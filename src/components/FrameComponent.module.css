@@ -1,0 +1,124 @@
+.logoNoBackground1Icon {
+  height: calc(100% - 17px);
+  width: 562px;
+  position: absolute;
+  margin: 0 !important;
+  top: 8px;
+  bottom: 9px;
+  left: 10px;
+  max-height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.quienesSomos {
+  width: 219px;
+  right: 878px;
+  display: inline-block;
+  mix-blend-mode: normal;
+}
+.contacto,
+.objetivos,
+.quienesSomos,
+.servicios {
+  position: absolute;
+  margin: 0 !important;
+  bottom: 31px;
+  line-height: 100%;
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 1;
+}
+.objetivos {
+  right: 704px;
+}
+.contacto,
+.servicios {
+  height: 32px;
+  display: inline-block;
+}
+.servicios {
+  width: 129px;
+  right: 530px;
+  min-width: 129px;
+}
+.contacto {
+  width: 130px;
+  right: 355px;
+}
+.acceso,
+.navigationChild {
+  height: 32px;
+  position: relative;
+}
+.navigationChild {
+  width: 103px;
+  background-color: var(--color-lightseagreen);
+  display: none;
+}
+.acceso {
+  flex: 1;
+  line-height: 100%;
+  display: inline-block;
+  min-width: 103px;
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 2;
+}
+.navigation,
+.navigationItem {
+  position: absolute;
+  background-color: var(--color-lightseagreen);
+  z-index: 1;
+}
+.navigation {
+  width: 103px;
+  margin: 0 !important;
+  right: 206px;
+  bottom: 31px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: var(--background-default-default);
+}
+.navigationItem {
+  top: 0;
+  left: 5px;
+  width: 120px;
+  height: 32px;
+}
+.navigation1,
+.registro {
+  width: 130px;
+  position: absolute;
+}
+.registro {
+  top: 0;
+  left: 0;
+  line-height: 100%;
+  display: inline-block;
+  height: 28px;
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 2;
+}
+.navigation1 {
+  height: 32px;
+  margin: 0 !important;
+  right: 31px;
+  bottom: 31px;
+  color: var(--background-default-default);
+}
+.headerParent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-9xl);
+  color: var(--color-lightseagreen);
+  font-family: var(--font-montserrat-alternates);
+}

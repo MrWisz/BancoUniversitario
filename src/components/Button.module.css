@@ -1,0 +1,32 @@
+.starIcon {
+  height: 16px;
+  width: 16px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: none;
+  min-height: 16px;
+}
+.button1 {
+  align-self: stretch;
+  position: relative;
+  line-height: 100%;
+}
+.button {
+  height: 40px;
+  border-radius: var(--radius-200);
+  background-color: var(--background-neutral-tertiary);
+  border: 1px solid var(--border-neutral-secondary);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-300) var(--padding-2xs);
+  gap: var(--space-200);
+  text-align: left;
+  font-size: var(--body-base-size);
+  color: var(--text-default-default);
+  font-family: var(--font-montserrat-alternates);
+}

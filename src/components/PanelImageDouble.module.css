@@ -1,0 +1,43 @@
+.imageIcon,
+.panelImageDouble {
+  align-self: stretch;
+  max-width: 100%;
+}
+.imageIcon {
+  flex: 1;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+  min-width: 599px;
+  min-height: 350px;
+}
+.panelImageDouble {
+  background-color: var(--background-default-default);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--space-1600);
+  box-sizing: border-box;
+  gap: var(--space-1200);
+  opacity: 0.8;
+}
+@media screen and (max-width: 1050px) {
+  .imageIcon {
+    min-width: 100%;
+  }
+  .panelImageDouble {
+    padding-left: var(--space-1600);
+    padding-right: var(--space-1600);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 750px) {
+  .panelImageDouble {
+    gap: var(--space-1200);
+    padding-top: var(--space-1600);
+    padding-bottom: var(--space-1600);
+    box-sizing: border-box;
+  }
+}

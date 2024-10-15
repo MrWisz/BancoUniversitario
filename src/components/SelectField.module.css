@@ -1,0 +1,116 @@
+.description,
+.label {
+  position: relative;
+  line-height: 140%;
+}
+.label {
+  margin: 0;
+  align-self: stretch;
+  font-size: var(--font-size-17xl);
+  font-weight: 700;
+  font-family: var(--font-montserrat-alternates);
+  flex-shrink: 0;
+}
+.description {
+  width: 240px;
+  color: var(--text-default-secondary);
+}
+.value {
+  flex: 1;
+  position: relative;
+  line-height: 100%;
+  display: inline-block;
+  max-width: calc(100% - 24px);
+}
+.chevronDownIcon {
+  height: 16px;
+  width: 16px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.helloWorld {
+  height: 22px;
+  font-weight: 600;
+  display: inline-block;
+}
+.helloWorld,
+.option2 {
+  position: relative;
+  line-height: 140%;
+}
+.options,
+.select {
+  border-radius: var(--radius-200);
+  background-color: var(--background-default-default);
+  border: 1px solid var(--border-default-default);
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--space-200);
+}
+.options {
+  box-shadow: var(--drop-shadow-200);
+  flex-direction: column;
+  padding: var(--padding-7xs) var(--padding-7xs) var(--padding-7xs)
+    var(--space-200);
+  color: var(--text-default-default);
+}
+.select {
+  align-self: stretch;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-3xs) var(--padding-2xs) var(--padding-3xs)
+    var(--padding-mini);
+  min-width: 240px;
+  max-width: 100%;
+  flex-shrink: 0;
+  color: var(--color-lightseagreen);
+}
+.option21 {
+  height: 22px;
+  position: relative;
+  line-height: 140%;
+  display: inline-block;
+}
+.options1,
+.selectField {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  gap: var(--space-200);
+}
+.options1 {
+  width: 105px;
+  box-shadow: var(--drop-shadow-200);
+  border-radius: var(--radius-200);
+  background-color: var(--background-default-default);
+  border: 1px solid var(--border-default-default);
+  display: none;
+  padding: var(--padding-7xs) var(--padding-sm);
+  color: var(--text-default-default);
+}
+.selectField {
+  width: 751px;
+  display: flex;
+  padding: 0 0 var(--padding-11xs);
+  max-width: 100%;
+  z-index: 2;
+  text-align: left;
+  font-size: var(--body-base-size);
+  color: var(--color-gray-200);
+  font-family: var(--body-base);
+}
+@media screen and (max-width: 1050px) {
+  .label {
+    font-size: var(--font-size-10xl);
+    line-height: 40px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .label {
+    font-size: var(--font-size-3xl);
+    line-height: 30px;
+  }
+}
