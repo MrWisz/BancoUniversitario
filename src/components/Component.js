@@ -36,6 +36,9 @@ const Component = ({
         Dirección: Av. Universidad, Edificio Banco Universitario, piso 12,
         Caracas, Venezuela.
       </div>
+      <div className={styles.telefono}>
+
+      </div>
     </div>
   );
 };

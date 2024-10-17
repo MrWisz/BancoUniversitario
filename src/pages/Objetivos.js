@@ -1,4 +1,4 @@
-import FrameComponent from "../components/FrameComponent";
+import ComponenteMision from "../components/ComponenteMision";
 import FrameComponent2 from "../components/FrameComponent2";
 import styles from "./Objetivos.module.css";
 
@@ -8,7 +8,7 @@ const Objetivos = () => {
       <div className={styles.text} />
       <div className={styles.objetivo1} />
       <main className={styles.frameParent}>
-        <FrameComponent
+        <ComponenteMision
           logoNoBackground1="/logonobackground-1@2x.png"
           label="Sign in"
           label="Register"

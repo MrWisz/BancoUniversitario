@@ -7,6 +7,16 @@
   white-space: nowrap;
   z-index: 1;
 }
+.telefono{
+  width: 187px;
+  position: absolute;
+  margin: 0 !important;
+  bottom: 25px;
+  left: 310px;
+  line-height: 140%;
+  display: inline-block;
+  z-index: 1;
+}
 .direccinAvUniversidad {
   width: 187px;
   position: absolute;
@@ -32,4 +42,13 @@
   font-size: var(--body-base-size);
   color: var(--color-lightseagreen);
   font-family: var(--font-montserrat-alternates);
+}
+@media screen and (max-width: 750px){
+.component1,.direccinAvUniversidad,.infobancouniversitariocomve{
+  flex-direction: column;
+  padding: 15px;
+  align-items: center;
+}
+
+
 }

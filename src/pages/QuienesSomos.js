@@ -1,13 +1,14 @@
-import FrameComponent from "../components/FrameComponent";
-import Content from "../components/Content";
+import ComponenteMision from "../components/ComponenteMision";
+import Contenido from "../components/Contenido.js";
 import Component from "../components/Component";
 import styles from "./QuienesSomos.module.css";
+
 
 const QuienesSomos = () => {
   return (
     <div className={styles.quienesSomos}>
       <div className={styles.text} />
-      <FrameComponent
+       <ComponenteMision  
         logoNoBackground1="/logonobackground-1@2x.png"
         label="Sign in"
         label="Register"
@@ -50,7 +51,7 @@ const QuienesSomos = () => {
         block
       />
       <div className={styles.objetivo1} />
-      <Content />
+      <Contenido />
       <Component
         propMarginTop="unset"
         propAlignSelf="stretch"

@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import styles from "./FrameComponent.module.css";
+import styles from "./ComponenteMision.module.css";
 
-const FrameComponent = ({
+const ComponenteMision = ({
   className = "",
   logoNoBackground1,
   label,
@@ -139,7 +139,7 @@ const FrameComponent = ({
   );
 };
 
-FrameComponent.propTypes = {
+ComponenteMision.propTypes = {
   className: PropTypes.string,
   logoNoBackground1: PropTypes.string,
   label: PropTypes.string,
@@ -164,4 +164,4 @@ FrameComponent.propTypes = {
   block: PropTypes.bool,
 };
 
-export default FrameComponent;
+export default ComponenteMision;

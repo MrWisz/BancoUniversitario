@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import styles from "./Content.module.css";
+import styles from "./Contenido.module.css";
 
-const Content = ({ className = "" }) => {
+const Contenido = ({ className = "" }) => {
   return (
     <section className={[styles.content, className].join(" ")}>
       <div className={styles.missionVision}>
@@ -13,12 +13,12 @@ const Content = ({ className = "" }) => {
               alt=""
               src="/objetivo-21@2x.png"
             />
-            <div className={styles.misinWrapper}>
-              <h3 className={styles.misin}>Misión</h3>
+            <div className={styles.misionWrapper}>
+              <h3 className={styles.mision}>Misión</h3>
             </div>
           </div>
         </div>
-        <h3 className={styles.somosUnaInstitucin}>
+        <h3 className={styles.somos}>
           Somos una institución financiera comprometida con los estudiantes
           universitarios, brindando soluciones financieras ágiles y eficientes.
           Nuestra misión es facilitar la gestión de sus recursos y contribuir al
@@ -32,13 +32,13 @@ const Content = ({ className = "" }) => {
               alt=""
               src="/frame-1@2x.png"
             />
-            <div className={styles.misinWrapper}>
-              <h3 className={styles.misin}>Visión</h3>
+            <div className={styles.misionWrapper}>
+              <h3 className={styles.mision}>Visión</h3>
             </div>
           </div>
         </div>
         <div className={styles.financialOption}>
-          <h3 className={styles.queremosSerLa}>
+          <h3 className={styles.somos}>
             Queremos ser la mejor opción financiera para estudiantes
             universitarios en el país. Deseamos ser reconocidos por nuestros
             servicios innovadores, la calidad de atención al cliente y nuestro
@@ -50,8 +50,8 @@ const Content = ({ className = "" }) => {
   );
 };
 
-Content.propTypes = {
+Contenido.propTypes = {
   className: PropTypes.string,
 };
 
-export default Content;
+export default Contenido;
