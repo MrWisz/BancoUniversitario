@@ -1,0 +1,70 @@
+.icons8AddUser801 {
+  width: 235px;
+  height: 217px;
+  position: absolute;
+  margin: 0 !important;
+  top: 477px;
+  left: 886px;
+  object-fit: cover;
+  z-index: 3;
+}
+.registrationContentWrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 var(--padding-45xl) 0 68px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.loginNavigationParent,
+.registroDeUsuarios {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.loginNavigationParent {
+  align-self: stretch;
+  align-items: flex-end;
+  gap: 95px;
+  max-width: 100%;
+}
+.registroDeUsuarios {
+  width: 100%;
+  position: relative;
+  background-color: var(--background-default-default);
+  overflow: hidden;
+  align-items: flex-start;
+  padding: var(--padding-5xs) 0 0;
+  box-sizing: border-box;
+  gap: 361px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 1050px) {
+  .registrationContentWrapper {
+    padding-left: 34px;
+    padding-right: var(--padding-13xl);
+    box-sizing: border-box;
+  }
+  .loginNavigationParent {
+    gap: 47px;
+  }
+  .registroDeUsuarios {
+    gap: 180px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .loginNavigationParent {
+    gap: var(--gap-5xl);
+  }
+  .registroDeUsuarios {
+    gap: 90px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .registroDeUsuarios {
+    gap: 45px;
+  }
+}

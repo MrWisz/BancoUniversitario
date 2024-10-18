@@ -1,0 +1,126 @@
+.starIcon {
+  height: 20px;
+  width: 20px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: none;
+}
+.iconButton {
+  height: 100%;
+  width: 100%;
+  margin: 0 !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-7xs);
+  background-color: var(--color-lightseagreen);
+  border: 1px solid var(--border-brand-default);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-300);
+  z-index: 1;
+}
+.listIcon,
+.registro {
+  position: relative;
+  z-index: 2;
+}
+.listIcon {
+  height: 48px;
+  width: 48px;
+  overflow: hidden;
+  flex-shrink: 0;
+  min-height: 48px;
+}
+.registro {
+  align-self: stretch;
+  line-height: 100%;
+  white-space: nowrap;
+}
+.registroWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-4xs) 0 0;
+}
+.logoNoBackground1Icon,
+.navigation {
+  position: relative;
+  margin: 0 !important;
+}
+.navigation {
+  width: 285px;
+  top: 14px;
+  right: 98px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-5xs) var(--padding-xs) var(--padding-2xs)
+    var(--padding-sm);
+  box-sizing: border-box;
+  gap: var(--gap-12xs);
+}
+.logoNoBackground1Icon {
+  height: 62px;
+  width: 162px;
+  bottom: 0;
+  left: 65px;
+  object-fit: cover;
+  z-index: 1;
+}
+.homeIcon {
+  height: 49px;
+  width: 60px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  mix-blend-mode: luminosity;
+  z-index: 2;
+}
+.headerParent,
+.inicioWrapper,
+.navigation1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.inicioWrapper {
+  flex: 1;
+  flex-direction: column;
+  padding: var(--padding-sm) 0 0;
+}
+.headerParent,
+.navigation1 {
+  flex-direction: row;
+  box-sizing: border-box;
+}
+.navigation1 {
+  width: 201px;
+  margin: 0 !important;
+  position: absolute;
+  top: 14px;
+  right: 407px;
+  padding: var(--padding-8xs) var(--padding-3xs) var(--padding-xs);
+  gap: var(--gap-12xs);
+}
+.headerParent {
+  align-self: stretch;
+  height: 100px;
+  padding: 0 var(--padding-12xs) var(--padding-12xs) 0;
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-17xl);
+  color: var(--background-default-default);
+  font-family: var(--font-montserrat-alternates);
+}

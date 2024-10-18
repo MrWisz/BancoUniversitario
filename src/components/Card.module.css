@@ -1,0 +1,105 @@
+.infoIcon {
+  height: 32px;
+  width: 32px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.depsitosEnEfectivo {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  letter-spacing: -0.02em;
+  line-height: 29px;
+  font-weight: 600;
+  font-family: inherit;
+}
+.elBancoUniversitario {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--body-base-size);
+  line-height: 140%;
+  color: var(--color-lightseagreen);
+}
+.text {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--space-200);
+}
+.starIcon {
+  height: 16px;
+  width: 16px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: none;
+  min-height: 16px;
+}
+.button1 {
+  align-self: stretch;
+  position: relative;
+  line-height: 100%;
+}
+.button {
+  height: 40px;
+  border-radius: var(--radius-200);
+  overflow: hidden;
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-300) var(--padding-4xs);
+  box-sizing: border-box;
+  gap: var(--space-200);
+}
+.body,
+.buttonGroup,
+.card {
+  justify-content: flex-start;
+}
+.buttonGroup {
+  align-self: stretch;
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-400);
+  font-size: var(--body-base-size);
+  color: var(--text-neutral-default);
+}
+.body,
+.card {
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.body {
+  flex: 1;
+  flex-direction: column;
+  padding: 0 0 var(--padding-32xl);
+  gap: var(--space-400);
+  min-width: 160px;
+  min-height: 220px;
+}
+.card {
+  width: 500px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0 var(--padding-11xs) 0 0;
+  gap: 24px 22px;
+  min-width: 240px;
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color);
+  font-family: var(--font-montserrat-alternates);
+}
+@media screen and (max-width: 450px) {
+  .depsitosEnEfectivo {
+    font-size: var(--font-size-lgi);
+    line-height: 23px;
+  }
+}

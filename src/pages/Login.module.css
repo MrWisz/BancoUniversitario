@@ -1,0 +1,70 @@
+.iniciaTuSesin {
+  width: 667px;
+  position: relative;
+  line-height: 100%;
+  display: inline-block;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+.iniciaTuSesinWrapper {
+  width: 1975px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-xl) 28px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.frameParent,
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.frameParent {
+  align-self: stretch;
+  align-items: flex-start;
+  gap: 71px;
+  max-width: 100%;
+  text-align: center;
+  font-size: var(--font-size-17xl);
+  color: var(--color);
+  font-family: var(--font-montserrat-alternates);
+}
+.login {
+  width: 100%;
+  position: relative;
+  background-color: var(--background-default-default);
+  overflow: hidden;
+  align-items: flex-end;
+  gap: 75px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 1300px) {
+  .frameParent {
+    gap: 35px;
+  }
+  .login {
+    gap: 37px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .iniciaTuSesin {
+    font-size: var(--font-size-10xl);
+    line-height: 29px;
+  }
+  .frameParent {
+    gap: var(--gap-lg);
+  }
+  .login {
+    gap: var(--gap-lgi);
+  }
+}
+@media screen and (max-width: 450px) {
+  .iniciaTuSesin {
+    font-size: var(--font-size-3xl);
+    line-height: 22px;
+  }
+}

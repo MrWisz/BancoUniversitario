@@ -1,0 +1,39 @@
+.objetivo1,
+.text {
+  width: 0;
+  height: 16px;
+  position: relative;
+  display: none;
+}
+.objetivo1 {
+  width: 100px;
+  height: 100px;
+}
+.quienesSomos {
+  width: 100%;
+  position: relative;
+  background-color: var(--background-default-default);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 161px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 1000px) {
+  .quienesSomos {
+    gap: 80px;
+  }
+}
+@media screen and (max-width: 725px) {
+  .quienesSomos {
+    gap: 40px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .quienesSomos {
+    gap: var(--gap-xl);
+  }
+}
