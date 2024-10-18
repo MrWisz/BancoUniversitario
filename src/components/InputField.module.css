@@ -1,0 +1,75 @@
+.label {
+  align-self: stretch;
+  flex-shrink: 0;
+}
+.description,
+.label,
+.value {
+  position: relative;
+  line-height: 140%;
+}
+.description {
+  width: 240px;
+  font-size: var(--body-base-size);
+  font-family: var(--body-base);
+  color: var(--text-default-secondary);
+}
+.value {
+  flex: 1;
+  display: inline-block;
+  max-width: 100%;
+}
+.input {
+  align-self: stretch;
+  border-radius: var(--radius-200);
+  background-color: var(--background-default-default);
+  border: 1px solid var(--border-default-default);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-3xs) var(--padding-mini);
+  min-width: 240px;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+.error {
+  width: 37px;
+  position: relative;
+  font-size: var(--body-base-size);
+  line-height: 140%;
+  font-family: var(--body-base);
+  color: var(--text-default-default);
+}
+.inputField {
+  align-self: stretch;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 0 var(--padding-31xl);
+  box-sizing: border-box;
+  gap: var(--space-200);
+  max-width: 100%;
+  z-index: 1;
+  text-align: left;
+  font-size: var(--font-size-17xl);
+  color: var(--background-default-default);
+  font-family: var(--font-montserrat-alternates);
+}
+@media screen and (max-width: 900px) {
+  .label,
+  .value {
+    font-size: var(--font-size-10xl);
+    line-height: 40px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .label,
+  .value {
+    font-size: var(--font-size-3xl);
+    line-height: 30px;
+  }
+}

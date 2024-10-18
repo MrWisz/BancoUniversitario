@@ -1,0 +1,18 @@
+.textStrong1 {
+  position: relative;
+  line-height: 140%;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 76px;
+}
+.textStrong {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: var(--body-base-size);
+  color: var(--color);
+  font-family: var(--font-montserrat-alternates);
+}
