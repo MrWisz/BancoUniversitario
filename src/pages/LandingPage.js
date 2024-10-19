@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+/*import { useCallback } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import PanelImageDouble from "../components/PanelImageDouble";
@@ -130,4 +130,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default LandingPage;*/
