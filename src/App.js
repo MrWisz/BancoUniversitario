@@ -6,7 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
-import Objetivos from "./pages/Objetivos";
+import Objetivos from "./pages/Objetivos.jsx";
 import Login from "./pages/Login";
 import QuienesSomos from "./pages/QuienesSomos";
 import RegistroDeUsuarios from "./pages/RegistroDeUsuarios";
