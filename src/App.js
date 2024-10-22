@@ -5,7 +5,7 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/LandingPage.jsx";
 import Objetivos from "./pages/Objetivos";
 import Login from "./pages/Login";
 import QuienesSomos from "./pages/QuienesSomos";
