@@ -9,7 +9,7 @@ import LandingPage from "./pages/LandingPage.jsx";
 import Objetivos from "./pages/Objetivos.jsx";
 import Login from "./pages/Login.jsx";
 import QuienesSomos from "./pages/QuienesSomos.jsx";
-import RegistroDeUsuarios from "./pages/RegistroDeUsuarios";
+import RegistroDeUsuarios from "./pages/RegistroDeUsuarios.jsx";
 
 function App() {
   const action = useNavigationType();
@@ -73,4 +73,5 @@ function App() {
     </Routes>
   );
 }
+
 export default App;
