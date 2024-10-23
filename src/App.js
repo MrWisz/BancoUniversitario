@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
 import Objetivos from "./pages/Objetivos.jsx";
-import Login from "./pages/Login";
-import QuienesSomos from "./pages/QuienesSomos";
+import Login from "./pages/Login.jsx";
+import QuienesSomos from "./pages/QuienesSomos.jsx";
 import RegistroDeUsuarios from "./pages/RegistroDeUsuarios";
 
 function App() {
