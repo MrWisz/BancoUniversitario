@@ -1,34 +1,21 @@
-import ComponenteMision from "../components/ComponenteMision";
+import React from 'react';
 import FrameComponent2 from "../components/FrameComponent2";
+import HeaderComponent from "../components/HeaderComponent"; // Import HeaderComponent
 
 const Objetivos = () => {
   return (
     <div className="objetivos">
+      <HeaderComponent
+        onQuienesSomosTextClick={() => console.log('Quienes somos clicked')}
+        onObjetivosTextClick={() => console.log('Objetivos clicked')}
+        onServiciosTextClick={() => console.log('Servicios clicked')}
+        onContactoTextClick={() => console.log('Contacto clicked')}
+        onAccesoTextClick={() => console.log('Acceso clicked')}
+        onRegistroTextClick={() => console.log('Registro clicked')}
+      />
       <div className="text" />
       <div className="objetivo1" />
       <main className="frameParent">
-        <ComponenteMision
-          logoNoBackground1="/logonobackground-1@2x.png"
-          label="Sign in"
-          hasIconStart={false}
-          hasIconEnd={false}
-          showButton
-          propHeight2="unset"
-          propBackgroundColor="#e3e3e3"
-          propBorder="1px solid #767676"
-          propPadding="var(--space-200) var(--padding-6xs)"
-          propFlex="1"
-          propAlignSelf="stretch"
-          propMinHeight="16px"
-          propFontSize="16px"
-          propColor="#1e1e1e"
-          propFlex1="unset"
-          propTextShadow="unset"
-          propFontWeight="unset"
-          propWidth="unset"
-          propMinHeight1="16px"
-          block
-        />
         <section className="frameWrapper">
           <div className="frameGroup">
             <div className="objectiveContentWrapper">
