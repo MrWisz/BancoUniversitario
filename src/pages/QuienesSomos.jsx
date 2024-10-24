@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ComponenteMision from "../components/ComponenteMision";
+import HeaderComponent from "../components/HeaderComponent"; 
 import Contenido from "../components/Contenido.js";
 import Component from "../components/Component";
 
@@ -44,27 +44,13 @@ const QuienesSomos = () => {
   return (
     <QuienesSomosContainer>
       <Text />
-      <ComponenteMision  
-        logoNoBackground1="/logonobackground-1@2x.png"
-        label="Sign in"
-        hasIconStart={false}
-        hasIconEnd={false}
-        showButton
-        propHeight2="unset"
-        propBackgroundColor="#e3e3e3"
-        propBorder="1px solid #767676"
-        propPadding="var(--space-200)"
-        propFlex="1"
-        propAlignSelf="stretch"
-        propMinHeight="16px"
-        propAlignSelf1="stretch"
-        propFontSize="16px"
-        propColor="#1e1e1e"
-        propFlex1="unset"
-        propTextShadow="unset"
-        propWidth="unset"
-        propMinHeight1="16px"
-        block
+      <HeaderComponent
+        onQuienesSomosTextClick={() => {}}
+        onObjetivosTextClick={() => {}}
+        onServiciosTextClick={() => {}}
+        onContactoTextClick={() => {}}
+        onAccesoTextClick={() => {}}
+        onRegistroTextClick={() => {}}
       />
       <Objetivo1 />
       <Contenido />
