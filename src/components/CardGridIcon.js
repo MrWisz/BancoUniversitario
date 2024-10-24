@@ -84,7 +84,6 @@ const CardGridIcon = ({ className = "" }) => {
           label="Button"
           hasIconStart={false}
           hasIconEnd={false}
-          showButton
           propHeight2="40px"
           propBackgroundColor="#e3e3e3"
           propBorder="1px solid #767676"
@@ -105,11 +104,8 @@ const CardGridIcon = ({ className = "" }) => {
           asset
           body="El Banco Universitario también permite a los estudiantes universitarios cobrar sus becas estudiantiles de manera sencilla y eficiente. Este servicio está disponible en cualquiera de las sucursales del banco, lo que permite a los estudiantes acceder a sus fondos de manera rápida y segura."
           heading="Cobro de becas estudiantiles"
-          button
-          label="Button"
           hasIconStart
           hasIconEnd
-          showButton
         />
       </div>
     </div>

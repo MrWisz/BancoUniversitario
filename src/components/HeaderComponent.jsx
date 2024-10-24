@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const HeaderContainer = styled.header`
   align-self: stretch;
@@ -16,25 +16,45 @@ const HeaderContainer = styled.header`
   color: var(--color-lightseagreen);
   font-family: var(--font-montserrat-alternates);
   display: flex;
-  align-items: center; /* Centrar verticalmente */
-  justify-content: flex-start;
+  align-items: center;
   justify-content: space-between;
+  border-bottom: 2px solid var(--color-lightseagreen);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+  }
 `;
 
 const Logo = styled.img`
   height: 62px;
   width: 252px;
-  position: absolute;
   margin: 0 !important;
   top: 8px;
   left: 10px;
   object-fit: scale-down;
   z-index: 1;
-   cursor: pointer;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    position: static;
+    margin-bottom: 10px;
+  }
+`;
+
+const NavLinksContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const NavLink = styled.h2`
-  margin: 0 !important;
+  margin: 0 20px;
   font-size: 25px;
   line-height: 100%;
   font-weight: 400;
@@ -44,59 +64,79 @@ const NavLink = styled.h2`
   z-index: 1;
   padding-top: 5px;
   display: flex;
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    margin: 10px 0;
+  }
+`;
+
+const MenusContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const Menu = styled.div`
   width: 132px;
-  margin: 0 !important;
-  position: absolute;
-  bottom: 47px;
+  margin: 0 10px;
   display: flex;
   flex-direction: row;
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;
+  justify-content: center;
   color: var(--background-default-default);
   border-radius: 5px;
   background-color: var(--color-lightseagreen);
   z-index: 1;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const MenuItem = styled.div`
   top: 0;
   left: 5px;
-  width: 5px; /* Ajustar el ancho para no ocupar todo el espacio */
+  width: 5px;
   height: 32px;
   border-radius: 5px;
   background-color: var(--color-lightseagreen);
+
+  @media (min-width: 769px) {
+    display: none;
+  }
 `;
 
 const HeaderComponent = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleQuienesSomosClick = () => {
-    navigate('/quienes-somos'); // Navigate to QuienesSomos page
+    navigate('/quienes-somos');
   };
 
   const handleObjetivosClick = () => {
-    navigate('/objetivos'); // Navigate to QuienesSomos page
+    navigate('/objetivos');
   };
 
   const handleAccesoClick = () => {
-    navigate('/login'); // Navigate to QuienesSomos page
+    navigate('/login');
   };
 
   const handleRegistroClick = () => {
-    navigate('/registro-de-usuarios'); // Navigate to QuienesSomos page
+    navigate('/registro-de-usuarios');
   };
 
   const handleLogoClick = () => {
-    navigate('/'); // Navigate to QuienesSomos page
+    navigate('/');
   };
 
   const handleServiciosClick = useCallback(() => {
-    navigate('/'); // Navigate to home page
+    navigate('/');
     setTimeout(() => {
       const anchor = document.querySelector("[data-scroll-to='cardGridIcon']");
       if (anchor) {
@@ -106,7 +146,7 @@ const HeaderComponent = () => {
   }, [navigate]);
 
   const handleContactoClick = useCallback(() => {
-    navigate('/'); // Navigate to home page
+    navigate('/');
     setTimeout(() => {
       const anchor = document.querySelector("[data-scroll-to='component1Container']");
       if (anchor) {
@@ -123,30 +163,34 @@ const HeaderComponent = () => {
         src="/logonobackground-1@2x.png"
         onClick={handleLogoClick}
       />
-      <NavLink style={{ right: '878px', position: 'absolute' }} onClick={handleQuienesSomosClick}>
-        Quienes somos
-      </NavLink>
-      <NavLink style={{ right: '704px', position: 'absolute' }} onClick={handleObjetivosClick}>
-        Objetivos
-      </NavLink>
-      <NavLink style={{ right: '530px', width: '129px', position: 'absolute' }} onClick={handleServiciosClick}>
-        Servicios
-      </NavLink>
-      <NavLink style={{ right: '355px', width: '130px', position: 'absolute' }} onClick={handleContactoClick}>
-        Contacto
-      </NavLink>
-      <Menu style={{ right: '206px', position: 'absolute', width: '130px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <MenuItem />
-        <NavLink onClick={handleAccesoClick} style={{ textAlign: 'center' }}>
-          Acceso
+      <NavLinksContainer>
+        <NavLink onClick={handleQuienesSomosClick}>
+          Quienes somos
         </NavLink>
-      </Menu>
-      <Menu style={{ right: '31px', position: 'absolute', width: '130px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <MenuItem />
-        <NavLink onClick={handleRegistroClick} style={{ textAlign: 'center' }}>
-          Registro
+        <NavLink onClick={handleObjetivosClick}>
+          Objetivos
         </NavLink>
-      </Menu>
+        <NavLink onClick={handleServiciosClick}>
+          Servicios
+        </NavLink>
+        <NavLink onClick={handleContactoClick}>
+          Contacto
+        </NavLink>
+      </NavLinksContainer>
+      <MenusContainer>
+        <Menu>
+          <MenuItem />
+          <NavLink onClick={handleAccesoClick} style={{ textAlign: 'center' }}>
+            Acceso
+          </NavLink>
+        </Menu>
+        <Menu>
+          <MenuItem />
+          <NavLink onClick={handleRegistroClick} style={{ textAlign: 'center' }}>
+            Registro
+          </NavLink>
+        </Menu>
+      </MenusContainer>
     </HeaderContainer>
   );
 };
