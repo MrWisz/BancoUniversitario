@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import HeaderComponent from "../components/HeaderComponent"; 
-import Contenido from "../components/Contenido.js";
 import Component from "../components/Component";
+import ContenidoQS from "../components/ContenidoQS"; 
 
 const QuienesSomosContainer = styled.div`
   width: 100%;
@@ -53,7 +53,7 @@ const QuienesSomos = () => {
         onRegistroTextClick={() => {}}
       />
       <Objetivo1 />
-      <Contenido />
+      <ContenidoQS />
       <Component
         propMarginTop="unset"
         propAlignSelf="stretch"

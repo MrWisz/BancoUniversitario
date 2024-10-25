@@ -1,4 +1,4 @@
-.objetivo2Icon {
+/*.objetivo2Icon {
   height: 100px;
   width: 100px;
   position: relative;
@@ -89,7 +89,7 @@
   font-family: inherit;
   display: inline-block;
   max-width: 100%;
-}*/
+}
 .financialOption {
   align-self: stretch;
   flex-direction: row;
@@ -191,3 +191,4 @@
    }
   
 }
+*/
