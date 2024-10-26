@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import PropTypes from "prop-types";
-import styles from "./Button.module.css";
 
 const Button = ({
   className = "",
@@ -34,6 +33,19 @@ const Button = ({
       padding: propPadding,
       flex: propFlex,
       alignSelf: propAlignSelf,
+      borderRadius: "var(--radius-200)",
+      boxSizing: "border-box",
+      overflow: "hidden",
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "var(--space-300) var(--padding-2xs)",
+      gap: "var(--space-200)",
+      textAlign: "left",
+      fontSize: "var(--body-base-size)",
+      color: "var(--text-default-default)",
+      fontFamily: "var(--font-montserrat-alternates)",
     };
   }, [
     propHeight,
@@ -47,6 +59,12 @@ const Button = ({
   const starIconStyle = useMemo(() => {
     return {
       minHeight: propMinHeight,
+      height: "16px",
+      width: "16px",
+      position: "relative",
+      overflow: "hidden",
+      flexShrink: 0,
+      display: "none",
     };
   }, [propMinHeight]);
 
@@ -59,6 +77,9 @@ const Button = ({
       textShadow: propTextShadow,
       fontWeight: propFontWeight,
       width: propWidth,
+      alignSelf: "stretch",
+      position: "relative",
+      lineHeight: "100%",
     };
   }, [
     propAlignSelf1,
@@ -73,26 +94,31 @@ const Button = ({
   const xIconStyle = useMemo(() => {
     return {
       minHeight: propMinHeight1,
+      height: "16px",
+      width: "16px",
+      position: "relative",
+      overflow: "hidden",
+      flexShrink: 0,
+      display: "none",
     };
   }, [propMinHeight1]);
 
   return (
-    <div className={[styles.button, className].join(" ")} style={buttonStyle}>
+    <div className={className} style={buttonStyle}>
       {hasIconStart && (
         <img
-          className={styles.starIcon}
           alt=""
           src={star}
           style={starIconStyle}
         />
       )}
       {showButton && (
-        <div className={styles.button1} style={button1Style}>
+        <div style={button1Style}>
           {label}
         </div>
       )}
       {hasIconEnd && (
-        <img className={styles.starIcon} alt="" src={x} style={xIconStyle} />
+        <img alt="" src={x} style={xIconStyle} />
       )}
     </div>
   );
