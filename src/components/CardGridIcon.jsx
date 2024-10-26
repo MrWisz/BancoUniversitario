@@ -2,20 +2,50 @@ import TextContentHeading from "./TextContentHeading";
 import Card1 from "./Card1";
 import Card from "./Card";
 import PropTypes from "prop-types";
-import styles from "./CardGridIcon.module.css";
 
 const CardGridIcon = ({ className = "" }) => {
   return (
     <div
-      className={[styles.cardGridIcon, className].join(" ")}
+      className={`cardGridIcon ${className}`}
       data-scroll-to="cardGridIcon"
+      style={{
+        display: "flex",
+        boxSizing: "border-box",
+        maxWidth: "100%",
+        width: "1920px",
+        backgroundColor: "var(--background-default-default)",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+        padding: "var(--space-1600)",
+        gap: "var(--space-1200)",
+        textAlign: "left",
+        fontSize: "var(--font-size-5xl)",
+        color: "var(--color)",
+        fontFamily: "var(--font-montserrat-alternates)",
+      }}
     >
       <TextContentHeading
         subheading="A continuación podrás encontrar un desglose detallado de los servicios que podrás disfrutar al ser cliente del Banco Universitario"
         hasSubheading
         heading="Servicios del Banco Universitario"
       />
-      <div className={styles.cards}>
+      <div
+        className="cards"
+        style={{
+          display: "flex",
+          boxSizing: "border-box",
+          maxWidth: "100%",
+          alignSelf: "stretch",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "0 var(--padding-63xl)",
+          gap: "var(--space-1600)",
+          minHeight: "504px",
+        }}
+      >
         <Card1
           asset
           body="El Banco Universitario ofrece un servicio de transferencias entre estudiantes sin costo alguno, con el objetivo de facilitar el intercambio de dinero entre los estudiantes universitarios. Este servicio permite transferir dinero de manera rápida, segura y eficiente, lo que permite a los estudiantes contar con una alternativa más para realizar sus pagos y transacciones."
