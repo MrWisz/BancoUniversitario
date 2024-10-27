@@ -209,7 +209,7 @@ const Objetivos = () => {
             line-height: 32px;
           }
           .brindarALosContainer {
-            font-size: var(--font-size-10xl);
+            font-size: var(--font-size-3xl);
             line-height: 32px;
           }
         }
@@ -223,6 +223,13 @@ const Objetivos = () => {
           .objetivos {
             gap: 34px;
           }
+
+          .brindarALosContainer {
+            font-size: 19px;
+            line-height: 32px;
+          }
+
+
         }
         @media screen and (max-width: 450px) {
           .objetivos1 {
@@ -231,7 +238,7 @@ const Objetivos = () => {
           }
           .brindarALosContainer {
             font-size: var(--font-size-3xl);
-            line-height: 24px;
+            line-height: 16px;
           }
           .frameGroup {
             gap: var(--gap-3xl);
@@ -239,6 +246,23 @@ const Objetivos = () => {
           .objetivos {
             gap: 17px;
           }
+          
+           @media screen and (max-width: 375px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+
+          .brindarALosContainer {
+            font-size: 14px;
+            line-height: 23px;
+          }
+
         }
       `}</style>
     </div>

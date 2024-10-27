@@ -19,8 +19,12 @@ const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid var(--color-lightseagreen);
-
-  @media (max-width: 768px) {
+  
+  @media (max-width: 1357px) {
+    flex-direction: row;
+    height: auto;
+  }
+    @media (max-width: 1264px) {
     flex-direction: column;
     height: auto;
   }
@@ -29,7 +33,7 @@ const HeaderContainer = styled.header`
 const Logo = styled.img`
   height: 62px;
   width: 252px;
-  margin: 0 !important;
+  margin:0 20px;
   top: 8px;
   left: 10px;
   object-fit: scale-down;
@@ -76,7 +80,7 @@ const MenusContainer = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media (max-width: 768px) {
+  @media (max-width:768px) {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -84,7 +88,7 @@ const MenusContainer = styled.div`
 
 const Menu = styled.div`
   width: 132px;
-  margin: 0 10px;
+  margin: 0 4px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -108,7 +112,7 @@ const MenuItem = styled.div`
   background-color: var(--color-lightseagreen);
 
   @media (min-width: 769px) {
-    display: none;
+    display: inline-block;
   }
 `;
 
