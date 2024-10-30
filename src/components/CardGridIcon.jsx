@@ -1,51 +1,71 @@
+import React from 'react';
+import styled from 'styled-components';
 import TextContentHeading from "./TextContentHeading";
 import Card1 from "./Card1";
-import Card from "./Card";
 import PropTypes from "prop-types";
+
+const CardGridIconContainer = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+  background-color: var(--background-default-default);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--space-1600);
+  gap: var(--space-1200);
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color);
+  font-family: var(--font-montserrat-alternates);
+
+  @media (max-width: 1300px) {
+    padding: var(--space-800);
+    gap: var(--space-600);
+    font-size: var(--font-size-3xl);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-400);
+    gap: var(--space-300);
+    font-size: var(--font-size-xl);
+  }
+`;
+
+const CardsContainer = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  align-self: stretch;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 var(--padding-63xl);
+  gap: var(--space-1600);
+  min-height: 504px;
+
+  @media (max-width: 1300px) {
+    padding: 0 var(--padding-31xl);
+    gap: var(--space-800);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 var(--padding-16xl);
+    gap: var(--space-400);
+  }
+`;
 
 const CardGridIcon = ({ className = "" }) => {
   return (
-    <div
-      className={`cardGridIcon ${className}`}
-      data-scroll-to="cardGridIcon"
-      style={{
-        display: "flex",
-        boxSizing: "border-box",
-        maxWidth: "100%",
-        width: "1920px",
-        backgroundColor: "var(--background-default-default)",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        justifyContent: "flex-start",
-        padding: "var(--space-1600)",
-        gap: "var(--space-1200)",
-        textAlign: "left",
-        fontSize: "var(--font-size-5xl)",
-        color: "var(--color)",
-        fontFamily: "var(--font-montserrat-alternates)",
-      }}
-    >
+    <CardGridIconContainer className={`cardGridIcon ${className}`} data-scroll-to="cardGridIcon">
       <TextContentHeading
         subheading="A continuación podrás encontrar un desglose detallado de los servicios que podrás disfrutar al ser cliente del Banco Universitario"
         hasSubheading
         heading="Servicios del Banco Universitario"
       />
-      <div
-        className="cards"
-        style={{
-          display: "flex",
-          boxSizing: "border-box",
-          maxWidth: "100%",
-          alignSelf: "stretch",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "0 var(--padding-63xl)",
-          gap: "var(--space-1600)",
-          minHeight: "504px",
-        }}
-      >
+      <CardsContainer className="cards">
         <Card1
           asset
           body="El Banco Universitario ofrece un servicio de transferencias entre estudiantes sin costo alguno, con el objetivo de facilitar el intercambio de dinero entre los estudiantes universitarios. Este servicio permite transferir dinero de manera rápida, segura y eficiente, lo que permite a los estudiantes contar con una alternativa más para realizar sus pagos y transacciones."
@@ -74,7 +94,34 @@ const CardGridIcon = ({ className = "" }) => {
           propWidth="unset"
           propMinHeight1="16px"
         />
-        <Card />
+        <Card1
+          asset
+          body="El Banco Universitario permite a los estudiantes realizar depósitos en efectivo de manera sencilla y cómoda en cualquiera de sus sucursales. Este servicio está disponible las 24 horas del día, los 7 días de la semana, lo que permite a los estudiantes realizar sus depósitos en cualquier momento que lo necesiten."
+          heading="Depósitos en efectivo"
+          button={false}
+          propHeight="unset"
+          propHeight1="unset"
+          propDisplay="unset"
+          label="Button"
+          hasIconStart
+          hasIconEnd={false}
+          showButton
+          propHeight2="40px"
+          propBackgroundColor="#e3e3e3"
+          propBorder="1px solid #767676"
+          propPadding="var(--space-300) var(--padding-2xs)"
+          propFlex="unset"
+          propAlignSelf="unset"
+          propMinHeight="16px"
+          propAlignSelf1="stretch"
+          propFontSize="16px"
+          propColor="#1e1e1e"
+          propFlex1="unset"
+          propTextShadow="unset"
+          propFontWeight="unset"
+          propWidth="unset"
+          propMinHeight1="16px"
+        />
         <Card1
           asset
           body="El Banco Universitario también permite a los estudiantes realizar retiros en efectivo de manera rápida y segura. Los estudiantes pueden realizar retiros en cualquiera de las sucursales del banco, con la tranquilidad de que sus fondos están seguros y protegidos."
@@ -137,8 +184,8 @@ const CardGridIcon = ({ className = "" }) => {
           hasIconStart
           hasIconEnd
         />
-      </div>
-    </div>
+      </CardsContainer>
+    </CardGridIconContainer>
   );
 };
 
