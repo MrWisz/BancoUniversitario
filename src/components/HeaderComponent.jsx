@@ -7,7 +7,7 @@ const HeaderContainer = styled.header`
   height: 115px;
   flex-shrink: 0;
   flex-direction: row;
-  padding: 0 0 var(--padding-base);
+  padding: var(--py) var(--px);
   box-sizing: border-box;
   position: relative;
   max-width: 100%;
@@ -24,7 +24,8 @@ const HeaderContainer = styled.header`
 const Logo = styled.img`
   height: 62px;
   width: 252px;
-  margin:0 20px;
+  margin-left: var(--margin-left);
+  margin: 0 20px;
   top: 8px;
   left: 10px;
   object-fit: scale-down;
