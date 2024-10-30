@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,15 +19,6 @@ const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid var(--color-lightseagreen);
-  
-  @media (max-width: 1357px) {
-    flex-direction: row;
-    height: auto;
-  }
-    @media (max-width: 1264px) {
-    flex-direction: column;
-    height: auto;
-  }
 `;
 
 const Logo = styled.img`
@@ -40,7 +31,7 @@ const Logo = styled.img`
   z-index: 1;
   cursor: pointer;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1300px) {
     position: static;
     margin-bottom: 10px;
   }
@@ -51,9 +42,8 @@ const NavLinksContainer = styled.div`
   flex-direction: row;
   align-items: center;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
+  @media (max-width: 1300px) {
+    display: none;
   }
 `;
 
@@ -71,7 +61,7 @@ const NavLink = styled.h2`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1300px) {
     margin: 10px 0;
   }
 `;
@@ -80,9 +70,8 @@ const MenusContainer = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media (max-width:768px) {
-    flex-direction: column;
-    align-items: flex-start;
+  @media (max-width: 1300px) {
+    display: none;
   }
 `;
 
@@ -98,7 +87,7 @@ const Menu = styled.div`
   background-color: var(--color-lightseagreen);
   z-index: 1;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1300px) {
     margin-top: 10px;
   }
 `;
@@ -111,13 +100,50 @@ const MenuItem = styled.div`
   border-radius: 5px;
   background-color: var(--color-lightseagreen);
 
-  @media (min-width: 769px) {
+  @media (max-width: 1300px) {
     display: inline-block;
   }
+
+  @media (min-width: 1301px) {
+    display: none;
+  }
+`;
+
+const HamburgerButton = styled.div`
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 2;
+  margin: 0 auto;
+
+  @media (max-width: 1300px) {
+    display: flex;
+  }
+
+  div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-lightseagreen);
+    margin: 4px 0;
+  }
+`;
+
+const MobileMenu = styled.div`
+  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  position: absolute;
+  top: 115px;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 `;
 
 const HeaderComponent = () => {
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleQuienesSomosClick = () => {
     navigate('/quienes-somos');
@@ -159,6 +185,23 @@ const HeaderComponent = () => {
     }, 0);
   }, [navigate]);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1300) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <HeaderContainer>
       <Logo
@@ -195,6 +238,37 @@ const HeaderComponent = () => {
           </NavLink>
         </Menu>
       </MenusContainer>
+      <HamburgerButton onClick={toggleMenu}>
+        <div />
+        <div />
+        <div />
+      </HamburgerButton>
+      <MobileMenu isOpen={isMenuOpen}>
+        <NavLink onClick={handleQuienesSomosClick}>
+          Quienes somos
+        </NavLink>
+        <NavLink onClick={handleObjetivosClick}>
+          Objetivos
+        </NavLink>
+        <NavLink onClick={handleServiciosClick}>
+          Servicios
+        </NavLink>
+        <NavLink onClick={handleContactoClick}>
+          Contacto
+        </NavLink>
+        <Menu>
+          <MenuItem />
+          <NavLink onClick={handleAccesoClick} style={{ textAlign: 'center' }}>
+            Acceso
+          </NavLink>
+        </Menu>
+        <Menu>
+          <MenuItem />
+          <NavLink onClick={handleRegistroClick} style={{ textAlign: 'center' }}>
+            Registro
+          </NavLink>
+        </Menu>
+      </MobileMenu>
     </HeaderContainer>
   );
 };

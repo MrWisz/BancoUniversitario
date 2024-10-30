@@ -49,6 +49,7 @@ const Card1 = ({
       alignItems: "flex-start",
       justifyContent: "flex-start",
       maxWidth: "100%",
+      marginBottom: 'var(--space-1600)', // Ajuste de margen inferior
     };
   }, [propHeight]);
 
