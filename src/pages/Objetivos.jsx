@@ -198,6 +198,44 @@ const Objetivos = () => {
           line-height: normal;
           letter-spacing: normal;
         }
+
+
+        
+         
+
+        @media screen and (max-width: 1920px) {
+          .objetivos1 {
+            font-size: var(--font-size-19xl);
+            line-height: 50px;
+          }
+          .brindarALosContainer {
+            font-size: var(--font-size-13xl);
+            line-height: 32px;
+          }
+        }
+
+        @media screen and (max-height: 1280px) {
+          .objetivos1 {
+            font-size: var(--font-size-19xl);
+            line-height: 50px;
+          }
+          .brindarALosContainer {
+            font-size: var(--font-size-13xl);
+            line-height: 32px;
+          }
+        }
+
+       @media screen and (max-width: 1024px) {
+          .objetivos1 {
+            font-size: var(--font-size-19xl);
+            line-height: 50px;
+          }
+          .brindarALosContainer {
+            font-size: var(--font-size-13xl);
+            line-height: 29px;
+          }
+        }
+
         @media screen and (max-width: 1000px) {
           .objetivos {
             gap: 68px;
@@ -205,14 +243,61 @@ const Objetivos = () => {
         }
         @media screen and (max-width: 975px) {
           .objetivos1 {
+            font-size: var(--font-size-19xl);
+            line-height: 50px;
+          }
+          .brindarALosContainer {
+            font-size: var(--font-size-13xl);
+            line-height: 29px;
+          }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         @media screen and (max-width: 820px) {
+          .objetivos1 {
             font-size: var(--font-size-13xl);
             line-height: 32px;
           }
           .brindarALosContainer {
             font-size: var(--font-size-3xl);
-            line-height: 32px;
+            line-height: 36px;
           }
         }
+
+       @media screen and (max-width: 768px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+
+          .brindarALosContainer {
+            font-size: 27px;
+            line-height: 28px;
+          }
+            .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+        }
+
+
         @media screen and (max-width: 725px) {
           .frameGroup {
             gap: 44px;
@@ -228,26 +313,9 @@ const Objetivos = () => {
             font-size: 19px;
             line-height: 32px;
           }
-
-
         }
-        @media screen and (max-width: 450px) {
-          .objetivos1 {
-            font-size: var(--font-size-5xl);
-            line-height: 24px;
-          }
-          .brindarALosContainer {
-            font-size: var(--font-size-3xl);
-            line-height: 16px;
-          }
-          .frameGroup {
-            gap: var(--gap-3xl);
-          }
-          .objetivos {
-            gap: 17px;
-          }
-          
-           @media screen and (max-width: 375px) {
+
+        @media screen and (max-width: 540px) {
           .frameGroup {
             gap: 44px;
           }
@@ -259,11 +327,145 @@ const Objetivos = () => {
           }
 
           .brindarALosContainer {
-            font-size: 14px;
-            line-height: 23px;
+            font-size: 24px;
+            line-height: 22px;
           }
 
         }
+
+        @media screen and (max-width: 450px) {
+          .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+          .brindarALosContainer {
+            font-size: var(--font-size-3xl);
+            line-height: 16px;
+          }
+          .frameGroup {
+            gap: var(--gap-3xl);
+          }
+          .objetivos {
+            gap: 17px;
+          }
+        }
+
+        @media screen and (max-width: 430px) {
+          .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+          .brindarALosContainer {
+            font-size: 18px;
+            line-height: 22px;
+          }
+          .frameGroup {
+            gap: var(--gap-3xl);
+          }
+          .objetivos {
+            gap: 17px;
+          }
+        }
+
+        @media screen and (max-width: 414px) {
+          .objetivos {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+          .brindarALosContainer {
+            font-size: 20px;
+            line-height: 19px;
+          }
+          .frameGroup {
+            gap: var(--gap-3xl);
+          }
+          .objetivos {
+            gap: 17px;
+          }
+        }
+
+          @media screen and (max-width: 390px) {
+          .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+          .brindarALosContainer {
+            font-size: 19px;
+            line-height: 19px;
+          }
+          .frameGroup {
+            gap: var(--gap-3xl);
+          }
+          .objetivos {
+            gap: 17px;
+          }
+        }
+
+           @media screen and (max-width: 375px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+                      .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+
+          .brindarALosContainer {
+            font-size: 19px;
+            line-height: 19px;
+          }
+
+        }
+           @media screen and (max-width: 360px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+           .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+
+          .brindarALosContainer {
+            font-size: 16px;
+            line-height: 20px;
+          }
+
+        }
+          media screen and (max-width: 344px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+           .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+
+          .brindarALosContainer {
+            font-size: 14px;
+            line-height: 14px;
+          }
+
+        }
+
+  
       `}</style>
     </div>
   );
