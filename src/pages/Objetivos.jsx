@@ -241,42 +241,9 @@ const Objetivos = () => {
             gap: 68px;
           }
         }
-        @media screen and (max-width: 975px) {
-          .objetivos1 {
-            font-size: var(--font-size-19xl);
-            line-height: 50px;
-          }
-          .brindarALosContainer {
-            font-size: var(--font-size-13xl);
-            line-height: 29px;
-          }
-        }
+       
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-         @media screen and (max-width: 820px) {
-          .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 32px;
-          }
-          .brindarALosContainer {
-            font-size: var(--font-size-3xl);
-            line-height: 36px;
-          }
-        }
-
-       @media screen and (max-width: 768px) {
+        @media screen and (max-width: 999px) {
           .frameGroup {
             gap: 44px;
           }
@@ -288,17 +255,11 @@ const Objetivos = () => {
           }
 
           .brindarALosContainer {
-            font-size: 27px;
-            line-height: 28px;
-          }
-            .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 45px;
+            font-size: 26px;
+            line-height: 25px;
           }
         }
-
-
-        @media screen and (max-width: 725px) {
+         @media screen and (max-width: 716px) {
           .frameGroup {
             gap: 44px;
           }
@@ -310,11 +271,10 @@ const Objetivos = () => {
           }
 
           .brindarALosContainer {
-            font-size: 19px;
-            line-height: 32px;
+            font-size: 24px;
+            line-height: 25px;
           }
         }
-
         @media screen and (max-width: 540px) {
           .frameGroup {
             gap: 44px;
@@ -332,6 +292,93 @@ const Objetivos = () => {
           }
 
         }
+       
+
+        @media screen and (max-width: 685px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+
+          .brindarALosContainer {
+            font-size: 24px;
+            line-height: 22px;
+          }
+
+        }
+                   @media screen and (max-width: 540px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+
+          .brindarALosContainer {
+            font-size: 20px;
+            line-height: 22px;
+          }
+
+        }
+
+         @media screen and (max-width: 535px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+
+          .brindarALosContainer {
+            font-size: 20px;
+            line-height: 22px;
+          }
+
+        }
+
+         @media screen and (max-width: 458px) {
+          .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+          .brindarALosContainer {
+            font-size: 20px;
+            line-height: 22px;
+          }
+          .frameGroup {
+            gap: var(--gap-3xl);
+          }
+          .objetivos {
+            gap: 17px;
+          }
+        }
+        @media screen and (max-width: 454px) {
+          .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+          .brindarALosContainer {
+            font-size: 19px;
+            line-height: 22px;
+          }
+          .frameGroup {
+            gap: var(--gap-3xl);
+          }
+          .objetivos {
+            gap: 17px;
+          }
+        }
 
         @media screen and (max-width: 450px) {
           .objetivos1 {
@@ -339,8 +386,8 @@ const Objetivos = () => {
             line-height: 45px;
           }
           .brindarALosContainer {
-            font-size: var(--font-size-3xl);
-            line-height: 16px;
+            font-size: 18px;
+            line-height: 19px;
           }
           .frameGroup {
             gap: var(--gap-3xl);
@@ -383,7 +430,38 @@ const Objetivos = () => {
             gap: 17px;
           }
         }
-
+          media screen and (max-width: 412px) {
+          .objetivos {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+          .brindarALosContainer {
+            font-size: 18px;
+            line-height: 19px;
+          }
+          .frameGroup {
+            gap: var(--gap-3xl);
+          }
+          .objetivos {
+            gap: 17px;
+          }
+        }
+        @media screen and (max-width: 398px) {
+          .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+          .brindarALosContainer {
+            font-size: 19px;
+            line-height: 19px;
+          }
+          .frameGroup {
+            gap: var(--gap-3xl);
+          }
+          .objetivos {
+            gap: 17px;
+          }
+        }
           @media screen and (max-width: 390px) {
           .objetivos1 {
             font-size: var(--font-size-13xl);
@@ -391,6 +469,22 @@ const Objetivos = () => {
           }
           .brindarALosContainer {
             font-size: 19px;
+            line-height: 19px;
+          }
+          .frameGroup {
+            gap: var(--gap-3xl);
+          }
+          .objetivos {
+            gap: 17px;
+          }
+        }
+          @media screen and (max-width: 380px) {
+          .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+          .brindarALosContainer {
+            font-size: 18px;
             line-height: 19px;
           }
           .frameGroup {
@@ -422,6 +516,33 @@ const Objetivos = () => {
           }
 
         }
+           @media screen and (max-width: 372px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+           .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+
+          .brindarALosContainer {
+            font-size: 17px;
+            line-height: 20px;
+          }
+
+        }
+
+
+
+
+
+
            @media screen and (max-width: 360px) {
           .frameGroup {
             gap: 44px;
@@ -443,7 +564,7 @@ const Objetivos = () => {
           }
 
         }
-          media screen and (max-width: 344px) {
+          @media screen and (max-width: 340px) {
           .frameGroup {
             gap: 44px;
           }
@@ -459,13 +580,95 @@ const Objetivos = () => {
           }
 
           .brindarALosContainer {
-            font-size: 14px;
-            line-height: 14px;
+            font-size: 16px;
+            line-height: 18px;
           }
 
         }
+           @media screen and (max-width: 318px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+           .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
 
-  
+          .brindarALosContainer {
+            font-size: 17px;
+            line-height: 17px;
+          }
+
+        }
+         @media screen and (max-width: 313px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+           .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+
+          .brindarALosContainer {
+            font-size: 16px;
+            line-height: 17px;
+          }
+
+        }
+          @media screen and (max-width: 318px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+           .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+
+          .brindarALosContainer {
+            font-size: 17px;
+            line-height: 17px;
+          }
+
+        }
+         @media screen and (max-width: 297px) {
+          .frameGroup {
+            gap: 44px;
+          }
+          .frameParent {
+            gap: var(--gap-lg);
+          }
+          .objetivos {
+            gap: 34px;
+          }
+           .objetivos1 {
+            font-size: var(--font-size-13xl);
+            line-height: 45px;
+          }
+
+          .brindarALosContainer {
+            font-size: 15px;
+            line-height: 17px;
+          }
+
+        }
       `}</style>
     </div>
   );
