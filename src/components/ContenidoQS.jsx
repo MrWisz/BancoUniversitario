@@ -1,118 +1,149 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Content =styled.section`
- display: flex;
+const Content = styled.section`
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Ocupa toda la pantalla */
-  padding: 0 var(--padding-2xl) var(--padding-54xl) var(--padding-xl);
+  height: 100vh;
+  padding: 0 var(--padding-2xl);
   box-sizing: border-box;
   text-align: center;
   font-size: var(--font-size-21xl);
   color: var(--color);
-  font-family: var(--font-montserrat-alternates);`;
-const Objetivo2Icon = styled.img`
- height: 100px;
-  width: 100px;
-  object-fit: cover;
-  overflow: visible;
-`;
-
-const Mision = styled.h3`
- margin: 0;
-  font-size: clamp(1.5rem, 2vw, 2rem);
-  line-height: 1.4;
-  font-weight: 400;
-  font-family: inherit;
-  text-align: center; 
-  
+  font-family: var(--font-montserrat-alternates);
 `;
 
 const MissionVision = styled.div`
-  width: 1735px;
+  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--gap-24xl-7);
   align-items: center;
-  overflow: visible;
+  gap: var(--gap-24xl-7);
+  width: 100%;
+  max-width: 1400px;
+   @media (max-width: 990px) {
+    max-width: 80%; /* Reducir ancho en pantallas más pequeñas */
+    padding-top: var(--padding-5xl);
+  }
+  @media (max-width: 768px) {
+    max-width: 80%; /* Reducir ancho en pantallas más pequeñas */
+    padding-top: var(--padding-5xl);
+  }
+    @media (max-width: 400px) {
+    max-width: 60%; /* Reducir ancho en pantallas más pequeñas */
+    padding-top: var(--padding-5xl);
+  }
 `;
 
 const ObjectiveMission = styled.div`
-  width: 1610px;
+  display: flex;
   justify-content: center;
+  width: 100%;
   padding: 0 var(--padding-xl);
   box-sizing: border-box;
-  width: 100%;
-  overflow: visible;
 `;
 
 const MissionContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 260px;
   justify-content: center;
+  width: 100%;
+  max-width: 1800px;
   gap: var(--gap-sm);
-  
+  margin: 0 100px;
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Cambiar a columna en pantallas más pequeñas */
+    margin: 0;
+  }
+`;
+
+const Objetivo2Icon = styled.img`
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+
+  @media (max-width: 768px) {
+    height: 75px; /* Reducir tamaño del ícono en pantallas pequeñas */
+    width: 75px;
+  }
+   @media (max-width: 400px) {
+    height: 65px; /* Reducir tamaño del ícono en pantallas pequeñas */
+    width: 65px;
+  } 
+`;
+
+const Mision = styled.h3`
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  line-height: 1.4;
+  font-weight: 400;
+  text-align: center;
 `;
 
 const MisionWrapper = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: var(--padding-10xl) 0 0;
-  text-align:center;
+  padding-top: var(--padding-10xl);
+  text-align: center;
+  @media (max-width: 768px) {
+  padding-top: var(--padding-5xl); /* Ajusta según sea necesario */
+}
 `;
 
 const Somos = styled.p`
- margin: 0;
-  font-size: clamp(1.5rem, 2vw, 2rem); 
-  line-height: 1.6; 
+  margin: 30px 0;
+  font-size: clamp(1.5rem, 2vw, 1.5rem);
+  line-height: 1.6;
   font-weight: 500;
-  font-family: inherit;
   color: var(--color-lightseagreen);
-  text-align: justify; /
-  width: 100%; 
-  max-width: 1200px; 
-  overflow-wrap: break-word; 
-  white-space: normal; 
-  padding: 20px; 
+  text-align: justify;
+  max-width: 1350px;
+  padding: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 0px;
+  }
 `;
 
 const ObjectiveMission1 = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 var(--padding-xl);
+  box-sizing: border-box;
 `;
 
 const FrameParent = styled.div`
-  width: 100px;
-  justify-content: flex-start;
-  gap: 10px;
   display: flex;
-  flex-direction: row;
   align-items: center;
+  gap: 10px;
+  margin: 0 100px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin: 0;
+  }
 `;
 
 const FinancialOption = styled.div`
-  align-self: stretch;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 0 0 0 var(--padding-xs);
-  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   color: var(--color-lightseagreen);
 `;
 
 const ContenidoQS = () => {
   return (
-    <Content> 
+    <Content>
       <MissionVision>
         <ObjectiveMission>
           <MissionContainer>
-            <Objetivo2Icon loading="lazy" alt="" src="/objetivo-21@2x.png" />
+            <Objetivo2Icon loading="lazy" alt="Ícono de misión" src="/objetivo-21@2x.png" />
             <MisionWrapper>
               <Mision>Misión</Mision>
             </MisionWrapper>
@@ -126,7 +157,7 @@ const ContenidoQS = () => {
         </Somos>
         <ObjectiveMission1>
           <FrameParent>
-            <img loading="lazy" alt="" src="/frame-1@2x.png" />
+            <Objetivo2Icon loading="lazy" alt="Ícono de visión" src="/frame-1@2x.png" />
             <MisionWrapper>
               <Mision>Visión</Mision>
             </MisionWrapper>
