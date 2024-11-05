@@ -1,6 +1,6 @@
 import React from 'react';
-import FrameComponent2 from "../components/FrameComponent2";
-import HeaderComponent from "../components/HeaderComponent"; // Import HeaderComponent
+import HeaderComponent from "../components/HeaderComponent"; 
+import Footer from "../components/Footer"
 
 const Objetivos = () => {
   return (
@@ -71,9 +71,9 @@ const Objetivos = () => {
             </div>
           </div>
         </section>
+        <Footer/>
       </main>
-      <FrameComponent2 />
-
+      
       <style jsx>{`
         .text {
           width: 0;
@@ -126,7 +126,7 @@ const Objetivos = () => {
           gap: var(--gap-sm);
         }
         .objectiveContentWrapper {
-          width: 1668px;
+          width: 100%;
           justify-content: center;
           padding: 0 var(--padding-xl);
           box-sizing: border-box;
@@ -139,19 +139,21 @@ const Objetivos = () => {
         }
         .brindarALos {
           margin: 0;
+          margin-bottom: 16px; /* Añadir margen inferior */
         }
         .mantenerUnaCultura {
           margin: 0;
           white-space: pre-wrap;
+          margin-bottom: 16px; /* Añadir margen inferior */
         }
         .brindarALosContainer {
           align-self: stretch;
-          height: 675.1px;
           position: relative;
           line-height: 100%;
           display: inline-block;
           flex-shrink: 0;
           font-size: var(--font-size-17xl);
+          padding-bottom: 100px; /* Añadir padding inferior */
         }
         .frameGroup,
         .frameWrapper {
@@ -160,7 +162,7 @@ const Objetivos = () => {
           max-width: 100%;
         }
         .frameGroup {
-          width: 1723px;
+          width: 100%;
           flex-direction: column;
           justify-content: flex-start;
           gap: 87.1px;
@@ -199,10 +201,6 @@ const Objetivos = () => {
           letter-spacing: normal;
         }
 
-
-        
-         
-
         @media screen and (max-width: 1920px) {
           .objetivos1 {
             font-size: var(--font-size-19xl);
@@ -225,7 +223,7 @@ const Objetivos = () => {
           }
         }
 
-       @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 1024px) {
           .objetivos1 {
             font-size: var(--font-size-19xl);
             line-height: 50px;
@@ -252,20 +250,7 @@ const Objetivos = () => {
           }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-         @media screen and (max-width: 820px) {
+        @media screen and (max-width: 820px) {
           .objetivos1 {
             font-size: var(--font-size-13xl);
             line-height: 32px;
@@ -276,7 +261,7 @@ const Objetivos = () => {
           }
         }
 
-       @media screen and (max-width: 768px) {
+        @media screen and (max-width: 768px) {
           .frameGroup {
             gap: 44px;
           }
@@ -286,17 +271,15 @@ const Objetivos = () => {
           .objetivos {
             gap: 34px;
           }
-
           .brindarALosContainer {
             font-size: 27px;
             line-height: 28px;
           }
-            .objetivos1 {
+          .objetivos1 {
             font-size: var(--font-size-13xl);
             line-height: 45px;
           }
         }
-
 
         @media screen and (max-width: 725px) {
           .frameGroup {
@@ -308,7 +291,6 @@ const Objetivos = () => {
           .objetivos {
             gap: 34px;
           }
-
           .brindarALosContainer {
             font-size: 19px;
             line-height: 32px;
@@ -325,12 +307,10 @@ const Objetivos = () => {
           .objetivos {
             gap: 34px;
           }
-
           .brindarALosContainer {
             font-size: 24px;
             line-height: 22px;
           }
-
         }
 
         @media screen and (max-width: 450px) {
@@ -384,7 +364,7 @@ const Objetivos = () => {
           }
         }
 
-          @media screen and (max-width: 390px) {
+        @media screen and (max-width: 390px) {
           .objetivos1 {
             font-size: var(--font-size-13xl);
             line-height: 45px;
@@ -401,7 +381,7 @@ const Objetivos = () => {
           }
         }
 
-           @media screen and (max-width: 375px) {
+        @media screen and (max-width: 375px) {
           .frameGroup {
             gap: 44px;
           }
@@ -411,18 +391,17 @@ const Objetivos = () => {
           .objetivos {
             gap: 34px;
           }
-                      .objetivos1 {
+          .objetivos1 {
             font-size: var(--font-size-13xl);
             line-height: 45px;
           }
-
           .brindarALosContainer {
             font-size: 19px;
             line-height: 19px;
           }
-
         }
-           @media screen and (max-width: 360px) {
+
+        @media screen and (max-width: 360px) {
           .frameGroup {
             gap: 44px;
           }
@@ -432,18 +411,17 @@ const Objetivos = () => {
           .objetivos {
             gap: 34px;
           }
-           .objetivos1 {
+          .objetivos1 {
             font-size: var(--font-size-13xl);
             line-height: 45px;
           }
-
           .brindarALosContainer {
             font-size: 16px;
             line-height: 20px;
           }
-
         }
-          media screen and (max-width: 344px) {
+
+        @media screen and (max-width: 344px) {
           .frameGroup {
             gap: 44px;
           }
@@ -453,19 +431,15 @@ const Objetivos = () => {
           .objetivos {
             gap: 34px;
           }
-           .objetivos1 {
+          .objetivos1 {
             font-size: var(--font-size-13xl);
             line-height: 45px;
           }
-
           .brindarALosContainer {
             font-size: 14px;
             line-height: 14px;
           }
-
         }
-
-  
       `}</style>
     </div>
   );

@@ -1,4 +1,4 @@
-import HeaderComponent from "../components/HeaderComponent"; // Asegúrate de que la ruta sea correcta
+import HeaderComponent from "../components/HeaderComponent"; 
 import PropTypes from "prop-types";
 
 const FrameComponent3 = ({ className = "" }) => {

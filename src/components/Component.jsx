@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import Footer from "./Footer";
 import PropTypes from "prop-types";
 
 const Component = ({
@@ -38,12 +37,6 @@ const Component = ({
         ...component1Style,
       }}
     >
-      <Footer
-        text="Dirección"
-        propFlex="unset"
-        propAlignSelf="stretch"
-        hasTitle
-      />
       <div
         className="infobancouniversitariocomve"
         style={{

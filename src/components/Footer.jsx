@@ -3,113 +3,58 @@ import styled from "styled-components";
 
 const FooterContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 202px;
-  padding: var(--sds-size-space-800) var(--sds-size-space-800) var(--sds-size-space-4000) var(--sds-size-space-800);
-  align-items: flex-start;
-  align-content: flex-start;
-  gap: 16px var(--sds-size-space-400);
-  flex-wrap: wrap;
-  position: relative; /* Cambiado a relative para ubicarse al final del contenido */
-  border-top: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  height: 200px; /* Altura fija */
+  padding: var(--sds-size-space-800);
+  align-items: center;
+  justify-content: center; /* Centrar contenido verticalmente */
+  border-top: 2px solid var(--color-lightseagreen);
+  border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
   background: var(--sds-color-background-default-default);
+  box-sizing: border-box; /* Incluir padding y border en la altura total */
 `;
-
 
 const LogoContainer = styled.div`
   display: flex;
-  width: 262px;
-  min-width: 240px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--sds-size-space-600);
-  flex-shrink: 0;
   font-family: "Montserrat Alternates";
 `;
 
-const LogoX = styled.img`
-  width: 23.98px;
-  height: var(--Icon-Small, 24px);
-`;
-
-const LogoInsta = styled.img`
-  width: var(--Icon-Small, 24px);
-  height: var(--Icon-Small, 24px);
-`;
-
-const LogoYT = styled.img`
-  width: var(--Icon-Small, 24px);
-  height: var(--Icon-Small, 24px);
-`;
-
-const LogoLinke = styled.img`
-  width: var(--Icon-Small, 24px);
-  height: var(--Icon-Small, 24px);
-  display: flex;
-  align-items: center;
-  gap: var(--sds-size-space-400);
-`;
-
-const Direccion = styled.div`
-  display: flex;
-  align-items: flex-start;
-  align-self: stretch;
-  font-family: inherit;
-  color: #085f63;
-`;
-
-const DireccionTexto = styled.p`
-  width: 187px;
-  height: 101px;
-  flex-shrink: 0;
-  color: #49beb7;
-  font-family: inherit;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
+const Texto = styled.p`
+  font-size: 20px; /* Tamaño de fuente del heading */
+  font-weight: bold; /* Peso de fuente del heading */
+  color: #085f63; /* Color del heading */
+  text-shadow: unset; /* Sombra de texto del heading */
   line-height: 140%;
+  text-align: center;
+  margin: 0; /* Eliminar márgenes para evitar desbordamiento */
 `;
 
 const Contacto = styled.div`
   display: flex;
-  align-items: flex-start;
-  align-self: stretch;
-  color: #085f63;
-  font-family: inherit;
-`;
-
-const ContactoTexto = styled.p`
-  display: flex;
-  width: 89px;
-  height: 22px;
-  justify-content: flex-end;
+  flex-direction: column;
   align-items: center;
-  font-family: inherit;
+  margin-top: var(--sds-size-space-600);
 `;
 
 const Footer = () => {
   return (
-    <FooterContainer>
+    <FooterContainer data-scroll-to="footer">
       <LogoContainer>
-        <LogoX loading="lazy" alt="Logo X" src="/x-logo.svg" />
-        <LogoInsta loading="lazy" alt="Instagram Logo" src="/logo-instagram.svg" />
-        <LogoYT loading="lazy" alt="YouTube Logo" src="/logo-youtube.svg" />
-        <LogoLinke loading="lazy" alt="LinkedIn Logo" src="/linkedin.svg" />
-        <Direccion>
-          Dirección
-          <DireccionTexto>
-            Dirección: Av. Universidad, Edificio Banco Universitario, piso 12, Caracas, Venezuela
-          </DireccionTexto>
-        </Direccion>
+        <Texto>
+          Dirección: Av. Universidad, Edificio Banco Universitario, piso 12, Caracas, Venezuela
+        </Texto>
         <Contacto>
-          Contacto
-          <ContactoTexto>
+          <Texto>
             Teléfono: +58 212-555-5555
             <br />
             Fax: +58 212-555-5556
             <br />
             info@bancouniversitario.com.ve
-          </ContactoTexto>
+          </Texto>
         </Contacto>
       </LogoContainer>
     </FooterContainer>

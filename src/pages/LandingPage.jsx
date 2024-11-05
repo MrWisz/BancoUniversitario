@@ -1,7 +1,7 @@
-import HeaderComponent from "../components/HeaderComponent.jsx"; 
+import HeaderComponent from "../components/HeaderComponent"; 
 import PanelImageDouble from "../components/PanelImageDouble";
 import CardGridIcon from "../components/CardGridIcon";
-import FrameComponent1 from "../components/FrameComponent1";
+import Footer from "../components/Footer"
 
 const LandingPage = () => {
   return (
@@ -12,7 +12,7 @@ const LandingPage = () => {
         <PanelImageDouble image="/image@2x.png" image1="/image-1@2x.png" />
         <CardGridIcon />
       </section>
-      <FrameComponent1 />
+      <Footer/>
       <style jsx>{`
         .text {
           width: 0;
