@@ -5,13 +5,20 @@ const Content = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  padding: 0 var(--padding-2xl);
+  padding: 100px var(--padding-2xl); /* Añadir padding superior e inferior */
   box-sizing: border-box;
   text-align: center;
   font-size: var(--font-size-21xl);
   color: var(--color);
   font-family: var(--font-montserrat-alternates);
+
+  @media (max-width: 768px) {
+    padding: 80px var(--padding-xl); /* Ajustar padding en pantallas más pequeñas */
+  }
+
+  @media (max-width: 480px) {
+    padding: 60px var(--padding-lg); /* Ajustar padding en pantallas muy pequeñas */
+  }
 `;
 
 const MissionVision = styled.div`
@@ -21,15 +28,19 @@ const MissionVision = styled.div`
   gap: var(--gap-24xl-7);
   width: 100%;
   max-width: 1400px;
-   @media (max-width: 990px) {
+  margin: 0 auto; /* Centrar horizontalmente */
+
+  @media (max-width: 990px) {
     max-width: 80%; /* Reducir ancho en pantallas más pequeñas */
     padding-top: var(--padding-5xl);
   }
+
   @media (max-width: 768px) {
     max-width: 80%; /* Reducir ancho en pantallas más pequeñas */
     padding-top: var(--padding-5xl);
   }
-    @media (max-width: 400px) {
+
+  @media (max-width: 400px) {
     max-width: 60%; /* Reducir ancho en pantallas más pequeñas */
     padding-top: var(--padding-5xl);
   }
@@ -63,15 +74,17 @@ const Objetivo2Icon = styled.img`
   height: 100px;
   width: 100px;
   object-fit: cover;
+  z-index: 0; /* Asegurar que el ícono esté detrás del menú */
 
   @media (max-width: 768px) {
     height: 75px; /* Reducir tamaño del ícono en pantallas pequeñas */
     width: 75px;
   }
-   @media (max-width: 400px) {
+
+  @media (max-width: 400px) {
     height: 65px; /* Reducir tamaño del ícono en pantallas pequeñas */
     width: 65px;
-  } 
+  }
 `;
 
 const Mision = styled.h3`
@@ -89,9 +102,10 @@ const MisionWrapper = styled.div`
   justify-content: flex-start;
   padding-top: var(--padding-10xl);
   text-align: center;
+
   @media (max-width: 768px) {
-  padding-top: var(--padding-5xl); /* Ajusta según sea necesario */
-}
+    padding-top: var(--padding-5xl); /* Ajusta según sea necesario */
+  }
 `;
 
 const Somos = styled.p`
@@ -100,7 +114,7 @@ const Somos = styled.p`
   line-height: 1.6;
   font-weight: 500;
   color: var(--color-lightseagreen);
-  text-align: justify;
+  text-align: center; /* Centrar el texto horizontalmente */
   max-width: 1350px;
   padding: 20px;
 
