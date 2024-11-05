@@ -82,6 +82,12 @@ const Card1 = ({
       fontFamily: "inherit",
       alignSelf: "stretch",
       position: "relative",
+      '@media (max-width: 768px)': {
+        fontSize: '1.2em', // Ajustar el tamaño del heading para pantallas pequeñas
+      },
+      '@media (max-width: 400px)': {
+        fontSize: '1em', // Ajustar el tamaño del heading para pantallas muy pequeñas
+      },
     },
     text: {
       alignSelf: "stretch",
@@ -126,6 +132,12 @@ const Card1 = ({
       minWidth: "160px",
       justifyContent: "flex-start",
       maxWidth: "100%",
+      '@media (max-width: 768px)': {
+        fontSize: '0.9em', // Ajustar el tamaño del body para pantallas pequeñas
+      },
+      '@media (max-width: 400px)': {
+        fontSize: '0.8em', // Ajustar el tamaño del body para pantallas muy pequeñas
+      },
     },
     buttonGroup: {
       width: "384px",
