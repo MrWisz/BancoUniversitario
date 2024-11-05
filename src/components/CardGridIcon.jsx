@@ -55,6 +55,10 @@ const CardsContainer = styled.div`
     padding: 0 var(--padding-16xl);
     gap: var(--space-400);
   }
+
+  @media (max-width: 400px) {
+    gap: 250px;
+  }
 `;
 
 const CardGridIcon = ({ className = "" }) => {
