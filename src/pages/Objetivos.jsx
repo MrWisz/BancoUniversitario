@@ -1,11 +1,93 @@
 import React from 'react';
-import HeaderComponent from "../components/HeaderComponent"; 
-import Footer from "../components/Footer"
+import styled, { keyframes } from 'styled-components';
+import HeaderComponent from "../components/HeaderComponent";
+import Footer from "../components/Footer";
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const ObjetivosContainer = styled.div`
+  font-family: var(--font-montserrat-alternates);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--background-default-default);
+  color: var(--color);
+  min-height: 100vh;
+  animation: ${fadeIn} 0.6s ease-in-out;
+`;
+
+const Header = styled(HeaderComponent)`
+  width: 100%;
+`;
+
+const Section = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0;
+  flex-direction: row;
+
+  &:nth-child(odd) {
+    flex-direction: row-reverse; /* Alterna la posición de imagen y texto */
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
+`;
+
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-basis: 40%; /* Ocupa 40% del ancho del contenedor */
+  padding: 20px;
+
+  img {
+    width: 100%;
+    max-width: 400px; /* Aumenta el tamaño máximo de la imagen */
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+`;
+
+const Text = styled.p`
+  flex-basis: 55%; /* Ocupa 55% del ancho del contenedor */
+  font-size: 1.4rem; /* Aumenta el tamaño de fuente */
+  line-height: 1.8;
+  text-align: justify;
+  margin-bottom: 20px;
+  margin-left:50px;
+  margin-right:50px;
+  color: #49beb7;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem; /* Ajusta el tamaño en pantallas pequeñas */
+  }
+`;
+
+const ObjetivosTitle = styled.h3`
+  font-size: 2.5rem;
+  color: #085f63;
+  background: linear-gradient(#085f63, #085f63), #49beb7;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+`;
 
 const Objetivos = () => {
   return (
-    <div className="objetivos">
-      <HeaderComponent
+    <ObjetivosContainer>
+      <Header
         onQuienesSomosTextClick={() => console.log('Quienes somos clicked')}
         onObjetivosTextClick={() => console.log('Objetivos clicked')}
         onServiciosTextClick={() => console.log('Servicios clicked')}
@@ -13,435 +95,39 @@ const Objetivos = () => {
         onAccesoTextClick={() => console.log('Acceso clicked')}
         onRegistroTextClick={() => console.log('Registro clicked')}
       />
-      <div className="text" />
-      <div className="objetivo1" />
-      <main className="frameParent">
-        <section className="frameWrapper">
-          <div className="frameGroup">
-            <div className="objectiveContentWrapper">
-              <div className="objectiveContent">
-                <img
-                  className="objetivo2Icon"
-                  loading="lazy"
-                  alt=""
-                  src="/objetivo-2@2x.png"
-                />
-                <div className="objetivosWrapper">
-                  <h3 className="objetivos1">Objetivos</h3>
-                </div>
-              </div>
-            </div>
-            <div className="brindarALosContainer">
-              <p className="blankLine">&nbsp;</p>
-              <p className="brindarALos">
-                    Brindar a los estudiantes universitarios un servicio
-                eficiente y de calidad en la gestión de sus recursos
-                financieros, a través de nuestros canales digitales y nuestros
-                puntos de atención presencial.
-              </p>
-              <p className="brindarALos">&nbsp;</p>
-              <p className="brindarALos">
-                     Fomentar el uso de nuestras plataformas digitales para
-                hacer transferencias entre estudiantes sin comisión, depósitos y
-                retiros en efectivo, ofreciendo herramientas tecnológicas
-                fáciles y seguras.
-              </p>
-              <p className="brindarALos">&nbsp;</p>
-              <p className="brindarALos">
-                     Promover la educación financiera de los estudiantes
-                universitarios, a través de charlas, talleres y capacitaciones
-                sobre temas como el ahorro, la inversión y el uso responsable
-                del crédito.
-              </p>
-              <p className="brindarALos">&nbsp;</p>
-              <p className="brindarALos">
-                      Establecer alianzas estratégicas con universidades y
-                empresas para ofrecer beneficios exclusivos a nuestros clientes,
-                tales como descuentos en matrículas, becas, prácticas laborales,
-                entre otros.
-              </p>
-              <p className="brindarALos">&nbsp;</p>
-              <p className="mantenerUnaCultura">
-                {" "}
-                Mantener una cultura de innovación y mejora continua en nuestros
-                procesos, productos y servicios, para estar siempre a la
-                vanguardia de las necesidades de nuestros clientes y del
-                mercado.
-              </p>
-            </div>
-          </div>
-        </section>
-        <Footer/>
-      </main>
-      
-      <style jsx>{`
-        .text {
-          width: 0;
-          height: 16px;
-          position: relative;
-          display: none;
-        }
-        .objetivo1,
-        .objetivo2Icon {
-          height: 100px;
-          width: 100px;
-          position: relative;
-        }
-        .objetivo1 {
-          display: none;
-        }
-        .objetivo2Icon {
-          object-fit: cover;
-          z-index: 2;
-        }
-        .objetivos1 {
-          margin: 0;
-          align-self: stretch;
-          position: relative;
-          font-size: inherit;
-          line-height: 100%;
-          font-weight: 400;
-          font-family: inherit;
-          background: linear-gradient(#085f63, #085f63), #49beb7;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        .objetivosWrapper {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: flex-start;
-          padding: var(--padding-10xl) 0 0;
-        }
-        .objectiveContent,
-        .objectiveContentWrapper {
-          display: flex;
-          flex-direction: row;
-          align-items: flex-start;
-        }
-        .objectiveContent {
-          width: 318px;
-          justify-content: flex-start;
-          gap: var(--gap-sm);
-        }
-        .objectiveContentWrapper {
-          width: 100%;
-          justify-content: center;
-          padding: 0 var(--padding-xl);
-          box-sizing: border-box;
-          max-width: 100%;
-        }
-        .blankLine {
-          margin: 0;
-          font-size: var(--font-size-21xl);
-          color: var(--color);
-        }
-        .brindarALos {
-          margin: 0;
-          margin-bottom: 16px; /* Añadir margen inferior */
-        }
-        .mantenerUnaCultura {
-          margin: 0;
-          white-space: pre-wrap;
-          margin-bottom: 16px; /* Añadir margen inferior */
-        }
-        .brindarALosContainer {
-          align-self: stretch;
-          position: relative;
-          line-height: 100%;
-          display: inline-block;
-          flex-shrink: 0;
-          font-size: var(--font-size-17xl);
-          padding-bottom: 100px; /* Añadir padding inferior */
-        }
-        .frameGroup,
-        .frameWrapper {
-          display: flex;
-          align-items: flex-start;
-          max-width: 100%;
-        }
-        .frameGroup {
-          width: 100%;
-          flex-direction: column;
-          justify-content: flex-start;
-          gap: 87.1px;
-        }
-        .frameWrapper {
-          align-self: stretch;
-          flex-direction: row;
-          justify-content: center;
-          padding: 0 var(--padding-xl) 0 var(--padding-2xl);
-          box-sizing: border-box;
-          text-align: center;
-          font-size: var(--font-size-21xl);
-          color: var(--color-lightseagreen);
-          font-family: var(--font-montserrat-alternates);
-        }
-        .frameParent,
-        .objetivos {
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-        }
-        .frameParent {
-          align-self: stretch;
-          align-items: flex-end;
-          gap: 36px;
-          max-width: 100%;
-        }
-        .objetivos {
-          width: 100%;
-          position: relative;
-          background-color: var(--background-default-default);
-          overflow: hidden;
-          align-items: flex-start;
-          gap: 135.8px;
-          line-height: normal;
-          letter-spacing: normal;
-        }
 
-        @media screen and (max-width: 1920px) {
-          .objetivos1 {
-            font-size: var(--font-size-19xl);
-            line-height: 50px;
-          }
-          .brindarALosContainer {
-            font-size: var(--font-size-13xl);
-            line-height: 32px;
-          }
-        }
+      <ObjetivosTitle>Objetivos</ObjetivosTitle>
 
-        @media screen and (max-height: 1280px) {
-          .objetivos1 {
-            font-size: var(--font-size-19xl);
-            line-height: 50px;
-          }
-          .brindarALosContainer {
-            font-size: var(--font-size-13xl);
-            line-height: 32px;
-          }
-        }
+      <Section>
+        <ImageWrapper>
+          <img loading="lazy" alt="Objetivo 1" src="/img-1.png" />
+        </ImageWrapper>
+        <Text>
+          Brindar a los estudiantes universitarios un servicio eficiente y de calidad en 
+          la gestión de sus recursos financieros, a través de nuestros canales digitales y
+          nuestros puntos de atención presencial.
+          Fomentar el uso de nuestras plataformas digitales para hacer transferencias entre estudiantes 
+          sin comisión, depósitos y retiros en efectivo, ofreciendo herramientas tecnológicas fáciles y seguras.
+          Promover la educación financiera de los estudiantes universitarios, a través de charlas,
+          talleres y capacitaciones sobre temas como el ahorro, la inversión y el uso responsable del crédito.
+        </Text>
+      </Section>
 
-        @media screen and (max-width: 1024px) {
-          .objetivos1 {
-            font-size: var(--font-size-19xl);
-            line-height: 50px;
-          }
-          .brindarALosContainer {
-            font-size: var(--font-size-13xl);
-            line-height: 29px;
-          }
-        }
+      <Section>
+        <ImageWrapper>
+          <img loading="lazy" alt="Objetivo 2" src="/img-o.jpg" />
+        </ImageWrapper>
+        <Text>
+          Establecer alianzas estratégicas con universidades y empresas para ofrecer beneficios exclusivos a 
+          nuestros clientes, tales como descuentos en matrículas, becas, prácticas laborales, entre otros.
+          Mantener una cultura de innovación y mejora continua en nuestros procesos,
+          productos y servicios, para estar siempre a la vanguardia de las necesidades de nuestros clientes y 
+          del mercado.
+        </Text>
+      </Section>
 
-        @media screen and (max-width: 1000px) {
-          .objetivos {
-            gap: 68px;
-          }
-        }
-        @media screen and (max-width: 975px) {
-          .objetivos1 {
-            font-size: var(--font-size-19xl);
-            line-height: 50px;
-          }
-          .brindarALosContainer {
-            font-size: var(--font-size-13xl);
-            line-height: 29px;
-          }
-        }
-
-        @media screen and (max-width: 820px) {
-          .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 32px;
-          }
-          .brindarALosContainer {
-            font-size: var(--font-size-3xl);
-            line-height: 36px;
-          }
-        }
-
-        @media screen and (max-width: 768px) {
-          .frameGroup {
-            gap: 44px;
-          }
-          .frameParent {
-            gap: var(--gap-lg);
-          }
-          .objetivos {
-            gap: 34px;
-          }
-          .brindarALosContainer {
-            font-size: 27px;
-            line-height: 28px;
-          }
-          .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 45px;
-          }
-        }
-
-        @media screen and (max-width: 725px) {
-          .frameGroup {
-            gap: 44px;
-          }
-          .frameParent {
-            gap: var(--gap-lg);
-          }
-          .objetivos {
-            gap: 34px;
-          }
-          .brindarALosContainer {
-            font-size: 19px;
-            line-height: 32px;
-          }
-        }
-
-        @media screen and (max-width: 540px) {
-          .frameGroup {
-            gap: 44px;
-          }
-          .frameParent {
-            gap: var(--gap-lg);
-          }
-          .objetivos {
-            gap: 34px;
-          }
-          .brindarALosContainer {
-            font-size: 24px;
-            line-height: 22px;
-          }
-        }
-
-        @media screen and (max-width: 450px) {
-          .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 45px;
-          }
-          .brindarALosContainer {
-            font-size: var(--font-size-3xl);
-            line-height: 16px;
-          }
-          .frameGroup {
-            gap: var(--gap-3xl);
-          }
-          .objetivos {
-            gap: 17px;
-          }
-        }
-
-        @media screen and (max-width: 430px) {
-          .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 45px;
-          }
-          .brindarALosContainer {
-            font-size: 18px;
-            line-height: 22px;
-          }
-          .frameGroup {
-            gap: var(--gap-3xl);
-          }
-          .objetivos {
-            gap: 17px;
-          }
-        }
-
-        @media screen and (max-width: 414px) {
-          .objetivos {
-            font-size: var(--font-size-13xl);
-            line-height: 45px;
-          }
-          .brindarALosContainer {
-            font-size: 20px;
-            line-height: 19px;
-          }
-          .frameGroup {
-            gap: var(--gap-3xl);
-          }
-          .objetivos {
-            gap: 17px;
-          }
-        }
-
-        @media screen and (max-width: 390px) {
-          .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 45px;
-          }
-          .brindarALosContainer {
-            font-size: 19px;
-            line-height: 19px;
-          }
-          .frameGroup {
-            gap: var(--gap-3xl);
-          }
-          .objetivos {
-            gap: 17px;
-          }
-        }
-
-        @media screen and (max-width: 375px) {
-          .frameGroup {
-            gap: 44px;
-          }
-          .frameParent {
-            gap: var(--gap-lg);
-          }
-          .objetivos {
-            gap: 34px;
-          }
-          .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 45px;
-          }
-          .brindarALosContainer {
-            font-size: 19px;
-            line-height: 19px;
-          }
-        }
-
-        @media screen and (max-width: 360px) {
-          .frameGroup {
-            gap: 44px;
-          }
-          .frameParent {
-            gap: var(--gap-lg);
-          }
-          .objetivos {
-            gap: 34px;
-          }
-          .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 45px;
-          }
-          .brindarALosContainer {
-            font-size: 16px;
-            line-height: 20px;
-          }
-        }
-
-        @media screen and (max-width: 344px) {
-          .frameGroup {
-            gap: 44px;
-          }
-          .frameParent {
-            gap: var(--gap-lg);
-          }
-          .objetivos {
-            gap: 34px;
-          }
-          .objetivos1 {
-            font-size: var(--font-size-13xl);
-            line-height: 45px;
-          }
-          .brindarALosContainer {
-            font-size: 14px;
-            line-height: 14px;
-          }
-        }
-      `}</style>
-    </div>
+      <Footer />
+    </ObjetivosContainer>
   );
 };
 
