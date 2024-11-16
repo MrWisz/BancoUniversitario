@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import HeaderComponent from "../components/HeaderComponent";
 import Footer from "../components/Footer";
+import BackToTop from "../components/BackToTop";
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -125,9 +126,11 @@ const Objetivos = () => {
           del mercado.
         </Text>
       </Section>
-
+      <BackToTop />
       <Footer />
+      
     </ObjetivosContainer>
+    
   );
 };
 

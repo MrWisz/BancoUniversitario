@@ -38,10 +38,9 @@ const CardsContainer = styled.div`
   box-sizing: border-box;
   max-width: 100%;
   align-self: stretch;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column; /* Cambiar a columna para alineación vertical */
+  align-items: center;
+  justify-content: flex-start;
   padding: 0 var(--padding-63xl);
   gap: var(--space-1600);
   min-height: 504px;
@@ -75,16 +74,16 @@ const CardGridIcon = ({ className = "" }) => {
           body="El Banco Universitario ofrece un servicio de transferencias entre estudiantes sin costo alguno, con el objetivo de facilitar el intercambio de dinero entre los estudiantes universitarios. Este servicio permite transferir dinero de manera rápida, segura y eficiente, lo que permite a los estudiantes contar con una alternativa más para realizar sus pagos y transacciones."
           heading="Transferencias entre estudiantes sin comisión"
           button={false}
-          propHeight="220px"
-          propHeight1="176px"
-          propDisplay="inline-block"
+          propHeight="auto"
+          propHeight1="auto"
+          propDisplay="block"
           label="Button"
           hasIconStart={false}
           hasIconEnd={false}
           showButton
           propHeight2="40px"
           propBackgroundColor="#e3e3e3"
-          propBorder="1px solid #767676"
+          propBorder="1px solid #085f63" // Cambiar el color del borde
           propPadding="var(--space-300) var(--padding-2xs)"
           propFlex="unset"
           propAlignSelf="unset"
@@ -97,22 +96,23 @@ const CardGridIcon = ({ className = "" }) => {
           propFontWeight="unset"
           propWidth="unset"
           propMinHeight1="16px"
+          imageSrc="/transferencia-bancaria.jpg"
         />
         <Card1
           asset
           body="El Banco Universitario permite a los estudiantes realizar depósitos en efectivo de manera sencilla y cómoda en cualquiera de sus sucursales. Este servicio está disponible las 24 horas del día, los 7 días de la semana, lo que permite a los estudiantes realizar sus depósitos en cualquier momento que lo necesiten."
           heading="Depósitos en efectivo"
           button={false}
-          propHeight="unset"
-          propHeight1="unset"
-          propDisplay="unset"
+          propHeight="auto"
+          propHeight1="auto"
+          propDisplay="block"
           label="Button"
           hasIconStart
           hasIconEnd={false}
           showButton
           propHeight2="40px"
           propBackgroundColor="#e3e3e3"
-          propBorder="1px solid #767676"
+          propBorder="1px solid #085f63" // Cambiar el color del borde
           propPadding="var(--space-300) var(--padding-2xs)"
           propFlex="unset"
           propAlignSelf="unset"
@@ -125,22 +125,23 @@ const CardGridIcon = ({ className = "" }) => {
           propFontWeight="unset"
           propWidth="unset"
           propMinHeight1="16px"
+          imageSrc="depositos.jpg"
         />
         <Card1
           asset
           body="El Banco Universitario también permite a los estudiantes realizar retiros en efectivo de manera rápida y segura. Los estudiantes pueden realizar retiros en cualquiera de las sucursales del banco, con la tranquilidad de que sus fondos están seguros y protegidos."
           heading="Retiros en efectivo"
           button={false}
-          propHeight="unset"
-          propHeight1="unset"
-          propDisplay="unset"
+          propHeight="auto"
+          propHeight1="auto"
+          propDisplay="block"
           label="Button"
           hasIconStart={false}
           hasIconEnd={false}
           showButton
           propHeight2="40px"
           propBackgroundColor="#e3e3e3"
-          propBorder="1px solid #767676"
+          propBorder="1px solid #085f63" // Cambiar el color del borde
           propPadding="var(--space-300) var(--padding-2xs)"
           propFlex="unset"
           propAlignSelf="unset"
@@ -153,21 +154,22 @@ const CardGridIcon = ({ className = "" }) => {
           propFontWeight="unset"
           propWidth="unset"
           propMinHeight1="16px"
+          imageSrc="/retiros.jpg"
         />
         <Card1
           asset
           body="El Banco Universitario también ofrece un servicio de pago de matrícula estudiantil, que permite a los estudiantes universitarios pagar sus matrículas de manera rápida y sencilla. Este servicio se realiza en línea y está disponible las 24 horas del día, lo que permite a los estudiantes realizar sus pagos en cualquier momento que lo necesiten."
           heading="Pago de matrícula estudiantil"
           button={false}
-          propHeight="unset"
-          propHeight1="unset"
-          propDisplay="unset"
+          propHeight="auto"
+          propHeight1="auto"
+          propDisplay="block"
           label="Button"
           hasIconStart={false}
           hasIconEnd={false}
           propHeight2="40px"
           propBackgroundColor="#e3e3e3"
-          propBorder="1px solid #767676"
+          propBorder="1px solid #085f63" // Cambiar el color del borde
           propPadding="var(--space-300) var(--padding-2xs)"
           propFlex="unset"
           propAlignSelf="unset"
@@ -180,6 +182,7 @@ const CardGridIcon = ({ className = "" }) => {
           propFontWeight="unset"
           propWidth="unset"
           propMinHeight1="16px"
+          imageSrc="/matricula.jpeg"
         />
         <Card1
           asset
@@ -187,6 +190,8 @@ const CardGridIcon = ({ className = "" }) => {
           heading="Cobro de becas estudiantiles"
           hasIconStart
           hasIconEnd
+          imageSrc="/beca.jpeg" 
+          propBorder="1px solid #085f63" 
         />
       </CardsContainer>
     </CardGridIconContainer>

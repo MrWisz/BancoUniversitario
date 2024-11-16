@@ -1,7 +1,8 @@
 import HeaderComponent from "../components/HeaderComponent"; 
 import PanelImageDouble from "../components/PanelImageDouble";
 import CardGridIcon from "../components/CardGridIcon";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
+import BackToTop from "../components/BackToTop";
 
 const LandingPage = () => {
   return (
@@ -12,7 +13,8 @@ const LandingPage = () => {
         <PanelImageDouble image="/image@2x.png" image1="/image-1@2x.png" />
         <CardGridIcon />
       </section>
-      <Footer/>
+      <Footer />
+      <BackToTop />
       <style jsx>{`
         .text {
           width: 0;

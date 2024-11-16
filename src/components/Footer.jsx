@@ -31,6 +31,18 @@ const Texto = styled.p`
   line-height: 140%;
   text-align: center;
   margin: 0; /* Eliminar márgenes para evitar desbordamiento */
+
+  @media (max-width: 500px) {
+    font-size: 18px; /* Tamaño de fuente reducido */
+  }
+
+  @media (max-width: 400px) {
+    font-size: 16px; /* Tamaño de fuente reducido */
+  }
+
+  @media (max-width: 300px) {
+    font-size: 14px; /* Tamaño de fuente reducido */
+  }
 `;
 
 const Contacto = styled.div`
