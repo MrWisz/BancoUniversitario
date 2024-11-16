@@ -9,7 +9,7 @@ const fadeIn = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
-const ObjetivosContainer = styled.div`
+const ObjetivesContainer = styled.div`
   font-family: var(--font-montserrat-alternates);
   display: flex;
   flex-direction: column;
@@ -76,7 +76,7 @@ const Text = styled.p`
   }
 `;
 
-const ObjetivosTitle = styled.h3`
+const ObjetivesTitle = styled.h3`
   font-size: 2.5rem;
   color: #085f63;
   background: linear-gradient(#085f63, #085f63), #49beb7;
@@ -85,19 +85,19 @@ const ObjetivosTitle = styled.h3`
   margin-bottom: 20px;
 `;
 
-const Objetivos = () => {
+const Objetives = () => {
   return (
-    <ObjetivosContainer>
+    <ObjetivesContainer>
       <Header
         onQuienesSomosTextClick={() => console.log('Quienes somos clicked')}
-        onObjetivosTextClick={() => console.log('Objetivos clicked')}
+        onObjetivesTextClick={() => console.log('Objetivos clicked')}
         onServiciosTextClick={() => console.log('Servicios clicked')}
         onContactoTextClick={() => console.log('Contacto clicked')}
         onAccesoTextClick={() => console.log('Acceso clicked')}
         onRegistroTextClick={() => console.log('Registro clicked')}
       />
 
-      <ObjetivosTitle>Objetivos</ObjetivosTitle>
+      <ObjetivesTitle>Objetivos</ObjetivesTitle>
 
       <Section>
         <ImageWrapper>
@@ -129,9 +129,9 @@ const Objetivos = () => {
       <BackToTop />
       <Footer />
       
-    </ObjetivosContainer>
+    </ObjetivesContainer>
     
   );
 };
 
-export default Objetivos;
+export default Objetives;

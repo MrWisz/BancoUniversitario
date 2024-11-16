@@ -11,8 +11,8 @@ const HeaderComponent = () => {
     setIsMenuOpen(false); // Cerrar el menú móvil
   };
 
-  const handleObjetivosClick = () => {
-    navigate('/objetivos');
+  const handleObjetivesClick = () => {
+    navigate('/objetives');
     setIsMenuOpen(false); // Cerrar el menú móvil
   };
 
@@ -98,7 +98,7 @@ const HeaderComponent = () => {
         <h2 className="navLink" onClick={handleWhoWeAreClick}>
           Quienes somos
         </h2>
-        <h2 className="navLink" onClick={handleObjetivosClick}>
+        <h2 className="navLink" onClick={handleObjetivesClick}>
           Objetivos
         </h2>
         <h2 className="navLink" onClick={handleServiciosClick}>
@@ -131,8 +131,8 @@ const HeaderComponent = () => {
         <h2 className="navLink" onClick={handleWhoWeAreClick}>
           Quienes somos
         </h2>
-        <h2 className="navLink" onClick={handleObjetivosClick}>
-          Objetivos
+        <h2 className="navLink" onClick={handleObjetivesClick}>
+          Objetives
         </h2>
         <h2 className="navLink" onClick={handleServiciosClick}>
           Servicios
