@@ -53,7 +53,7 @@ const BackToTop = () => {
 
   return (
     <Button show={showButton} isNearFooter={isNearFooter} onClick={scrollToTop}>
-      ↑ Volver al tope
+      ↑ 
     </Button>
   );
 };
