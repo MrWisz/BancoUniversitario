@@ -8,7 +8,7 @@ import {
 import LandingPage from "./pages/LandingPage.jsx";
 import Objetivos from "./pages/Objetivos.jsx";
 import Login from "./pages/Login.jsx";
-import QuienesSomos from "./pages/QuienesSomos.jsx";
+import WhoWeAre from "./pages/WhoWeAre.jsx";
 import RegistroDeUsuarios from "./pages/RegistroDeUsuarios.jsx";
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/quienes-somos":
+      case "/who-we-are":
         title = "";
         metaDescription = "";
         break;
@@ -68,7 +68,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/objetivos" element={<Objetivos />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/quienes-somos" element={<QuienesSomos />} />
+      <Route path="/who-we-are" element={<WhoWeAre />} />
       <Route path="/registro-de-usuarios" element={<RegistroDeUsuarios />} />
     </Routes>
   );
