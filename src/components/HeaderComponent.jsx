@@ -1,9 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const HeaderComponent = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const handleQuienesSomosClick = () => {
     navigate('/quienes-somos');
@@ -63,6 +64,12 @@ const HeaderComponent = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMenuOpen(false);
+    }
+  };
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1300) {
@@ -71,8 +78,10 @@ const HeaderComponent = () => {
     };
 
     window.addEventListener('resize', handleResize);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -118,7 +127,7 @@ const HeaderComponent = () => {
         <div />
         <div />
       </div>
-      <div className={`mobileMenu ${isMenuOpen ? 'open' : ''}`}>
+      <div ref={menuRef} className={`mobileMenu ${isMenuOpen ? 'open' : ''}`}>
         <h2 className="navLink" onClick={handleQuienesSomosClick}>
           Quienes somos
         </h2>
@@ -178,6 +187,18 @@ const HeaderComponent = () => {
           .logo {
             position: static;
             margin-bottom: 10px;
+          }
+        }
+        @media (max-width: 324px) {
+          .logo {
+            height: 50px;
+            width: 200px;
+          }
+        }
+        @media (max-width: 290px) {
+          .logo {
+            height: 40px;
+            width: 160px;
           }
         }
         .navLinksContainer {
@@ -265,11 +286,33 @@ const HeaderComponent = () => {
             display: flex;
           }
         }
+        @media (max-width: 324px) {
+          .hamburgerButton {
+            margin-left: 10px;
+          }
+        }
+        @media (max-width: 290px) {
+          .hamburgerButton {
+            margin-left: 5px;
+          }
+        }
         .hamburgerButton div {
           width: 25px;
           height: 3px;
           background-color: var(--color-lightseagreen);
           margin: 4px 0;
+        }
+        @media (max-width: 324px) {
+          .hamburgerButton div {
+            width: 20px;
+            height: 2px;
+          }
+        }
+        @media (max-width: 290px) {
+          .hamburgerButton div {
+            width: 15px;
+            height: 2px;
+          }
         }
         .mobileMenu {
           display: none;
