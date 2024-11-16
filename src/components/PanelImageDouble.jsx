@@ -100,6 +100,8 @@ const PanelImageDouble = ({ className = "", image, image1 }) => {
         <Slider {...settings}>
           <ImageIcon className="imageIcon" alt="" src={image} />
           <ImageIcon className="imageIcon" alt="" src={image1} />
+          <ImageIcon className="imageIcon" alt="" src="image-2@2x.png" />
+          <ImageIcon className="imageIcon" alt="" src="image-3@2x.png" />
         </Slider>
       </CarouselContainer>
     </PanelImageDoubleContainer>

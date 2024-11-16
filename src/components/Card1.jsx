@@ -30,40 +30,42 @@ const Card1 = ({
   propFontWeight,
   propWidth,
   propMinHeight1,
+  imageSrc, // Añadir la prop imageSrc
 }) => {
   const cardStyle = useMemo(() => {
     return {
-      height: propHeight,
-      width: "500px",
-      flexDirection: "row",
-      flexWrap: "wrap",
-      padding: "0 var(--padding-11xs) var(--padding-32xl) 0",
+      width: "100%",
+      maxWidth: "500px",
+      padding: "var(--space-400)",
       boxSizing: "border-box",
-      gap: "24px 22px",
-      minWidth: "240px",
       textAlign: "left",
       fontSize: "var(--font-size-5xl)",
       color: "var(--color)",
       fontFamily: "var(--font-montserrat-alternates)",
       display: "flex",
+      flexDirection: "column",
       alignItems: "flex-start",
       justifyContent: "flex-start",
-      maxWidth: "100%",
       marginBottom: 'var(--space-1600)', // Ajuste de margen inferior
+      border: "1px solid #085f63", // Cambiar el color del borde
+      '@media (min-width: 1000px)': {
+        maxWidth: '800px', // Hacer más anchos los cards para dimensiones mayores a 1000px
+      },
     };
-  }, [propHeight]);
+  }, []);
 
   const bodyTextForStyle = useMemo(() => {
     return {
-      height: propHeight1,
-      display: propDisplay,
       fontSize: "var(--body-base-size)",
       lineHeight: "140%",
       color: "var(--color-lightseagreen)",
       alignSelf: "stretch",
       position: "relative",
+      overflow: "hidden", // Asegurar que el texto no se salga del contenedor
+      textOverflow: "ellipsis", // Añadir puntos suspensivos si el texto es demasiado largo
+      whiteSpace: "normal", // Permitir que el texto se ajuste a múltiples líneas
     };
-  }, [propHeight1, propDisplay]);
+  }, []);
 
   const styles = {
     infoIcon: {
@@ -149,10 +151,16 @@ const Card1 = ({
       justifyContent: "flex-start",
       maxWidth: "100%",
     },
+    image: {
+      width: "100%",
+      height: "auto",
+      marginBottom: "var(--space-400)",
+    },
   };
 
   return (
     <div className={className} style={cardStyle}>
+      {imageSrc && <img style={styles.image} alt={heading} src={imageSrc} />}
       {asset && <img style={styles.infoIcon} alt="" src="/info.svg" />}
       <div style={styles.body}>
         <div style={styles.text}>
@@ -228,6 +236,7 @@ Card1.propTypes = {
   propHeight: PropTypes.any,
   propHeight1: PropTypes.any,
   propDisplay: PropTypes.any,
+  imageSrc: PropTypes.string, // Añadir la prop imageSrc
 };
 
 export default Card1;

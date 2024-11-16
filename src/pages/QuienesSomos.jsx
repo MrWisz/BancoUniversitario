@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderComponent from "../components/HeaderComponent"; 
 import ContenidoQS from "../components/ContenidoQS"; 
 import Footer from "../components/Footer";
+import BackToTop from "../components/BackToTop";
 
 const QuienesSomos = () => {
   return (
@@ -12,6 +13,7 @@ const QuienesSomos = () => {
       <div className="quienesSomosContainer">
         <ContenidoQS />
       </div>
+      <BackToTop />
       <Footer />
       <style jsx>{`
         .text {
