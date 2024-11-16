@@ -1,5 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
 
 const Content = styled.section`
   display: flex;
@@ -10,6 +16,8 @@ const Content = styled.section`
   font-family: var(--font-montserrat-alternates);
   background-color: #f5f5f5;
   width: 100vw; /* Ancho completo */
+  animation: ${fadeIn} 0.6s ease-in-out;
+  
   
   @media (max-width: 768px) {
     padding: 60px var(--padding-xl);
@@ -101,7 +109,7 @@ const Text = styled.p`
   margin: 0;
 `;
 
-const ContenidoQS = () => {
+const ContentWWA = () => {
   return (
     <Content>
       <MissionVision>
@@ -133,4 +141,4 @@ const ContenidoQS = () => {
   );
 };
 
-export default ContenidoQS;
+export default ContentWWA;

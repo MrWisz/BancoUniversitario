@@ -6,13 +6,13 @@ const HeaderComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const handleQuienesSomosClick = () => {
-    navigate('/quienes-somos');
+  const handleWhoWeAreClick = () => {
+    navigate('/who-we-are');
     setIsMenuOpen(false); // Cerrar el menú móvil
   };
 
-  const handleObjetivosClick = () => {
-    navigate('/objetivos');
+  const handleObjetivesClick = () => {
+    navigate('/objetives');
     setIsMenuOpen(false); // Cerrar el menú móvil
   };
 
@@ -95,10 +95,10 @@ const HeaderComponent = () => {
         onClick={handleLogoClick}
       />
       <div className="navLinksContainer">
-        <h2 className="navLink" onClick={handleQuienesSomosClick}>
+        <h2 className="navLink" onClick={handleWhoWeAreClick}>
           Quienes somos
         </h2>
-        <h2 className="navLink" onClick={handleObjetivosClick}>
+        <h2 className="navLink" onClick={handleObjetivesClick}>
           Objetivos
         </h2>
         <h2 className="navLink" onClick={handleServiciosClick}>
@@ -128,11 +128,11 @@ const HeaderComponent = () => {
         <div />
       </div>
       <div ref={menuRef} className={`mobileMenu ${isMenuOpen ? 'open' : ''}`}>
-        <h2 className="navLink" onClick={handleQuienesSomosClick}>
+        <h2 className="navLink" onClick={handleWhoWeAreClick}>
           Quienes somos
         </h2>
-        <h2 className="navLink" onClick={handleObjetivosClick}>
-          Objetivos
+        <h2 className="navLink" onClick={handleObjetivesClick}>
+          Objetives
         </h2>
         <h2 className="navLink" onClick={handleServiciosClick}>
           Servicios

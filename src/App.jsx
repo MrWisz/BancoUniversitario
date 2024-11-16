@@ -6,9 +6,9 @@ import {
   useLocation,
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
-import Objetivos from "./pages/Objetivos.jsx";
+import Objetives from "./pages/Objetives.jsx";
 import Login from "./pages/Login.jsx";
-import QuienesSomos from "./pages/QuienesSomos.jsx";
+import WhoWeAre from "./pages/WhoWeAre.jsx";
 import RegistroDeUsuarios from "./pages/RegistroDeUsuarios.jsx";
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/objetivos":
+      case "/objetives":
         title = "";
         metaDescription = "";
         break;
@@ -39,7 +39,7 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/quienes-somos":
+      case "/who-we-are":
         title = "";
         metaDescription = "";
         break;
@@ -66,9 +66,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/objetivos" element={<Objetivos />} />
+      <Route path="/objetives" element={<Objetives />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/quienes-somos" element={<QuienesSomos />} />
+      <Route path="/who-we-are" element={<WhoWeAre />} />
       <Route path="/registro-de-usuarios" element={<RegistroDeUsuarios />} />
     </Routes>
   );

@@ -1,17 +1,18 @@
 import React from 'react';
-import HeaderComponent from "../components/HeaderComponent"; 
-import ContenidoQS from "../components/ContenidoQS"; 
+import HeaderComponent from "../components/HeaderComponent";
+import ContentWWA from "../components/ContentWWA"; 
 import Footer from "../components/Footer";
 import BackToTop from "../components/BackToTop";
 
-const QuienesSomos = () => {
+
+const WhoWeAre = () => {
   return (
-    <div className="quienesSomosPage">
+    <div className="WhoWeArePage">
       <HeaderComponent />
       <div className="text" />
       <div className="objetivo1" />
-      <div className="quienesSomosContainer">
-        <ContenidoQS />
+      <div className="WhoWeAreContainer">
+        <ContentWWA />
       </div>
       <BackToTop />
       <Footer />
@@ -28,7 +29,7 @@ const QuienesSomos = () => {
           position: relative;
           display: none;
         }
-        .quienesSomosContainer {
+        .WhoWeAreContainer {
           width: 100%;
           position: relative;
           background-color: var(--background-default-default);
@@ -40,19 +41,20 @@ const QuienesSomos = () => {
           gap: 161px;
           line-height: normal;
           letter-spacing: normal;
+          
         }
         @media screen and (max-width: 1000px) {
-          .quienesSomosContainer {
+          .WhoWeAreContainer {
             gap: 80px;
           }
         }
         @media screen and (max-width: 725px) {
-          .quienesSomosContainer {
+          .WhoWeAreContainer {
             gap: 40px;
           }
         }
         @media screen and (max-width: 450px) {
-          .quienesSomosContainer {
+          .WhoWeAreContainer {
             gap: var(--gap-xl);
           }
         }
@@ -61,4 +63,4 @@ const QuienesSomos = () => {
   );
 };
 
-export default QuienesSomos;
+export default WhoWeAre;
