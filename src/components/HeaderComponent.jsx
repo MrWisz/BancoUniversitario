@@ -61,7 +61,7 @@ const HeaderComponent = () => {
   }, [navigate]);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen);
   };
 
   const handleClickOutside = (event) => {
