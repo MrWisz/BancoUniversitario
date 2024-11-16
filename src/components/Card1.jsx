@@ -47,7 +47,7 @@ const Card1 = ({
       alignItems: "flex-start",
       justifyContent: "flex-start",
       marginBottom: 'var(--space-1600)', // Ajuste de margen inferior
-      border: "1px solid #085f63", // Cambiar el color del borde
+      border: "2px solid #085f63", // Cambiar el color del borde
       '@media (min-width: 1000px)': {
         maxWidth: '800px', // Hacer más anchos los cards para dimensiones mayores a 1000px
       },

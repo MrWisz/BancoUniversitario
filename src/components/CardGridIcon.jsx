@@ -83,7 +83,7 @@ const CardGridIcon = ({ className = "" }) => {
           showButton
           propHeight2="40px"
           propBackgroundColor="#e3e3e3"
-          propBorder="1px solid #085f63" // Cambiar el color del borde
+          propBorder="2px solid #085f63" // Cambiar el color del borde
           propPadding="var(--space-300) var(--padding-2xs)"
           propFlex="unset"
           propAlignSelf="unset"
@@ -112,7 +112,7 @@ const CardGridIcon = ({ className = "" }) => {
           showButton
           propHeight2="40px"
           propBackgroundColor="#e3e3e3"
-          propBorder="1px solid #085f63" // Cambiar el color del borde
+          propBorder="2px solid #085f63" // Cambiar el color del borde
           propPadding="var(--space-300) var(--padding-2xs)"
           propFlex="unset"
           propAlignSelf="unset"
@@ -141,7 +141,7 @@ const CardGridIcon = ({ className = "" }) => {
           showButton
           propHeight2="40px"
           propBackgroundColor="#e3e3e3"
-          propBorder="1px solid #085f63" // Cambiar el color del borde
+          propBorder="2px solid #085f63" // Cambiar el color del borde
           propPadding="var(--space-300) var(--padding-2xs)"
           propFlex="unset"
           propAlignSelf="unset"
@@ -169,7 +169,7 @@ const CardGridIcon = ({ className = "" }) => {
           hasIconEnd={false}
           propHeight2="40px"
           propBackgroundColor="#e3e3e3"
-          propBorder="1px solid #085f63" // Cambiar el color del borde
+          propBorder="2px solid #085f63" // Cambiar el color del borde
           propPadding="var(--space-300) var(--padding-2xs)"
           propFlex="unset"
           propAlignSelf="unset"
@@ -191,7 +191,7 @@ const CardGridIcon = ({ className = "" }) => {
           hasIconStart
           hasIconEnd
           imageSrc="/beca.jpeg" 
-          propBorder="1px solid #085f63" 
+          propBorder="2px solid #085f63" 
         />
       </CardsContainer>
     </CardGridIconContainer>
