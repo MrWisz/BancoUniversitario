@@ -9,7 +9,7 @@ import LandingPage from "./pages/LandingPage.jsx";
 import Objectives from "./pages/Objectives.jsx";
 import Login from "./pages/Login.jsx";
 import WhoWeAre from "./pages/WhoWeAre.jsx";
-import RegistroDeUsuarios from "./pages/RegistroDeUsuarios.jsx";
+import Register from "./pages/Register.jsx";
 
 function App() {
   const action = useNavigationType();
@@ -43,7 +43,7 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/registro-de-usuarios":
+      case "/register":
         title = "";
         metaDescription = "";
         break;
@@ -69,7 +69,7 @@ function App() {
       <Route path="/objectives" element={<Objectives />} />
       <Route path="/login" element={<Login />} />
       <Route path="/who-we-are" element={<WhoWeAre />} />
-      <Route path="/registro-de-usuarios" element={<RegistroDeUsuarios />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }
