@@ -21,8 +21,8 @@ const HeaderComponent = () => {
     setIsMenuOpen(false); // Cerrar el menú móvil
   };
 
-  const handleRegistroClick = () => {
-   // navigate('/registro-de-usuarios');
+  const handleRegisterClick = () => {
+ navigate('/register');
     setIsMenuOpen(false); // Cerrar el menú móvil
   };
 
@@ -117,7 +117,7 @@ const HeaderComponent = () => {
         </div>
         <div className="menu">
           <div className="menuItem" />
-          <h2 className="navLink" onClick={handleRegistroClick} style={{ textAlign: 'center' }}>
+          <h2 className="navLink" onClick={handleRegisterClick} style={{ textAlign: 'center' }}>
             Registro
           </h2>
         </div>
@@ -148,7 +148,7 @@ const HeaderComponent = () => {
         </div>
         <div className="menu">
           <div className="menuItem" />
-          <h2 className="navLink" onClick={handleRegistroClick} style={{ textAlign: 'center' }}>
+          <h2 className="navLink" onClick={handleRegisterClick} style={{ textAlign: 'center' }}>
             Registro
           </h2>
         </div>
