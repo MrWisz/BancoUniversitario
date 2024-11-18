@@ -6,7 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
-import Objetives from "./pages/Objetives.jsx";
+import Objectives from "./pages/Objectives.jsx";
 import Login from "./pages/Login.jsx";
 import WhoWeAre from "./pages/WhoWeAre.jsx";
 import RegistroDeUsuarios from "./pages/RegistroDeUsuarios.jsx";
@@ -31,7 +31,7 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/objetives":
+      case "/objectives":
         title = "";
         metaDescription = "";
         break;
@@ -66,7 +66,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/objetives" element={<Objetives />} />
+      <Route path="/objectives" element={<Objectives />} />
       <Route path="/login" element={<Login />} />
       <Route path="/who-we-are" element={<WhoWeAre />} />
       <Route path="/registro-de-usuarios" element={<RegistroDeUsuarios />} />

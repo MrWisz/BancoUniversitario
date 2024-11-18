@@ -1,64 +1,16 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
 
-const HeaderComponent = () => {
+const HeaderBanca = ({ className = "" }) => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const handleWhoWeAreClick = () => {
-    navigate('/who-we-are');
-    setIsMenuOpen(false); // Cerrar el menú móvil
-  };
-
-  const handleObjectivesClick = () => {
-    navigate('/objectives');
-    setIsMenuOpen(false); // Cerrar el menú móvil
-  };
-
-  const handleAccesoClick = () => {
-    navigate('/login');
-    setIsMenuOpen(false); // Cerrar el menú móvil
-  };
-
-  const handleRegistroClick = () => {
-   // navigate('/registro-de-usuarios');
-    setIsMenuOpen(false); // Cerrar el menú móvil
-  };
-
   const handleLogoClick = () => {
     navigate('/');
-    setIsMenuOpen(false); // Cerrar el menú móvil
+    setIsMenuOpen(false);
   };
-
-  const handleServiciosClick = useCallback(() => {
-    navigate('/');
-    setTimeout(() => {
-      const anchor = document.querySelector("[data-scroll-to='cardGridIcon']");
-      if (anchor) {
-        anchor.scrollIntoView({ block: "start", behavior: "smooth" });
-        anchor.classList.add('highlight');
-        setTimeout(() => {
-          anchor.classList.remove('highlight');
-        }, 2000); // Eliminar la clase después de 2 segundos
-      }
-    }, 0);
-    setIsMenuOpen(false); // Cerrar el menú móvil
-  }, [navigate]);
-
-  const handleContactoClick = useCallback(() => {
-    setTimeout(() => {
-      const anchor = document.querySelector("[data-scroll-to='footer']");
-      if (anchor) {
-        anchor.scrollIntoView({ block: "start", behavior: "smooth" });
-        anchor.classList.add('highlight');
-        setTimeout(() => {
-          anchor.classList.remove('highlight');
-        }, 2000); // Eliminar la clase después de 2 segundos
-      }
-    }, 0);
-    setIsMenuOpen(false); // Cerrar el menú móvil
-  }, [navigate]);
 
   const toggleMenu = () => {
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen);
@@ -86,7 +38,7 @@ const HeaderComponent = () => {
   }, []);
 
   return (
-    <header className="headerContainer">
+    <header className={`headerContainer ${className}`}>
       <img
         className="logo"
         loading="lazy"
@@ -94,31 +46,19 @@ const HeaderComponent = () => {
         src="/logonobackground-1@2x.png"
         onClick={handleLogoClick}
       />
-      <div className="navLinksContainer">
-        <h2 className="navLink" onClick={handleWhoWeAreClick}>
-          Quienes somos
-        </h2>
-        <h2 className="navLink" onClick={handleObjectivesClick}>
-          Objetivos
-        </h2>
-        <h2 className="navLink" onClick={handleServiciosClick}>
-          Servicios
-        </h2>
-        <h2 className="navLink" onClick={handleContactoClick}>
-          Contacto
-        </h2>
-      </div>
       <div className="menusContainer">
         <div className="menu">
           <div className="menuItem" />
-          <h2 className="navLink" onClick={handleAccesoClick} style={{ textAlign: 'center' }}>
-            Acceso
+          <img src="/lista.png" alt="Form Icon" className="menuIcon" />
+          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+            Registro
           </h2>
         </div>
         <div className="menu">
           <div className="menuItem" />
-          <h2 className="navLink" onClick={handleRegistroClick} style={{ textAlign: 'center' }}>
-            Registro
+          <img src="/hogar.png" alt="Home Icon" className="menuIcon" />
+          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+            Inicio
           </h2>
         </div>
       </div>
@@ -128,28 +68,18 @@ const HeaderComponent = () => {
         <div />
       </div>
       <div ref={menuRef} className={`mobileMenu ${isMenuOpen ? 'open' : ''}`}>
-        <h2 className="navLink" onClick={handleWhoWeAreClick}>
-          Quienes somos
-        </h2>
-        <h2 className="navLink" onClick={handleObjectivesClick}>
-          Objetives
-        </h2>
-        <h2 className="navLink" onClick={handleServiciosClick}>
-          Servicios
-        </h2>
-        <h2 className="navLink" onClick={handleContactoClick}>
-          Contacto
-        </h2>
         <div className="menu">
           <div className="menuItem" />
-          <h2 className="navLink" onClick={handleAccesoClick} style={{ textAlign: 'center' }}>
-            Acceso
+          <img src="/lista.png" alt="Form Icon" className="menuIcon" />
+          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+            Registro
           </h2>
         </div>
         <div className="menu">
           <div className="menuItem" />
-          <h2 className="navLink" onClick={handleRegistroClick} style={{ textAlign: 'center' }}>
-            Registro
+          <img src="/hogar.png" alt="Home Icon" className="menuIcon" />
+          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+            Inicio
           </h2>
         </div>
       </div>
@@ -201,35 +131,6 @@ const HeaderComponent = () => {
             width: 160px;
           }
         }
-        .navLinksContainer {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-        }
-        @media (max-width: 1300px) {
-          .navLinksContainer {
-            display: none;
-          }
-        }
-        .navLink {
-          margin: 0 20px;
-          font-size: 25px;
-          line-height: 100%;
-          font-weight: 400;
-          font-family: inherit;
-          white-space: nowrap;
-          cursor: pointer;
-          z-index: 1;
-          padding-top: 5px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        @media (max-width: 1300px) {
-          .navLink {
-            margin: 10px 0;
-          }
-        }
         .menusContainer {
           display: flex;
           flex-direction: row;
@@ -250,6 +151,7 @@ const HeaderComponent = () => {
           border-radius: 5px;
           background-color: var(--color-lightseagreen);
           z-index: 1;
+          padding: 0 10px; /* Add padding to ensure text stays within bounds */
         }
         @media (max-width: 1300px) {
           .menu {
@@ -273,6 +175,16 @@ const HeaderComponent = () => {
           .menuItem {
             display: none;
           }
+        }
+        .menuIcon {
+          width: 20px;
+          height: 20px;
+          margin-right: 8px;
+        }
+        .navLink {
+          white-space: nowrap; /* Ensure text does not wrap */
+          overflow: hidden; /* Hide overflow text */
+          text-overflow: ellipsis; /* Add ellipsis for overflow text */
         }
         .hamburgerButton {
           display: none;
@@ -324,25 +236,18 @@ const HeaderComponent = () => {
           width: 100%;
           padding: 10px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          z-index: 3; /* Asegurar que el menú esté delante del ícono */
+          z-index: 3;
         }
         .mobileMenu.open {
           display: flex;
-        }
-        @keyframes highlight {
-          0% {
-            background-color: #49beb7;
-          }
-          100% {
-            background-color: var(--sds-color-background-default-default);
-          }
-        }
-        .highlight {
-          animation: highlight 2s ease-in-out;
         }
       `}</style>
     </header>
   );
 };
 
-export default HeaderComponent;
+HeaderBanca.propTypes = {
+  className: PropTypes.string,
+};
+
+export default HeaderBanca;
