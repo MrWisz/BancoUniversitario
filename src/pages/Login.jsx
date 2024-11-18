@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import FrameComponent4 from "../components/FrameComponent4";
 import LoginForm from "../components/LoginForm";
 import HeaderBanca from '../components/HeaderBanca';
+import Footer from '../components/Footer';
 
 
 const FrameParent = styled.section`
@@ -52,8 +53,9 @@ const Login = () => {
                 <LoginForm />
                 <FrameComponent4 />
             </FrameParent>
-            
+            <Footer/>
         </LoginContainer>
+        
     );
 };
 
