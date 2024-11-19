@@ -10,6 +10,7 @@ import Objectives from "./pages/Objectives.jsx";
 import Login from "./pages/Login.jsx";
 import WhoWeAre from "./pages/WhoWeAre.jsx";
 import Register from "./pages/Register.jsx";
+import HomeUser from "./pages/HomeUser.jsx";
 
 function App() {
   const action = useNavigationType();
@@ -47,6 +48,10 @@ function App() {
         title = "";
         metaDescription = "";
         break;
+      case "/home-user":
+        title = "";
+        metaDescription = "";
+        break;
     }
 
     if (title) {
@@ -70,6 +75,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/who-we-are" element={<WhoWeAre />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/home-user" element={<HomeUser />} />
     </Routes>
   );
 }

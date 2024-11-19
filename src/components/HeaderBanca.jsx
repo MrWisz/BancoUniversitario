@@ -8,10 +8,17 @@ const HeaderBanca = ({ className = "" }) => {
   const menuRef = useRef(null);
 
   const handleLogoClick = () => {
-    navigate('/');
+    navigate('/'); //Cambiar al landing page//*
     setIsMenuOpen(false);
   };
-
+  const handleHomeClick = () => {
+    navigate('/home-user');//Cambiar al home user//*
+    setIsMenuOpen(false);
+  };
+  const handleRegisterClick = () => {
+    navigate('/register');//Cambiar al register//*
+    setIsMenuOpen(false);
+  };
   const toggleMenu = () => {
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen);
   };
@@ -48,16 +55,16 @@ const HeaderBanca = ({ className = "" }) => {
       />
       <div className="menusContainer">
         <div className="menu">
-          <div className="menuItem" />
-          <img src="/lista.png" alt="Form Icon" className="menuIcon" />
-          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+          <div className="menuItem"  />
+          <img src="/lista.png" alt="Form Icon" className="menuIcon"  />
+          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleRegisterClick}>
             Registro
           </h2>
         </div>
         <div className="menu">
           <div className="menuItem" />
-          <img src="/hogar.png" alt="Home Icon" className="menuIcon" />
-          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+          <img src="/hogar.png" alt="Home Icon" className="menuIcon"  />
+          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleHomeClick}>
             Inicio
           </h2>
         </div>
@@ -152,6 +159,10 @@ const HeaderBanca = ({ className = "" }) => {
           background-color: var(--color-lightseagreen);
           z-index: 1;
           padding: 0 10px; /* Add padding to ensure text stays within bounds */
+          &:hover {
+          color:#085f63;
+          border:solid 2px;
+          }
         }
         @media (max-width: 1300px) {
           .menu {
@@ -180,7 +191,9 @@ const HeaderBanca = ({ className = "" }) => {
           width: 20px;
           height: 20px;
           margin-right: 8px;
+          
         }
+      
         .navLink {
           white-space: nowrap; /* Ensure text does not wrap */
           overflow: hidden; /* Hide overflow text */
