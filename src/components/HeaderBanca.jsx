@@ -2,11 +2,12 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
 
+
 const HeaderBanca = ({ className = "" }) => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
-
+  const [isTransferMenuOpen, setIsTransferMenuOpen] = useState(false);
   const handleLogoClick = () => {
     navigate('/'); //Cambiar al landing page//*
     setIsMenuOpen(false);
@@ -19,6 +20,7 @@ const HeaderBanca = ({ className = "" }) => {
     navigate('/register');//Cambiar al register//*
     setIsMenuOpen(false);
   };
+  const handleTransferClick = () => setIsTransferMenuOpen((prev) => !prev);
   const toggleMenu = () => {
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen);
   };
@@ -54,6 +56,20 @@ const HeaderBanca = ({ className = "" }) => {
         onClick={handleLogoClick}
       />
       <div className="menusContainer">
+      <div className="menu" onClick={handleTransferClick}>
+          <img src="/Clipboard.png" alt="Transfer Icon" className="menuIcon" />
+          <h2 className="navLink">Transferencias</h2>
+        </div>
+        {isTransferMenuOpen && (
+          <div className="dropdownMenu">
+            <div className="dropdownItem" onClick={() => navigate('/transfer-contacts')}>
+              Desde contactos
+            </div>
+            <div className="dropdownItem" onClick={() => navigate('/transfer-guest')}>
+              Sin registrar
+            </div>
+          </div>
+        )}
         <div className="menu">
           <div className="menuItem"  />
           <img src="/lista.png" alt="Form Icon" className="menuIcon"  />
@@ -73,6 +89,7 @@ const HeaderBanca = ({ className = "" }) => {
         <div />
         <div />
         <div />
+      
       </div>
       <div ref={menuRef} className={`mobileMenu ${isMenuOpen ? 'open' : ''}`}>
         <div className="menu">
