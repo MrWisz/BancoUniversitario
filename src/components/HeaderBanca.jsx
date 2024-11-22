@@ -7,6 +7,7 @@ const HeaderBanca = ({ className = "" }) => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const dropdownRef = useRef(null);
   const [isTransferMenuOpen, setIsTransferMenuOpen] = useState(false);
 
   const handleLogoClick = () => {
@@ -24,6 +25,11 @@ const HeaderBanca = ({ className = "" }) => {
     setIsMenuOpen(false);
   };
 
+  const handleLoginClick = () => {
+    navigate('/login');//Cambiar al login//*
+    setIsMenuOpen(false);
+  };
+
   const handleTransferClick = () => setIsTransferMenuOpen((prev) => !prev);
 
   const toggleMenu = () => {
@@ -33,6 +39,9 @@ const HeaderBanca = ({ className = "" }) => {
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setIsMenuOpen(false);
+    }
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsTransferMenuOpen(false);
     }
   };
 
@@ -51,7 +60,8 @@ const HeaderBanca = ({ className = "" }) => {
     };
   }, []);
 
-  const isLoginOrRegisterPage = location.pathname === '/login' || location.pathname === '/register';
+  const isLoginPage = location.pathname === '/login';
+  const isRegisterPage = location.pathname === '/register';
 
   return (
     <header className={`headerContainer ${className}`}>
@@ -63,36 +73,42 @@ const HeaderBanca = ({ className = "" }) => {
         onClick={handleLogoClick}
       />
       <div className="menusContainer">
-        {!isLoginOrRegisterPage && (
-          <div className="menu" onClick={handleTransferClick}>
-            <img src="/Clipboard.png" alt="Transfer Icon" className="menuIcon" />
-            <h2 className="navLink transferNavLink">Transferencias</h2>
+        {!isLoginPage && !isRegisterPage && (
+          <>
+            <div className="menu" onClick={handleTransferClick}>
+              <img src="/Clipboard.png" alt="Transfer Icon" className="menuIcon" />
+              <h2 className="navLink transferNavLink">Transferencias</h2>
+            </div>
+            {isTransferMenuOpen && (
+              <div className="dropdownMenu" ref={dropdownRef}>
+                <div className="dropdownItem" onClick={() => navigate('/transfer-contacts')}>
+                  Desde contactos
+                </div>
+                <div className="dropdownItem" onClick={() => navigate('/transfer-guest')}>
+                  Sin registrar
+                </div>
+              </div>
+            )}
+          </>
+        )}
+        {!isRegisterPage && (
+          <div className="menu">
+            <div className="menuItem" />
+            <img src="/lista.png" alt="Form Icon" className="menuIcon" />
+            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleRegisterClick}>
+              Registro
+            </h2>
           </div>
         )}
-        {isTransferMenuOpen && (
-          <div className="dropdownMenu">
-            <div className="dropdownItem" onClick={() => navigate('/transfer-contacts')}>
-              Desde contactos
-            </div>
-            <div className="dropdownItem" onClick={() => navigate('/transfer-guest')}>
-              Sin registrar
-            </div>
+        {!isLoginPage && (
+          <div className="menu">
+            <div className="menuItem" />
+            <img src="/llave.png" alt="Home Icon" className="menuIcon" />
+            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleLoginClick}>
+              Ingresar
+            </h2>
           </div>
         )}
-        <div className="menu">
-          <div className="menuItem" />
-          <img src="/lista.png" alt="Form Icon" className="menuIcon" />
-          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleRegisterClick}>
-            Registro
-          </h2>
-        </div>
-        <div className="menu">
-          <div className="menuItem" />
-          <img src="/hogar.png" alt="Home Icon" className="menuIcon" />
-          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleHomeClick}>
-            Inicio
-          </h2>
-        </div>
       </div>
       <div className="hamburgerButton" onClick={toggleMenu}>
         <div />
@@ -100,20 +116,24 @@ const HeaderBanca = ({ className = "" }) => {
         <div />
       </div>
       <div ref={menuRef} className={`mobileMenu ${isMenuOpen ? 'open' : ''}`}>
-        <div className="menu">
-          <div className="menuItem" />
-          <img src="/lista.png" alt="Form Icon" className="menuIcon" />
-          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
-            Registro
-          </h2>
-        </div>
-        <div className="menu">
-          <div className="menuItem" />
-          <img src="/hogar.png" alt="Home Icon" className="menuIcon" />
-          <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
-            Inicio
-          </h2>
-        </div>
+        {!isRegisterPage && (
+          <div className="menu">
+            <div className="menuItem" />
+            <img src="/lista.png" alt="Form Icon" className="menuIcon" />
+            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleRegisterClick}>
+              Registro
+            </h2>
+          </div>
+        )}
+        {!isLoginPage && (
+          <div className="menu">
+            <div className="menuItem" />
+            <img src="/llave.png" alt="Home Icon" className="menuIcon" />
+            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleLoginClick}>
+              Ingresar
+            </h2>
+          </div>
+        )}
       </div>
       <style jsx>{`
         .headerContainer {
@@ -166,6 +186,7 @@ const HeaderBanca = ({ className = "" }) => {
         .menusContainer {
           display: flex;
           flex-direction: row;
+          position: relative;
         }
         @media (max-width: 1300px) {
           .menusContainer {
@@ -173,7 +194,7 @@ const HeaderBanca = ({ className = "" }) => {
           }
         }
         .menu {
-          width: 190px; /* Increase the width */
+          width: 205px; /* Match the width of the dropdown */
           height: 50px; /* Set a fixed height */
           margin: 0 4px;
           display: flex;
@@ -185,9 +206,10 @@ const HeaderBanca = ({ className = "" }) => {
           background-color: var(--color-lightseagreen);
           z-index: 1;
           padding: 0 10px; /* Add padding to ensure text stays within bounds */
+          box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
           &:hover {
             color: #085f63;
-            border: solid 2px;
+            box-shadow: inset 0 0 0 2px #085f63; /* Internal border */
           }
         }
         @media (max-width: 1300px) {
@@ -228,14 +250,14 @@ const HeaderBanca = ({ className = "" }) => {
         }
         .dropdownMenu {
           position: absolute;
-          top: 100%;
-          left: 0;
+          top: calc(100% + 2px); /* 2px separation from the button */
+          left: 5px;
           background-color: var(--color-lightseagreen);
           border: 1px solid var(--color-lightseagreen);
           border-radius: 5px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           z-index: 2;
-          width: 190px; /* Match the width of the menu */
+          width: 200px; /* Match the width of the menu */
         }
         .dropdownItem {
           padding: 10px;
@@ -246,6 +268,9 @@ const HeaderBanca = ({ className = "" }) => {
             background-color: #085f63;
             color: white;
           }
+        }
+        .dropdownItem:not(:last-child) {
+          border-bottom: 1px solid #085f63; /* Separation line color */
         }
         .hamburgerButton {
           display: none;
