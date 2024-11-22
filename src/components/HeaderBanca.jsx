@@ -1,26 +1,31 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import PropTypes from "prop-types";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const HeaderBanca = ({ className = "" }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const [isTransferMenuOpen, setIsTransferMenuOpen] = useState(false);
+
   const handleLogoClick = () => {
     navigate('/'); //Cambiar al landing page//*
     setIsMenuOpen(false);
   };
+
   const handleHomeClick = () => {
     navigate('/home-user');//Cambiar al home user//*
     setIsMenuOpen(false);
   };
+
   const handleRegisterClick = () => {
     navigate('/register');//Cambiar al register//*
     setIsMenuOpen(false);
   };
+
   const handleTransferClick = () => setIsTransferMenuOpen((prev) => !prev);
+
   const toggleMenu = () => {
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen);
   };
@@ -46,6 +51,8 @@ const HeaderBanca = ({ className = "" }) => {
     };
   }, []);
 
+  const isLoginOrRegisterPage = location.pathname === '/login' || location.pathname === '/register';
+
   return (
     <header className={`headerContainer ${className}`}>
       <img
@@ -56,10 +63,12 @@ const HeaderBanca = ({ className = "" }) => {
         onClick={handleLogoClick}
       />
       <div className="menusContainer">
-      <div className="menu" onClick={handleTransferClick}>
-          <img src="/Clipboard.png" alt="Transfer Icon" className="menuIcon" />
-          <h2 className="navLink">Transferencias</h2>
-        </div>
+        {!isLoginOrRegisterPage && (
+          <div className="menu" onClick={handleTransferClick}>
+            <img src="/Clipboard.png" alt="Transfer Icon" className="menuIcon" />
+            <h2 className="navLink transferNavLink">Transferencias</h2>
+          </div>
+        )}
         {isTransferMenuOpen && (
           <div className="dropdownMenu">
             <div className="dropdownItem" onClick={() => navigate('/transfer-contacts')}>
@@ -71,15 +80,15 @@ const HeaderBanca = ({ className = "" }) => {
           </div>
         )}
         <div className="menu">
-          <div className="menuItem"  />
-          <img src="/lista.png" alt="Form Icon" className="menuIcon"  />
+          <div className="menuItem" />
+          <img src="/lista.png" alt="Form Icon" className="menuIcon" />
           <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleRegisterClick}>
             Registro
           </h2>
         </div>
         <div className="menu">
           <div className="menuItem" />
-          <img src="/hogar.png" alt="Home Icon" className="menuIcon"  />
+          <img src="/hogar.png" alt="Home Icon" className="menuIcon" />
           <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleHomeClick}>
             Inicio
           </h2>
@@ -89,7 +98,6 @@ const HeaderBanca = ({ className = "" }) => {
         <div />
         <div />
         <div />
-      
       </div>
       <div ref={menuRef} className={`mobileMenu ${isMenuOpen ? 'open' : ''}`}>
         <div className="menu">
@@ -165,7 +173,8 @@ const HeaderBanca = ({ className = "" }) => {
           }
         }
         .menu {
-          width: 132px;
+          width: 190px; /* Increase the width */
+          height: 50px; /* Set a fixed height */
           margin: 0 4px;
           display: flex;
           flex-direction: row;
@@ -177,8 +186,8 @@ const HeaderBanca = ({ className = "" }) => {
           z-index: 1;
           padding: 0 10px; /* Add padding to ensure text stays within bounds */
           &:hover {
-          color:#085f63;
-          border:solid 2px;
+            color: #085f63;
+            border: solid 2px;
           }
         }
         @media (max-width: 1300px) {
@@ -208,13 +217,35 @@ const HeaderBanca = ({ className = "" }) => {
           width: 20px;
           height: 20px;
           margin-right: 8px;
-          
         }
-      
         .navLink {
           white-space: nowrap; /* Ensure text does not wrap */
           overflow: hidden; /* Hide overflow text */
           text-overflow: ellipsis; /* Add ellipsis for overflow text */
+        }
+        .transferNavLink {
+          font-size: 20px; /* Set font size for Transferencias menu */
+        }
+        .dropdownMenu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: var(--color-lightseagreen);
+          border: 1px solid var(--color-lightseagreen);
+          border-radius: 5px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          z-index: 2;
+          width: 190px; /* Match the width of the menu */
+        }
+        .dropdownItem {
+          padding: 10px;
+          color: var(--background-default-default);
+          cursor: pointer;
+          text-align: center;
+          &:hover {
+            background-color: #085f63;
+            color: white;
+          }
         }
         .hamburgerButton {
           display: none;
