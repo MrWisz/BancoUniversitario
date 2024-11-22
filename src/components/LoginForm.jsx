@@ -9,6 +9,7 @@ const Container = styled.div`
   padding: 20px;
   font-family: 'Montserrat Alternates';
   position: relative;
+  margin-top: 100px; /* Ajusta este valor según el espacio que necesites debajo del header */
 `;
 
 const Form = styled.form`
@@ -104,7 +105,7 @@ const Circle = styled.div`
   background-color: #085f63;
   border-radius: 50%;
   position: absolute;
-  top: -30px;
+  top: -30px; /* Ajusta este valor según el espacio que necesites */
   left: 50%;
   transform: translateX(-50%);
   display: flex;

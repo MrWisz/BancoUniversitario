@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const FooterContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 200px; /* Altura fija */
+  height: auto; /* Ajustar altura automáticamente */
   padding: var(--sds-size-space-800);
   align-items: center;
   justify-content: center; /* Centrar contenido verticalmente */
@@ -52,6 +53,22 @@ const Contacto = styled.div`
   margin-top: var(--sds-size-space-600);
 `;
 
+const SocialIcons = styled.div`
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+`;
+
+const IconLink = styled.a`
+  color: #085f63;
+  font-size: 24px;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #000;
+  }
+`;
+
 const Footer = () => {
   return (
     <FooterContainer data-scroll-to="footer">
@@ -68,6 +85,23 @@ const Footer = () => {
             info@bancouniversitario.com.ve
           </Texto>
         </Contacto>
+        <SocialIcons>
+          <IconLink href="https://twitter.com/bancouniversitario" target="_blank" rel="noopener noreferrer">
+            <FaTwitter />
+          </IconLink>
+          <IconLink href="https://instagram.com/bancouniversitario" target="_blank" rel="noopener noreferrer">
+            <FaInstagram />
+          </IconLink>
+          <IconLink href="https://facebook.com/bancouniversitario" target="_blank" rel="noopener noreferrer">
+            <FaFacebookF />
+          </IconLink>
+          <IconLink href="https://linkedin.com/company/bancouniversitario" target="_blank" rel="noopener noreferrer">
+            <FaLinkedinIn />
+          </IconLink>
+          <IconLink href="https://youtube.com/bancouniversitario" target="_blank" rel="noopener noreferrer">
+            <FaYoutube />
+          </IconLink>
+        </SocialIcons>
       </LogoContainer>
     </FooterContainer>
   );
