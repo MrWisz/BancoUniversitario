@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import HeaderBanca from '../components/HeaderBanca';
 import Account from '../components/Account';
+import Movements from '../components/Movements';
 const HomeUserContainer = styled.div`
     width: 100%;
     position: relative;
@@ -25,6 +26,7 @@ const HomeUser = () => {
         <HomeUserContainer>
             <HeaderBanca />
             <Account />
+            <Movements />
             </HomeUserContainer> );
             };
 export default HomeUser;
