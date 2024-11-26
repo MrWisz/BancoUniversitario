@@ -97,7 +97,7 @@ const Button = styled.button`
   }
 `;
 
-function SuccessfullTransfer() {
+function SuccessfulTransfer() {
   return (
     <Container>
       <Title>Transferencias</Title>
