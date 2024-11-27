@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { registerAPI } from '../services/user/User.Service';
+import { isValidEmail } from '../utils/formValidation';
 
-const Container = styled.div` 
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,11 +47,6 @@ const Label = styled.label`
 `;
 
 const InputWrapper = styled.div`
-  position: relative;
-  width: 95%;
-`;
-
-const InputWrapper2 = styled.div`
   position: relative;
   width: 95%;
 `;
@@ -116,43 +114,100 @@ const CircleImage = styled.img`
   width: 70px;
   height: 70px;
 `;
-const RegisterFrom = () => {
+
+const ErrorMessage = styled.div`
+  color: red;
+  margin-top: 10px;
+`;
+
+const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [documentNumber, setDocumentNumber] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [birthDate, setBirthDate] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState('');
+  const navigate = useNavigate();
 
- const togglePasswordVisibility = (e) => {
+  const togglePasswordVisibility = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
-  }; 
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!firstName) newErrors.firstName = 'Campo requerido';
+    if (!lastName) newErrors.lastName = 'Campo requerido';
+    if (!documentNumber) newErrors.documentNumber = 'Campo requerido';
+    if (!isValidEmail(email)) newErrors.email = 'Debe ser un correo válido';
+    if (!password) newErrors.password = 'Campo requerido';
+    if (password.length > 16) newErrors.password = 'La contraseña no puede tener más de 16 caracteres';
+    if (password !== confirmPassword) newErrors.confirmPassword = 'Las contraseñas no coinciden';
+    if (!birthDate) newErrors.birthDate = 'Campo requerido';
+    if (!phoneNumber) newErrors.phoneNumber = 'Campo requerido';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    const registerValues = {
+      first_name: firstName,
+      last_name: lastName,
+      document_number: documentNumber,
+      birth_date: new Date(birthDate).toISOString(), // Ensure correct date format
+      phone_number: phoneNumber,
+      email,
+      password,
+    };
+    console.log('Register values:', registerValues); // Log the request payload
+    try {
+      const response = await registerAPI(registerValues);
+      console.log('API response:', response); // Log the API response
+      if (response.status === 201) { // Check for status code 201 (Created)
+        console.log('Registration successful, navigating to /login');
+        navigate('/login'); // Navigate to the login route
+      } else {
+        setApiError(response.message || 'Error al registrarse');
+      }
+    } catch (error) {
+      console.error('Register error:', error.response);
+      setApiError(error.response?.data?.message || 'Error al registrarse');
+    }
+  };
+
   return (
     <Container>
       <Circle>
-        <CircleImage src="/usuario.png" alt="Usuario" />  
+        <CircleImage src="/usuario.png" alt="Usuario" />
       </Circle>
-      <Form>
-        <Title>Registrarse</Title>  
+      <Form onSubmit={handleSubmit}>
+        <Title>Registrarse</Title>
         <FormGroup>
-          <Label htmlFor="name">Nombre:</Label>
-          <InputWrapper2>
+          <Label htmlFor="firstName">Nombre:</Label>
+          <InputWrapper>
             <Input
               type="text"
-              id="name"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              id="firstName"
+              name="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               required
             />
-          </InputWrapper2>
+            {errors.firstName && <span>{errors.firstName}</span>}
+          </InputWrapper>
         </FormGroup>
         <FormGroup>
           <Label htmlFor="lastName">Apellido:</Label>
-          <InputWrapper2>
+          <InputWrapper>
             <Input
               type="text"
               id="lastName"
@@ -161,11 +216,26 @@ const RegisterFrom = () => {
               onChange={(e) => setLastName(e.target.value)}
               required
             />
-          </InputWrapper2>
+            {errors.lastName && <span>{errors.lastName}</span>}
+          </InputWrapper>
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="documentNumber">Número de Documento:</Label>
+          <InputWrapper>
+            <Input
+              type="text"
+              id="documentNumber"
+              name="documentNumber"
+              value={documentNumber}
+              onChange={(e) => setDocumentNumber(e.target.value)}
+              required
+            />
+            {errors.documentNumber && <span>{errors.documentNumber}</span>}
+          </InputWrapper>
         </FormGroup>
         <FormGroup>
           <Label htmlFor="email">Correo:</Label>
-          <InputWrapper2>
+          <InputWrapper>
             <Input
               type="email"
               id="email"
@@ -174,7 +244,8 @@ const RegisterFrom = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </InputWrapper2>
+            {errors.email && <span>{errors.email}</span>}
+          </InputWrapper>
         </FormGroup>
         <FormGroup>
           <Label htmlFor="password">Contraseña:</Label>
@@ -190,6 +261,7 @@ const RegisterFrom = () => {
             <ToggleButton onClick={togglePasswordVisibility}>
               <img src={showPassword ? '/ojos-cruzados.png' : '/ojo.png'} alt="Toggle visibility" />
             </ToggleButton>
+            {errors.password && <span>{errors.password}</span>}
           </InputWrapper>
         </FormGroup>
         <FormGroup>
@@ -206,24 +278,26 @@ const RegisterFrom = () => {
             <ToggleButton onClick={togglePasswordVisibility}>
               <img src={showPassword ? '/ojos-cruzados.png' : '/ojo.png'} alt="Toggle visibility" />
             </ToggleButton>
+            {errors.confirmPassword && <span>{errors.confirmPassword}</span>}
           </InputWrapper>
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="dateOfBirth">Fecha de Nacimiento:</Label>
-          <InputWrapper2>
+          <Label htmlFor="birthDate">Fecha de Nacimiento:</Label>
+          <InputWrapper>
             <Input
               type="date"
-              id="dateOfBirth"
-              name="dateOfBirth"
-              value={dateOfBirth}
-              onChange={(e) => setDateOfBirth(e.target.value)}
+              id="birthDate"
+              name="birthDate"
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
               required
             />
-          </InputWrapper2>
+            {errors.birthDate && <span>{errors.birthDate}</span>}
+          </InputWrapper>
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="phoneNumber">Telefono:</Label>
-          <InputWrapper2>
+          <Label htmlFor="phoneNumber">Teléfono:</Label>
+          <InputWrapper>
             <Input
               type="tel"
               id="phoneNumber"
@@ -232,11 +306,14 @@ const RegisterFrom = () => {
               onChange={(e) => setPhoneNumber(e.target.value)}
               required
             />
-          </InputWrapper2>
+            {errors.phoneNumber && <span>{errors.phoneNumber}</span>}
+          </InputWrapper>
         </FormGroup>
+        {apiError && <ErrorMessage>{apiError}</ErrorMessage>}
         <Button type="submit">Registrarse</Button>
       </Form>
     </Container>
   );
 };
-export default RegisterFrom;
+
+export default RegisterForm;

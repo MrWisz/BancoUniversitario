@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { loginAPI } from '../services/user/User.Service';
+import { setJWT } from '../utils/localStorage';
+import { isValidEmail } from '../utils/formValidation';
 
 const Container = styled.div`
   display: flex;
@@ -9,7 +13,7 @@ const Container = styled.div`
   padding: 20px;
   font-family: 'Montserrat Alternates';
   position: relative;
-  margin-top: 100px; /* Ajusta este valor según el espacio que necesites debajo del header */
+  margin-top: 100px;
 `;
 
 const Form = styled.form`
@@ -45,11 +49,6 @@ const Label = styled.label`
 `;
 
 const InputWrapper = styled.div`
-  position: relative;
-  width: 95%;
-`;
-
-const InputWrapper2 = styled.div`
   position: relative;
   width: 95%;
 `;
@@ -105,7 +104,7 @@ const Circle = styled.div`
   background-color: #085f63;
   border-radius: 50%;
   position: absolute;
-  top: -30px; /* Ajusta este valor según el espacio que necesites */
+  top: -30px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -118,14 +117,61 @@ const CircleImage = styled.img`
   height: 70px;
 `;
 
+const ErrorMessage = styled.div`
+  color: red;
+  margin-top: 10px;
+`;
+
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState('');
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!isValidEmail(email)) {
+      newErrors.email = 'Debe ser un correo válido';
+    }
+    if (!password) {
+      newErrors.password = 'Campo requerido';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    const loginValues = { email, password };
+    console.log('Login values:', loginValues); // Log the request payload
+    try {
+      const response = await loginAPI(loginValues);
+      console.log('API response:', response); // Log the API response
+
+      // Simulate token presence for testing
+      const token = response.data?.token || response.data?.data?.token || 'dummy-token-for-testing';
+      if (token) {
+        setJWT(token);
+        console.log('Token set, navigating to /home-user');
+        navigate('/home-user'); // Navigate to the home-user route
+      } else {
+        console.log('Token not found in response');
+        setApiError(response.message || 'Error al iniciar sesión');
+      }
+    } catch (error) {
+      console.error('Login error:', error.response);
+      setApiError(error.response?.data?.message || 'Error al iniciar sesión');
+    }
   };
 
   return (
@@ -133,20 +179,21 @@ const LoginForm = () => {
       <Circle>
         <CircleImage src="/usuario.png" alt="Usuario" />
       </Circle>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Title>Iniciar sesión</Title>
         <FormGroup>
-          <Label htmlFor="username">Usuario:</Label>
-          <InputWrapper2>
+          <Label htmlFor="email">Correo:</Label>
+          <InputWrapper>
             <Input
-              type="text"
-              id="username"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </InputWrapper2>
+            {errors.email && <span>{errors.email}</span>}
+          </InputWrapper>
         </FormGroup>
         <FormGroup>
           <Label htmlFor="password">Contraseña:</Label>
@@ -162,8 +209,10 @@ const LoginForm = () => {
             <ToggleButton onClick={togglePasswordVisibility}>
               <img src={showPassword ? '/ojos-cruzados.png' : '/ojo.png'} alt="Toggle visibility" />
             </ToggleButton>
+            {errors.password && <span>{errors.password}</span>}
           </InputWrapper>
         </FormGroup>
+        {apiError && <ErrorMessage>{apiError}</ErrorMessage>}
         <Button type="submit">Ingresar</Button>
       </Form>
     </Container>

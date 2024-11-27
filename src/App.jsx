@@ -11,6 +11,7 @@ import Login from "./pages/Login.jsx";
 import WhoWeAre from "./pages/WhoWeAre.jsx";
 import Register from "./pages/Register.jsx";
 import HomeUser from "./pages/HomeUser.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   const action = useNavigationType();
@@ -75,7 +76,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/who-we-are" element={<WhoWeAre />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/home-user" element={<HomeUser />} />
+      <Route path="/home-user" element={<ProtectedRoute><HomeUser /></ProtectedRoute>} />
     </Routes>
   );
 }
