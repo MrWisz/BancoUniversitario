@@ -30,22 +30,24 @@ const Section = styled.section`
   justify-content: space-between;
   gap: 20px;
   padding: 20px 0;
-  flex-direction: row;
+  flex-direction: column; /* Cambia la dirección a columna por defecto */
 
   &:nth-child(odd) {
-    flex-direction: row-reverse; /* Alterna la posición de imagen y texto */
+    flex-direction: column; /* Asegura que la dirección sea columna */
   }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
+  @media (min-width: 769px) {
+    flex-direction: row; /* Cambia a fila en pantallas grandes */
+    &:nth-child(odd) {
+      flex-direction: row-reverse; /* Alterna la posición de imagen y texto */
+    }
   }
 `;
 
 const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  flex-basis: 40%; /* Ocupa 40% del ancho del contenedor */
+  flex-basis: 30%; /* Ocupa 40% del ancho del contenedor */
   padding: 20px;
 
   img {
@@ -62,17 +64,23 @@ const ImageWrapper = styled.div`
 `;
 
 const Text = styled.p`
-  flex-basis: 55%; /* Ocupa 55% del ancho del contenedor */
+  flex-basis: 80%; /* Ocupa 55% del ancho del contenedor */
   font-size: 1.4rem; /* Aumenta el tamaño de fuente */
   line-height: 1.8;
   text-align: justify;
   margin-bottom: 20px;
-  margin-left:50px;
-  margin-right:50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 20px; /* Añade padding */
   color: #49beb7;
 
   @media (max-width: 768px) {
     font-size: 1.2rem; /* Ajusta el tamaño en pantallas pequeñas */
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 20px; /* Añade padding a la izquierda */
+    padding-right: 20px; /* Añade padding a la derecha */
+    width: calc(100% - 40px); /* Ajusta el ancho para considerar el padding */
   }
 `;
 
@@ -128,9 +136,7 @@ const Objetives = () => {
       </Section>
       <BackToTop />
       <Footer />
-      
     </ObjetivesContainer>
-    
   );
 };
 

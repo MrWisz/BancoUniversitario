@@ -176,11 +176,13 @@ const RegisterForm = () => {
         console.log('Registration successful, navigating to /login');
         navigate('/login'); // Navigate to the login route
       } else {
-        setApiError(response.message || 'Error al registrarse');
+        setApiError(response.message || '');
+        navigate('/login');
       }
     } catch (error) {
       console.error('Register error:', error.response);
-      setApiError(error.response?.data?.message || 'Error al registrarse');
+      setApiError(error.response?.data?.message || '');
+      navigate('/login');
     }
   };
 
