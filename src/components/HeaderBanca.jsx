@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import PropTypes from "prop-types";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { removeJWT } from '../utils/localStorage'; // Importa la función removeJWT
 
 const HeaderBanca = ({ className = "" }) => {
   const navigate = useNavigate();
@@ -32,6 +33,11 @@ const HeaderBanca = ({ className = "" }) => {
 
   const handleTransferClick = () => setIsTransferMenuOpen((prev) => !prev);
 
+  const handleLogoutClick = () => {
+    removeJWT(); // Eliminar el token de autenticación
+    navigate('/'); // Navegar a la página de inicio
+  };
+
   const toggleMenu = () => {
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen);
   };
@@ -62,6 +68,7 @@ const HeaderBanca = ({ className = "" }) => {
 
   const isLoginPage = location.pathname === '/login';
   const isRegisterPage = location.pathname === '/register';
+  const isLoggedIn = !!localStorage.getItem('bank_jwt'); // Verificar si el usuario está autenticado
 
   return (
     <header className={`headerContainer ${className}`}>
@@ -89,23 +96,50 @@ const HeaderBanca = ({ className = "" }) => {
                 </div>
               </div>
             )}
+            {isLoggedIn && (
+              <div className="menu">
+                <div className="menuItem" />
+                <img src="/dolar.png" alt="Saldo Icon" className="menuIcon" />
+                <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+                  Saldo
+                </h2>
+              </div>
+            )}
+            {isLoggedIn && (
+              <div className="menu" >
+                <div className="menuItem" />
+                <img src="/password.png" alt="Password Icon" className="menuIcon" />
+                <h2 className="navLink" style={{ textAlign: 'center', fontSize: '16px' }}>
+                  Cambiar contraseña
+                </h2>
+              </div>
+            )}
+            {isLoggedIn && (
+              <div className="menu" onClick={handleLogoutClick}>
+                <div className="menuItem" />
+                <img src="/logout.png" alt="Logout Icon" className="menuIcon" />
+                <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+                  Salir
+                </h2>
+              </div>
+            )}
           </>
         )}
-        {!isRegisterPage && (
-          <div className="menu">
+        {isRegisterPage && (
+          <div className="menu" onClick={handleLoginClick}>
             <div className="menuItem" />
-            <img src="/lista.png" alt="Form Icon" className="menuIcon" />
-            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleRegisterClick}>
-              Registro
+            <img src="/llave.png" alt="Home Icon" className="menuIcon" />
+            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+              Ingresar
             </h2>
           </div>
         )}
-        {!isLoginPage && (
-          <div className="menu">
+        {isLoginPage && (
+          <div className="menu" onClick={handleRegisterClick}>
             <div className="menuItem" />
-            <img src="/llave.png" alt="Home Icon" className="menuIcon" />
-            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleLoginClick}>
-              Ingresar
+            <img src="/lista.png" alt="Form Icon" className="menuIcon" />
+            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+              Registro
             </h2>
           </div>
         )}
@@ -116,21 +150,66 @@ const HeaderBanca = ({ className = "" }) => {
         <div />
       </div>
       <div ref={menuRef} className={`mobileMenu ${isMenuOpen ? 'open' : ''}`}>
-        {!isRegisterPage && (
-          <div className="menu">
+        {!isLoginPage && !isRegisterPage && (
+          <>
+            <div className="menu" onClick={handleTransferClick}>
+              <img src="/Clipboard.png" alt="Transfer Icon" className="menuIcon" />
+              <h2 className="navLink transferNavLink">Transferencias</h2>
+            </div>
+            {isTransferMenuOpen && (
+              <div className="dropdownMenu mobileDropdownMenu" ref={dropdownRef}>
+                <div className="dropdownItem" onClick={() => navigate('/transfer-contacts')}>
+                  Desde contactos
+                </div>
+                <div className="dropdownItem" onClick={() => navigate('/transfer-guest')}>
+                  Sin registrar
+                </div>
+              </div>
+            )}
+            {isLoggedIn && (
+              <div className="menu">
+                <div className="menuItem" />
+                <img src="/dolar.png" alt="Saldo Icon" className="menuIcon" />
+                <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+                  Saldo
+                </h2>
+              </div>
+            )}
+            {isLoggedIn && (
+              <div className="menu" >
+                <div className="menuItem" />
+                <img src="/password.png" alt="Password Icon" className="menuIcon" />
+                <h2 className="navLink" style={{ textAlign: 'center', fontSize: '16px' }}>
+                  Cambiar contraseña
+                </h2>
+              </div>
+            )}
+            {isLoggedIn && (
+              <div className="menu" onClick={handleLogoutClick}>
+                <div className="menuItem" />
+                <img src="/logout.png" alt="Logout Icon" className="menuIcon" />
+                <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+                  Salir
+                </h2>
+              </div>
+            )}
+          </>
+        )}
+        {isRegisterPage && (
+          <div className="menu" onClick={handleLoginClick}>
             <div className="menuItem" />
-            <img src="/lista.png" alt="Form Icon" className="menuIcon" />
-            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleRegisterClick}>
-              Registro
+            <img src="/llave.png" alt="Home Icon" className="menuIcon" />
+            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+              Ingresar
             </h2>
           </div>
         )}
-        {!isLoginPage && (
-          <div className="menu">
+        {isLoginPage && (
+          <div className="menu" onClick={handleRegisterClick}>
             <div className="menuItem" />
-            <img src="/llave.png" alt="Home Icon" className="menuIcon" />
-            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }} onClick={handleLoginClick}>
-              Ingresar
+            <img src="/lista.png" alt="Form Icon" className="menuIcon" />
+            <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
+              Registro
             </h2>
           </div>
         )}
@@ -207,6 +286,8 @@ const HeaderBanca = ({ className = "" }) => {
           z-index: 1;
           padding: 0 10px; /* Add padding to ensure text stays within bounds */
           box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+          cursor: pointer; /* Ensure the cursor changes to pointer */
+          margin-right: 20px; /* Add right margin */
           &:hover {
             color: #085f63;
             box-shadow: inset 0 0 0 2px #085f63; /* Internal border */
@@ -259,11 +340,18 @@ const HeaderBanca = ({ className = "" }) => {
           z-index: 2;
           width: 200px; /* Match the width of the menu */
         }
+        .mobileDropdownMenu {
+          position: relative;
+          top: 3px; /* Align with the button */
+          left: -8px; /* Align with the button */
+        }
         .dropdownItem {
           padding: 10px;
           color: var(--background-default-default);
           cursor: pointer;
           text-align: center;
+          top: 3px;
+          font-size: 20px; /* Set font size for dropdown items */
           &:hover {
             background-color: #085f63;
             color: white;

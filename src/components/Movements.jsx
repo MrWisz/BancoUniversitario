@@ -74,12 +74,8 @@ const Title = styled.h2`
 
 const Movements = () => {
   const transactions = [
-    { date: '14/07/2024', reference: '0000000000000000', description: 'Saldo Final', amount: '14,24', type: 'income' },
-    { date: '14/07/2024', reference: '0000000000000001', description: 'Pago matrícula mes julio 2024', amount: '1,085,76', type: 'expense' },
-    { date: '14/07/2024', reference: '0000000000000002', description: 'Consumo tarjeta de débito', amount: '400,00', type: 'expense' },
-    { date: '14/07/2024', reference: '0000000000000003', description: 'Transferencia a terceros', amount: '500,00', type: 'expense' },
-    { date: '14/07/2024', reference: '0000000000000004', description: 'Pago móvil', amount: '500,00', type: 'income' },
-    { date: '14/07/2024', reference: '0000000000000005', description: 'Saldo inicial', amount: '1,500,00', type: 'income' },
+    { amount: 250, account_number: '54321098765432109876', description: 'testing' },
+    
   ];
 
   return (
@@ -89,19 +85,17 @@ const Movements = () => {
         <Table>
           <TableHeader>
             <tr>
-              <th>Fecha</th>
-              <th>Referencia</th>
-              <th>Descripción</th>
               <th>Monto</th>
+              <th>Número de Cuenta</th>
+              <th>Descripción</th>
             </tr>
           </TableHeader>
           <tbody>
             {transactions.map((transaction, index) => (
               <TableRow key={index}>
-                <TableData>{transaction.date}</TableData>
-                <TableData>{transaction.reference}</TableData>
+                <TableData>{transaction.amount}</TableData>
+                <TableData>{transaction.account_number}</TableData>
                 <TableData>{transaction.description}</TableData>
-                <TableData className={transaction.type}>{transaction.amount}</TableData>
               </TableRow>
             ))}
           </tbody>
