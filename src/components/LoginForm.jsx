@@ -159,6 +159,8 @@ const LoginForm = () => {
       console.log('API response:', response); // Log the API response
 
       // Simulate token presence for testing
+      //revisar si hubo errores, si tiene valores response.error
+      // const token = response.data.jwt
       const token = response.data?.token || response.data?.data?.token || 'dummy-token-for-testing';
       if (token) {
         setJWT(token);
