@@ -160,7 +160,7 @@ const LoginForm = () => {
   
       if (response.data.errors && response.data.errors.length > 0) {
         console.log('API error:', response.data.errors);
-        setApiError(response.data.errors.join(', '));
+        setApiError(response.data.errors[0].error);
         return;
       }
   
@@ -177,7 +177,7 @@ const LoginForm = () => {
       }
     } catch (error) {
       console.error('Login error:', error.response);
-      setApiError(error.response?.data?.message || 'Error al iniciar sesión');
+      setApiError(error.response?.data?.errors?.[0]?.error || 'Error al iniciar sesión');
     }
   };
 
