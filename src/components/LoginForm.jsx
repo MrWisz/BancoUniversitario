@@ -157,18 +157,23 @@ const LoginForm = () => {
     try {
       const response = await loginAPI(loginValues);
       console.log('API response:', response); // Log the API response
-
-      // Simulate token presence for testing
-      //revisar si hubo errores, si tiene valores response.error
-      // const token = response.data.jwt
-      const token = response.data?.token || response.data?.data?.token || 'dummy-token-for-testing';
+  
+      if (response.data.errors && response.data.errors.length > 0) {
+        console.log('API error:', response.data.errors);
+        setApiError(response.data.errors.join(', '));
+        return;
+      }
+  
+      console.log('Response data:', response.data); // Log the response data
+      const token = response.data.data.jwt;
+      console.log('Token found:', token); // Log the token
       if (token) {
         setJWT(token);
         console.log('Token set, navigating to /home-user');
         navigate('/home-user'); // Navigate to the home-user route
       } else {
         console.log('Token not found in response');
-        setApiError(response.message || 'Error al iniciar sesión');
+        setApiError('Error al iniciar sesión: Token no encontrado');
       }
     } catch (error) {
       console.error('Login error:', error.response);
