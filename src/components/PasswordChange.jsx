@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { passwordAPI } from '../services/password/Password.Service';
+import { hasFieldError } from '../utils/formValidation';
 
 const Container = styled.div`
-  padding-top: 200px;
-  padding-bottom: 200px;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -28,21 +30,23 @@ const Form = styled.form`
   width: 486px;
   margin: 80px auto;
 `;
+
 const Title = styled.h1`
-      font-family: 'Montserrat Alternates';
-      margin-bottom: 10px;
-      margin-top:20px;
-      padding: 5px;
-      background-color: #FFFFFF;
-      color: #085F63;
-      text-align: center;
-      weight: 418px;
-      height: 43px;
-      flex-direction: column;
-      align-items: center;
-      display: flex;
-      position: center;
+  font-family: 'Montserrat Alternates';
+  margin-bottom: 10px;
+  margin-top: 20px;
+  padding: 5px;
+  background-color: #ffffff;
+  color: #085f63;
+  text-align: center;
+  weight: 418px;
+  height: 43px;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  position: center;
 `;
+
 const Label = styled.label`
   display: block;
   margin: 10px 0 24px;
@@ -51,20 +55,40 @@ const Label = styled.label`
   font-family: "Montserrat Alternates";
   font-size: 20px;
   font-weight: bold;
-  padding-top:5px;
-  pading-bottom:5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+  width: 414px;
+  margin: 15px 24px 24px 28px;
 `;
 
 const Input = styled.input`
-  width: 414px;
-  height: 20px;
-  margin: 15px 24px 24px 28px;
-  border-radius: 8px;
-  border: 1px solid #49beb7;
-  padding-bottom:20px;
-  margin-top: 2px;
-  margin-bottom:2px;
-  padding-top: 8px;
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #085f63;
+  border-radius: 5px;
+  border-color: #085f63;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 20px;
+  color: #085f63;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #085f63;
+  }
+`;
+
+const ToggleButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
 `;
 
 const Button = styled.button`
@@ -95,36 +119,7 @@ const Message = styled.p`
   font-family: Montserrat Alternates;
   font-weight: normal;
 
-  color:${(props)=>(props.success ? '#085f63':'red')};
-`;
-const ToggleButton = styled.button`
-  position: absolute;
-  right: 15px;
-  top: 49.3%;
-  transform: translateY(100px);
-  transform: translateX(-570px);
-  background: none;
-  border: none;
-  cursor: pointer;
-`;
-const ToggleButton1 = styled.button`
-  position: absolute;
-  right: 584px;
-  top: 17.8%;
-  transform: translateY(400px);
-
-  background: none;
-  border: none;
-  cursor: pointer;
-`;
-const ToggleButton2 = styled.button`
-  position: absolute;
-  right: 584px;
-  top: 74%;
-  transform: translateY(100%);
-  background: none;
-  border: none;
-  cursor: pointer;
+  color: ${(props) => (props.success ? '#085f63' : 'red')};
 `;
 
 function PasswordChange() {
@@ -132,35 +127,58 @@ function PasswordChange() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
-  const[ isSuccess,setIsSuccess]=useState(null);
+  const [isSuccess, setIsSuccess] = useState(null);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newPasswordError = hasFieldError(newPassword, [{ minLength: 8 }, { maxLength: 16 }]);
+    const confirmPasswordError = hasFieldError(confirmPassword, [{ minLength: 8 }, { maxLength: 16 }]);
+
+    if (newPasswordError || confirmPasswordError) {
+      setMessage(newPasswordError || confirmPasswordError);
+      setIsSuccess(false);
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
       setMessage("Las contraseñas nuevas no coinciden.");
       setIsSuccess(null);
-    } else {
+      return;
+    }
+
+    try {
+      // Guardar la nueva contraseña
+      await passwordAPI({ oldPassword, newPassword });
       setMessage("¡Contraseña ha cambiado exitosamente!");
       setIsSuccess(true);
-      // Aquí podrías enviar la nueva contraseña a un servidor
+    } catch (error) {
+      setMessage("Error al cambiar la contraseña.");
+      setIsSuccess(false);
     }
   };
 
-  const toggleOldPasswordVisibility = () => {
+  const toggleOldPasswordVisibility = (e) => {
+    e.preventDefault();
     setShowOldPassword((prevShowPassword) => !prevShowPassword);
   };
-  const toggleNewPasswordVisibility = () => {
+
+  const toggleNewPasswordVisibility = (e) => {
+    e.preventDefault();
     setShowNewPassword((prevShowPassword) => !prevShowPassword);
   };
-  const toggleConfirmPasswordVisibility = () => {
+
+  const toggleConfirmPasswordVisibility = (e) => {
+    e.preventDefault();
     setShowConfirmPassword((prevShowPassword) => !prevShowPassword);
   };
+
   useEffect(() => {
     if (!oldPassword && !newPassword && !confirmPassword) {
-      setMessage("");// Valida que al limpiar los input, se limpie el mensaje
+      setMessage(""); // Valida que al limpiar los input, se limpie el mensaje
     }
   }, [oldPassword, newPassword, confirmPassword]);
 
@@ -171,46 +189,50 @@ function PasswordChange() {
         <Form onSubmit={handleSubmit}>
           <Label>
             Ingrese la contraseña antigua:
-            <Input
-              type={showOldPassword ? "text" : "password"}
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
-              required
-             
-            />
-            <ToggleButton onClick={toggleOldPasswordVisibility}>
-              <img src={showOldPassword ? '/ojos-cruzados.png' : '/ojo.png'} alt="Toggle visibility" />
-            </ToggleButton>
+            <InputWrapper>
+              <Input
+                type={showOldPassword ? "text" : "password"}
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+                required
+              />
+              <ToggleButton onClick={toggleOldPasswordVisibility}>
+                <img src={showOldPassword ? '/ojos-cruzados.png' : '/ojo.png'} alt="Toggle visibility" />
+              </ToggleButton>
+            </InputWrapper>
           </Label>
           <Label>
             Ingrese la contraseña nueva:
-            <Input
-              type={showNewPassword ? "text" : "password"}
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              required
-              minLength={8}
-              maxLength={20}
-            />
-            <ToggleButton1 onClick={toggleNewPasswordVisibility}>
-              <img src={showNewPassword ? '/ojos-cruzados.png' : '/ojo.png'} alt="Toggle visibility" />
-            </ToggleButton1>
+            <InputWrapper>
+              <Input
+                type={showNewPassword ? "text" : "password"}
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+                minLength={8}
+                maxLength={16}
+              />
+              <ToggleButton onClick={toggleNewPasswordVisibility}>
+                <img src={showNewPassword ? '/ojos-cruzados.png' : '/ojo.png'} alt="Toggle visibility" />
+              </ToggleButton>
+            </InputWrapper>
           </Label>
           <Label>
             Confirme la contraseña nueva:
-            <Input
-              type={showConfirmPassword ? "text" : "password"}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              minLength={8}
-              maxLength={20}
-            />
-            <ToggleButton2 onClick={toggleConfirmPasswordVisibility}>
-              <img src={showConfirmPassword ?'/ojos-cruzados.png':'/ojo.png'} alt="Toggle visibility"/>
-            </ToggleButton2>
+            <InputWrapper>
+              <Input
+                type={showConfirmPassword ? "text" : "password"}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                minLength={8}
+                maxLength={16}
+              />
+              <ToggleButton onClick={toggleConfirmPasswordVisibility}>
+                <img src={showConfirmPassword ? '/ojos-cruzados.png' : '/ojo.png'} alt="Toggle visibility" />
+              </ToggleButton>
+            </InputWrapper>
           </Label>
-          
           <Button type="submit">Confirmar</Button>
           {message && <Message success={isSuccess}>{message}</Message>}
         </Form>

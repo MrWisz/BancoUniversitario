@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { removeJWT } from '../utils/localStorage'; // Importa la función removeJWT
 
-const HeaderBanca = ({ className = "" }) => {
+const HeaderBanca = ({ className = "", onPasswordChangeClick, onSaldoClick }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +12,7 @@ const HeaderBanca = ({ className = "" }) => {
   const [isTransferMenuOpen, setIsTransferMenuOpen] = useState(false);
 
   const handleLogoClick = () => {
-    navigate('/'); //Cambiar al landing page//*
+    onSaldoClick(); // Llevar al estado inicial del HomeUser
     setIsMenuOpen(false);
   };
 
@@ -97,7 +97,7 @@ const HeaderBanca = ({ className = "" }) => {
               </div>
             )}
             {isLoggedIn && (
-              <div className="menu">
+              <div className="menu" onClick={onSaldoClick}>
                 <div className="menuItem" />
                 <img src="/dolar.png" alt="Saldo Icon" className="menuIcon" />
                 <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
@@ -106,7 +106,7 @@ const HeaderBanca = ({ className = "" }) => {
               </div>
             )}
             {isLoggedIn && (
-              <div className="menu" >
+              <div className="menu" onClick={onPasswordChangeClick}>
                 <div className="menuItem" />
                 <img src="/password.png" alt="Password Icon" className="menuIcon" />
                 <h2 className="navLink" style={{ textAlign: 'center', fontSize: '16px' }}>
@@ -167,7 +167,7 @@ const HeaderBanca = ({ className = "" }) => {
               </div>
             )}
             {isLoggedIn && (
-              <div className="menu">
+              <div className="menu" onClick={onSaldoClick}>
                 <div className="menuItem" />
                 <img src="/dolar.png" alt="Saldo Icon" className="menuIcon" />
                 <h2 className="navLink" style={{ textAlign: 'center', fontSize: '20px' }}>
@@ -176,7 +176,7 @@ const HeaderBanca = ({ className = "" }) => {
               </div>
             )}
             {isLoggedIn && (
-              <div className="menu" >
+              <div className="menu" onClick={onPasswordChangeClick}>
                 <div className="menuItem" />
                 <img src="/password.png" alt="Password Icon" className="menuIcon" />
                 <h2 className="navLink" style={{ textAlign: 'center', fontSize: '16px' }}>
@@ -422,6 +422,8 @@ const HeaderBanca = ({ className = "" }) => {
 
 HeaderBanca.propTypes = {
   className: PropTypes.string,
+  onPasswordChangeClick: PropTypes.func.isRequired,
+  onSaldoClick: PropTypes.func.isRequired,
 };
 
 export default HeaderBanca;

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { getBalanceAPI } from "../services/balance/Balance.Service";
+import { whoAmIAPI } from "../services/user/User.Service";
 
 const Container = styled.div`
   font-family: var(--font-montserrat-alternates);
@@ -7,7 +9,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 40vh;
   background-color: #ffffff;
   color: #085f63;
   padding: 0px;
@@ -45,7 +47,6 @@ const SelectWrapper = styled.div`
     font-size: 1.2rem;
     margin-bottom: 5px;
     color: #085f63;
-    
   }
 
   label1 {
@@ -65,7 +66,6 @@ const SelectWrapper = styled.div`
     }
   }
 `;
-
 
 const CardsContainer = styled.div`
   display: flex;
@@ -114,20 +114,19 @@ const AccountInfo = styled(Card)`
       font-size: 0.9rem; /* Reduce el tamaño del texto si es necesario */
       white-space: wrap; /* Evita que el texto se desborde */
       overflow: hidden; /* Oculta cualquier desbordamiento */
-      
       max-width: 100%; /* Evita que exceda el ancho del contenedor */
     }
   }
 
   .details {
-     display: flex;
+    display: flex;
     flex-direction: column;
     gap: 8px;
     flex-grow: 1;
     align-items: flex-end; /* Opcional: Alinea el contenido al final */
 
     .logo {
-     display: flex;
+      display: flex;
       justify-content: flex-end; /* Mueve el logo hacia la derecha */
       align-self: flex-end; /* Opcional: Asegura que el logo esté en el extremo derecho */
       width: 40px;
@@ -147,6 +146,7 @@ const AccountInfo = styled(Card)`
     }
   }
 `;
+
 const AccountNumber = styled.h4`
   font-size: 1rem;
   color: #085f63;
@@ -157,38 +157,10 @@ const AccountNumber = styled.h4`
   text-overflow: ellipsis;
   max-width: 100%; /* Limita el ancho del texto */
 `;
-const BalanceDetails = styled(Card)`
-  h4 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    text-align: center;
-    color: #085f63;
-  }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-
-    td {
-      padding: 5px 10px;
-      font-size: 0.9rem;
-      text-align: right;
-      color: #085f63;
-    }
-
-    td:first-child {
-      text-align: left;
-    }
-
-    .total {
-      font-weight: bold;
-      color: #49beb7;
-    }
-  }
-`;
 const CopyButton = styled.button`
- max-width: 306px;
- max-height: 70px;
+  max-width: 306px;
+  max-height: 70px;
   padding: 5px 5px;
   background-color: #49beb7;
   border: none;
@@ -206,70 +178,76 @@ const CopyButton = styled.button`
     background-color: #064f54;
   }
 `;
+
 const Account = () => {
+  const [balance, setBalance] = useState(null);
+  const [accountNumber, setAccountNumber] = useState('');
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const response = await getBalanceAPI();
+        setBalance(response.data.data.balance);
+      } catch (error) {
+        console.error('Error fetching balance:', error);
+      }
+    };
+
+    const fetchAccountNumber = async () => {
+      try {
+        const response = await whoAmIAPI();
+        setAccountNumber(response.data.data.account_number);
+      } catch (error) {
+        console.error('Error fetching account number:', error);
+      }
+    };
+
+    fetchBalance();
+    fetchAccountNumber();
+  }, []);
+
   const handleCopy = () => {
-    const accountNumber = "63130130634416479"; // Reemplaza con el número actual dinámico
     navigator.clipboard
       .writeText(accountNumber)
       .then(() => alert("¡Número de cuenta copiado al portapapeles!"))
       .catch((err) => alert("Error al copiar el número de cuenta"));
   };
+
+  const censoredAccountNumber = accountNumber ? `****${accountNumber.slice(-4)}` : '';
+
   return (
     <Container>
-    <Title>Detalles de la cuenta</Title>
+      <Title>Detalles de la cuenta</Title>
 
-    <Section>
-      <div>
-        <SelectWrapper>
-          <label htmlFor="cuenta">Consultas</label>
-          <label1 id="cuenta">
-            <option>Cuenta nro. ****1234</option>
-          </label1>
-          <CopyButton onClick={handleCopy}>Copiar nro° de cuenta</CopyButton>
-        </SelectWrapper>
+      <Section>
+        <div>
+          <SelectWrapper>
+            <label htmlFor="cuenta">Cuenta nro:</label>
+            <label1 id="cuenta">
+              <option>{censoredAccountNumber}</option>
+            </label1>
+            <CopyButton onClick={handleCopy}>Copiar nro° de cuenta</CopyButton>
+          </SelectWrapper>
+        </div>
 
-        
-      </div>
-
-      <CardsContainer>
-        <AccountInfo>
-          <div className="account-icon">
-            <img src="banco-universitario-website-favicon-color.ico" alt="Logo Banco" />
-            <AccountNumber>Cuenta Nro.</AccountNumber>
-            <span>63130130634416479</span>
-          </div>
-          <div className="details">
-            <div className="logo">
-              <img src="maestro.png" alt="Logo Maestro" />
+        <CardsContainer>
+          <AccountInfo>
+            <div className="account-icon">
+              <img src="banco-universitario-website-favicon-color.ico" alt="Logo Banco" />
+              <AccountNumber>Cuenta Nro.</AccountNumber>
+              <span>{censoredAccountNumber}</span>
             </div>
-            <span className="available">Disponible: 00,00 $</span>
-          </div>
-        </AccountInfo>
-
-        <BalanceDetails>
-          <h4>Detalle de Saldos</h4>
-          <table>
-            <tbody>
-              <tr>
-                <td>Diferido:</td>
-                <td>0,00</td>
-              </tr>
-              <tr>
-                <td>Bloqueado:</td>
-                <td>0,00</td>
-              </tr>
-              <tr>
-                <td className="total">Total:</td>
-                <td className="total">0,00</td>
-              </tr>
-            </tbody>
-          </table>
-        </BalanceDetails>
-      </CardsContainer>
-    
-    </Section>
-  </Container>
-);
+            <div className="details">
+              <div className="logo">
+                <img src="maestro.png" alt="Logo Maestro" />
+              </div>
+              <span className="available">Disponible: {balance !== null && balance !== undefined ? balance.toFixed(2) : 'Cargando...'} $</span>
+            </div>
+          </AccountInfo>
+        </CardsContainer>
+      </Section>
+    </Container>
+  );
 };
 
 export default Account;

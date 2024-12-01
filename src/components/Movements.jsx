@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getMovementsAPI } from '../services/movement/Movement.Service';
-import { setJWT } from '../utils/localStorage';
 
 const Container = styled.div`
   display: flex;
@@ -82,7 +81,7 @@ const Movements = () => {
     const fetchMovements = async () => {
       try {
         const response = await getMovementsAPI();
-        setTransactions(response.data?.movements || []);
+        setTransactions(response.data?.data || []);
       } catch (error) {
         console.error('Error fetching movements:', error);
         setError('Error al obtener los movimientos');
@@ -100,6 +99,8 @@ const Movements = () => {
         <Table>
           <TableHeader>
             <tr>
+              <th>ID</th>
+              <th>Fecha</th>
               <th>Monto</th>
               <th>Número de Cuenta</th>
               <th>Descripción</th>
@@ -107,16 +108,18 @@ const Movements = () => {
           </TableHeader>
           <tbody>
             {transactions.length > 0 ? (
-              transactions.map((transaction, index) => (
+              transactions.slice(-5).map((transaction, index) => (
                 <TableRow key={index}>
-                  <TableData>{transaction.amount}</TableData>
+                  <TableData>{transaction.id}</TableData>
+                  <TableData>{new Date(transaction.created_at).toLocaleDateString()}</TableData>
+                  <TableData>{transaction.amount} $</TableData>
                   <TableData>{transaction.account_number}</TableData>
                   <TableData>{transaction.description}</TableData>
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableData colSpan="3">No hay movimientos disponibles</TableData>
+                <TableData colSpan="5">No hay movimientos disponibles</TableData>
               </TableRow>
             )}
           </tbody>
