@@ -45,15 +45,16 @@ const SelectWrapper = styled.div`
     font-size: 1.2rem;
     margin-bottom: 5px;
     color: #085f63;
+    
   }
 
-  select {
+  label1 {
     width: 100%;
     padding: 12px;
     border: 1px solid #49beb7;
     border-radius: 4px;
     font-size: 1rem;
-    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: 'Montserrat Alternates';
     color: #085f63;
     background-color: #fff;
 
@@ -221,10 +222,9 @@ const Account = () => {
       <div>
         <SelectWrapper>
           <label htmlFor="cuenta">Consultas</label>
-          <select id="cuenta">
+          <label1 id="cuenta">
             <option>Cuenta nro. ****1234</option>
-            <option>Cuenta nro. ****5678</option>
-          </select>
+          </label1>
           <CopyButton onClick={handleCopy}>Copiar nro° de cuenta</CopyButton>
         </SelectWrapper>
 
@@ -266,13 +266,7 @@ const Account = () => {
           </table>
         </BalanceDetails>
       </CardsContainer>
-      <SelectWrapper>
-          <label htmlFor="movimientos">Movimientos del mes de</label>
-          <select id="movimientos">
-            <option>Julio</option>
-            <option>Agosto</option>
-          </select>
-        </SelectWrapper>
+    
     </Section>
   </Container>
 );
