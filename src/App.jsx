@@ -12,6 +12,7 @@ import WhoWeAre from "./pages/WhoWeAre.jsx";
 import Register from "./pages/Register.jsx";
 import HomeUser from "./pages/HomeUser.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Test from "./pages/test.jsx"; // Importa el componente Test
 
 function App() {
   const action = useNavigationType();
@@ -53,6 +54,10 @@ function App() {
         title = "";
         metaDescription = "";
         break;
+      case "/test":
+        title = "Test Page";
+        metaDescription = "This is a test page.";
+        break;
     }
 
     if (title) {
@@ -77,6 +82,7 @@ function App() {
       <Route path="/who-we-are" element={<WhoWeAre />} />
       <Route path="/register" element={<Register />} />
       <Route path="/home-user" element={<ProtectedRoute><HomeUser /></ProtectedRoute>} />
+      <Route path="/test" element={<Test />} /> {/* Agrega la ruta para Test */}
     </Routes>
   );
 }
