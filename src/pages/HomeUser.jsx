@@ -5,6 +5,7 @@ import Account from '../components/Account';
 import Movements from '../components/Movements';
 import Footer from '../components/Footer';
 import PasswordChange from '../components/PasswordChange';
+import Contacts from '../components/Contacts'; // Importa el componente Contacts
 
 const HomeUserContainer = styled.div`
   width: 100%;
@@ -28,23 +29,40 @@ const HomeUserContainer = styled.div`
 
 const HomeUser = () => {
   const [showPasswordChange, setShowPasswordChange] = useState(false);
+  const [showContacts, setShowContacts] = useState(false);
 
   const handlePasswordChangeClick = () => {
     setShowPasswordChange(true);
+    setShowContacts(false);
   };
 
   const handleSaldoClick = () => {
     setShowPasswordChange(false);
+    setShowContacts(false);
   };
+
+  const handleContactsClick = () => {
+    setShowContacts(true);
+    setShowPasswordChange(false);
+  };
+
+  console.log("showPasswordChange:", showPasswordChange);
+  console.log("showContacts:", showContacts);
 
   return (
     <HomeUserContainer>
-      <HeaderBanca onPasswordChangeClick={handlePasswordChangeClick} onSaldoClick={handleSaldoClick} />
-      {!showPasswordChange ? (
+      <HeaderBanca 
+        onPasswordChangeClick={handlePasswordChangeClick} 
+        onSaldoClick={handleSaldoClick} 
+        onContactsClick={handleContactsClick} // Pasar la función de manejo de clics
+      />
+      {!showPasswordChange && !showContacts ? (
         <>
           <Account />
           <Movements />
         </>
+      ) : showContacts ? (
+        <Contacts />
       ) : (
         <PasswordChange />
       )}

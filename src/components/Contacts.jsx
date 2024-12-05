@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getContactsListAPI } from '../services/contacts/Contacts.Service';
 
 const Container = styled.div`
   display: flex;
@@ -78,18 +79,28 @@ const Title = styled.h2`
 `;
 
 const Contacts = () => {
-  const dummyContacts = [
-    { alias: 'JohnDoe', description: 'Friend from work', accountNumber: '1234567890' },
-    { alias: 'JaneSmith', description: 'Gym buddy', accountNumber: '0987654321' },
-    { alias: 'MikeBrown', description: 'Neighbor', accountNumber: '1122334455' },
-    { alias: 'EmilyWhite', description: 'College friend', accountNumber: '5566778899' },
-    { alias: 'ChrisGreen', description: 'Family friend', accountNumber: '6677889900' },
-  ];
+  const [contacts, setContacts] = useState([]);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const response = await getContactsListAPI();
+        setContacts(response.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching contacts:', error);
+        setError('Error al obtener los contactos');
+      }
+    };
+
+    fetchContacts();
+  }, []);
 
   return (
     <Container>
       <TableWrapper>
         <Title>Contactos</Title>
+        {error && <p>{error}</p>}
         <Table>
           <TableHeader>
             <tr>
@@ -100,19 +111,25 @@ const Contacts = () => {
             </tr>
           </TableHeader>
           <tbody>
-            {dummyContacts.map((contact, index) => (
-              <TableRow key={index}>
-                <TableData>{contact.alias}</TableData>
-                <TableData>{contact.description}</TableData>
-                <TableData>{contact.accountNumber}</TableData>
-                <TableData>
-                  <IconWrapper>
-                    <Icon src="/editar.png" alt="Editar" />
-                    <Icon src="/basura.png" alt="Eliminar" />
-                  </IconWrapper>
-                </TableData>
+            {contacts.length > 0 ? (
+              contacts.map((contact, index) => (
+                <TableRow key={index}>
+                  <TableData>{contact.alias}</TableData>
+                  <TableData>{contact.description}</TableData>
+                  <TableData>{contact.accountNumber}</TableData>
+                  <TableData>
+                    <IconWrapper>
+                      <Icon src="/editar.png" alt="Editar" />
+                      <Icon src="/basura.png" alt="Eliminar" />
+                    </IconWrapper>
+                  </TableData>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableData colSpan="4">No hay contactos disponibles</TableData>
               </TableRow>
-            ))}
+            )}
           </tbody>
         </Table>
       </TableWrapper>

@@ -2,14 +2,16 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import PropTypes from "prop-types";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { removeJWT } from '../utils/localStorage'; // Importa la función removeJWT
+import TransferDropdown from './TransferDropdown'; // Importa el nuevo componente
 
-const HeaderBanca = ({ className = "", onPasswordChangeClick, onSaldoClick }) => {
+const HeaderBanca = ({ className = "", onPasswordChangeClick, onSaldoClick, onContactsClick }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isTransferMenuOpen, setIsTransferMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const dropdownRef = useRef(null);
-  const [isTransferMenuOpen, setIsTransferMenuOpen] = useState(false);
+  const transferButtonRef = useRef(null);
 
   const handleLogoClick = () => {
     onSaldoClick(); // Llevar al estado inicial del HomeUser
@@ -31,7 +33,10 @@ const HeaderBanca = ({ className = "", onPasswordChangeClick, onSaldoClick }) =>
     setIsMenuOpen(false);
   };
 
-  const handleTransferClick = () => setIsTransferMenuOpen((prev) => !prev);
+  const handleTransferClick = () => {
+    console.log("handleTransferClick called");
+    setIsTransferMenuOpen((prev) => !prev);
+  };
 
   const handleLogoutClick = () => {
     removeJWT(); // Eliminar el token de autenticación
@@ -70,6 +75,19 @@ const HeaderBanca = ({ className = "", onPasswordChangeClick, onSaldoClick }) =>
   const isRegisterPage = location.pathname === '/register';
   const isLoggedIn = !!localStorage.getItem('bank_jwt'); // Verificar si el usuario está autenticado
 
+  const handleContactsClick = () => {
+    console.log("handleContactsClick called");
+    onContactsClick();
+    console.log("onContactsClick executed");
+    console.log("isMenuOpen:", isMenuOpen);
+    console.log("isTransferMenuOpen:", isTransferMenuOpen);
+    if (isMenuOpen || isTransferMenuOpen) {
+      setIsMenuOpen(false);
+      setIsTransferMenuOpen(false);
+      console.log("Menus closed");
+    }
+  };
+
   return (
     <header className={`headerContainer ${className}`}>
       <img
@@ -82,18 +100,16 @@ const HeaderBanca = ({ className = "", onPasswordChangeClick, onSaldoClick }) =>
       <div className="menusContainer">
         {!isLoginPage && !isRegisterPage && (
           <>
-            <div className="menu" onClick={handleTransferClick}>
+            <div className="menu" onClick={handleTransferClick} ref={transferButtonRef}>
               <img src="/Clipboard.png" alt="Transfer Icon" className="menuIcon" />
               <h2 className="navLink transferNavLink">Transferencias</h2>
             </div>
-            {isTransferMenuOpen && (
-              <div className="dropdownMenu" ref={dropdownRef}>
-                <div className="dropdownItem" onClick={() => navigate('/transfer-contacts')}>
-                  Desde contactos
-                </div>
-                <div className="dropdownItem" onClick={() => navigate('/transfer-guest')}>
-                  Sin registrar
-                </div>
+            {isTransferMenuOpen && transferButtonRef.current && (
+              <div
+                className="dropdownContainer"
+                ref={dropdownRef}
+              >
+                <TransferDropdown handleContactsClick={handleContactsClick} isMobile={false} />
               </div>
             )}
             {isLoggedIn && (
@@ -157,14 +173,7 @@ const HeaderBanca = ({ className = "", onPasswordChangeClick, onSaldoClick }) =>
               <h2 className="navLink transferNavLink">Transferencias</h2>
             </div>
             {isTransferMenuOpen && (
-              <div className="dropdownMenu mobileDropdownMenu" ref={dropdownRef}>
-                <div className="dropdownItem" onClick={() => navigate('/transfer-contacts')}>
-                  Desde contactos
-                </div>
-                <div className="dropdownItem" onClick={() => navigate('/transfer-guest')}>
-                  Sin registrar
-                </div>
-              </div>
+              <TransferDropdown handleContactsClick={handleContactsClick} isMobile={true} />
             )}
             {isLoggedIn && (
               <div className="menu" onClick={onSaldoClick}>
@@ -329,37 +338,6 @@ const HeaderBanca = ({ className = "", onPasswordChangeClick, onSaldoClick }) =>
         .transferNavLink {
           font-size: 20px; /* Set font size for Transferencias menu */
         }
-        .dropdownMenu {
-          position: absolute;
-          top: calc(100% + 2px); /* 2px separation from the button */
-          left: 5px;
-          background-color: var(--color-lightseagreen);
-          border: 1px solid var(--color-lightseagreen);
-          border-radius: 5px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          z-index: 2;
-          width: 200px; /* Match the width of the menu */
-        }
-        .mobileDropdownMenu {
-          position: relative;
-          top: 3px; /* Align with the button */
-          left: -8px; /* Align with the button */
-        }
-        .dropdownItem {
-          padding: 10px;
-          color: var(--background-default-default);
-          cursor: pointer;
-          text-align: center;
-          top: 3px;
-          font-size: 20px; /* Set font size for dropdown items */
-          &:hover {
-            background-color: #085f63;
-            color: white;
-          }
-        }
-        .dropdownItem:not(:last-child) {
-          border-bottom: 1px solid #085f63; /* Separation line color */
-        }
         .hamburgerButton {
           display: none;
           flex-direction: column;
@@ -415,6 +393,15 @@ const HeaderBanca = ({ className = "", onPasswordChangeClick, onSaldoClick }) =>
         .mobileMenu.open {
           display: flex;
         }
+        .dropdownContainer {
+          position: absolute;
+          top: 100%;
+          left: 12px;
+          width: 100%;
+          background-color: white;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          z-index: 2;
+        }
       `}</style>
     </header>
   );
@@ -424,6 +411,7 @@ HeaderBanca.propTypes = {
   className: PropTypes.string,
   onPasswordChangeClick: PropTypes.func.isRequired,
   onSaldoClick: PropTypes.func.isRequired,
+  onContactsClick: PropTypes.func.isRequired, // Añadir la nueva prop
 };
 
 export default HeaderBanca;
