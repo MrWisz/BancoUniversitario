@@ -3,7 +3,7 @@ import HeaderComponent from "../components/HeaderComponent";
 import ContentWWA from "../components/ContentWWA"; 
 import Footer from "../components/Footer";
 import BackToTop from "../components/BackToTop";
-import TransferForm from "../components/TransferForm";
+
 
 
 const WhoWeAre = () => {
@@ -14,7 +14,6 @@ const WhoWeAre = () => {
       <div className="objetivo1" />
       <div className="WhoWeAreContainer">
         <ContentWWA />
-        <TransferForm />
       </div>
       <BackToTop />
       <Footer />
