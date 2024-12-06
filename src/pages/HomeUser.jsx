@@ -88,6 +88,7 @@ const HomeUser = () => {
   };
 
   const handleTransferGuestClick = () => {
+    setLastAccountNumber(""); // Reinicia el número de cuenta
     setShowTransferForm(true);
     setShowContacts(false);
     setShowPasswordChange(false);
@@ -111,6 +112,12 @@ const HomeUser = () => {
     setShowTransferForm(false);
   };
 
+  const handleTransferFromContact = (accountNumber) => {
+    setLastAccountNumber(accountNumber);
+    setShowContacts(false);
+    setShowTransferForm(true);
+  };
+
   return (
     <HomeUserContainer>
       <HeaderBanca 
@@ -125,13 +132,13 @@ const HomeUser = () => {
           <Movements />
         </>
       ) : showContacts ? (
-        <Contacts onEditContact={handleEditContactClick} />
+        <Contacts onEditContact={handleEditContactClick} onTransfer={handleTransferFromContact} />
       ) : showAddContactForm ? (
         <AddContactForm />
       ) : showModifyContact ? (
         <ModifyContact contactId={selectedContactId} />
       ) : showTransferForm ? (
-        <TransferForm onSuccess={handleTransferSuccess} />
+        <TransferForm onSuccess={handleTransferSuccess} initialAccountNumber={lastAccountNumber} />
       ) : showSuccessfulTransfer ? (
         <SuccessfulTransfer accountNumber={lastAccountNumber} onContinue={handleContinueClick} />
       ) : (

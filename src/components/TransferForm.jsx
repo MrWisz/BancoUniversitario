@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { createMovementAPI } from "../services/movement/Movement.Service";
 
@@ -83,11 +83,19 @@ const ErrorMessage = styled.p`
   margin-bottom: 10px;
 `;
 
-const TransferForm = ({ onSuccess }) => {
+const TransferForm = ({ onSuccess, initialAccountNumber }) => {
   const [amount, setAmount] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (initialAccountNumber) {
+      setAccountNumber(initialAccountNumber);
+    } else {
+      setAccountNumber("");
+    }
+  }, [initialAccountNumber]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -131,6 +139,7 @@ const TransferForm = ({ onSuccess }) => {
           placeholder="Número de Cuenta"
           value={accountNumber}
           onChange={(e) => setAccountNumber(e.target.value)}
+          readOnly={!!initialAccountNumber}
         />
         <Subtitle>Descripción</Subtitle>
         <Input

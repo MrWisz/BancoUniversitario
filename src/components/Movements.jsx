@@ -305,14 +305,6 @@ const Movements = () => {
           </tbody>
         </Table>
       </TableWrapper>
-      <Pagination>
-        <Button onClick={handlePreviousPage} disabled={page === 1}>
-          Anterior
-        </Button>
-        <Button onClick={handleNextPage} disabled={page === totalPages || transactions.length < pageSize}>
-          Siguiente
-        </Button>
-      </Pagination>
     </Container>
   );
 };
