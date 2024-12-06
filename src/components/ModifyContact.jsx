@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { updateContactAPI, getContactAPI } from '../services/contacts/Contacts.Service';
+import { getJWT } from '../utils/localStorage';
 
 const Container = styled.div`
   padding-top: 1vh;
@@ -127,24 +129,60 @@ const Message = styled.p`
   color: ${(props) => (props.success ? '#085f63' : 'red')};
 `;
 
-function ModifyContact() {
+function ModifyContact({ contactId }) {
   const [alias, setAlias] = useState("");
   const [description, setDescription] = useState("");
+  const [newAlias, setNewAlias] = useState("");
+  const [newDescription, setNewDescription] = useState("");
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(null);
+  const [contactIdToUpdate, setContactIdToUpdate] = useState(null);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const fetchContact = async () => {
+      try {
+        const response = await getContactAPI(contactId);
+        const { id, alias, description } = response.data.data; // Asegúrate de acceder correctamente a los datos
+        setAlias(alias || ""); // Asegúrate de que alias no sea undefined
+        setDescription(description || ""); // Asegúrate de que description no sea undefined
+        setContactIdToUpdate(id); // Guarda el ID del contacto
+      } catch (error) {
+        console.error("Error fetching contact:", error);
+      }
+    };
+
+    fetchContact();
+  }, [contactId]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!alias || !description) {
+    if (!newAlias || !newDescription) {
       setMessage("Todos los campos son obligatorios.");
       setIsSuccess(false);
       return;
     }
 
-    // Aquí puedes agregar la lógica para modificar el contacto
-    setMessage("¡Contacto modificado exitosamente!");
-    setIsSuccess(true);
+    const data = {
+      alias: newAlias,
+      description: newDescription,
+    };
+
+    const jwt = getJWT(); // Obtén el token JWT del almacenamiento local
+
+    try {
+      await updateContactAPI(contactIdToUpdate, data, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+      setMessage("¡Contacto modificado exitosamente!");
+      setIsSuccess(true);
+    } catch (error) {
+      console.error("Error al modificar el contacto:", error);
+      setMessage("Hubo un error al modificar el contacto.");
+      setIsSuccess(false);
+    }
   };
 
   return (
@@ -153,29 +191,38 @@ function ModifyContact() {
         <Title>Modificar Contacto</Title>
         <Form onSubmit={handleSubmit}>
           <Label>
-            Alias:
+            Alias Actual:
             <InputWrapper>
               <Input
                 type="text"
-                value={alias}
-                onChange={(e) => setAlias(e.target.value)}
                 required
               />
             </InputWrapper>
           </Label>
           <Label>
-            Descripción:
+            Nuevo Alias:
             <InputWrapper>
-              <TextArea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+              <Input
+                type="text"
+                value={newAlias}
+                onChange={(e) => setNewAlias(e.target.value)}
                 required
-                rows="4"
+              />
+            </InputWrapper>
+          </Label>
+          <Label>
+            Nueva Descripción:
+            <InputWrapper>
+              <Input
+                type="text"
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+                required
               />
             </InputWrapper>
           </Label>
           <Button type="submit">Modificar</Button>
-          {message && <Message success={isSuccess}>{message}</Message>}
+          {message && <Message success={isSuccess.toString()}>{message}</Message>}
         </Form>
       </Main>
     </Container>

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { createContactAPI } from "../services/contacts/Contacts.Service";
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -12,7 +13,7 @@ const ContactContainer = styled.section`
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  border: 2px solid #49beb7; /* Borde verde y más grueso */
+  border: 2px solid #49beb7;
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -39,8 +40,8 @@ const Subtitle = styled.h3`
   font-size: 1.2rem;
   color: #49beb7;
   margin-bottom: 5px;
-  font-weight: 400; /* Letra más delgada */
-  align-self: flex-start; /* Alineación a la izquierda */
+  font-weight: 400;
+  align-self: flex-start;
 `;
 
 const Input = styled.input`
@@ -69,21 +70,73 @@ const Button = styled.button`
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: 0 auto;
 
   &:hover {
     background-color: #49beb7;
   }
 `;
 
-const AddContactForm = () => {
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+const AddContactForm = ({ onSuccess }) => {
+  const [alias, setAlias] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      alias,
+      account_number: accountNumber,
+      description,
+    };
+    try {
+      await createContactAPI(data);
+      alert("Contacto creado exitosamente");
+      // Limpiar el formulario
+      setAlias("");
+      setAccountNumber("");
+      setDescription("");
+      onSuccess(); // Llama a la función de callback
+    } catch (error) {
+      console.error("Error al crear el contacto:", error);
+      alert("Hubo un error al crear el contacto");
+    }
+  };
+
   return (
     <ContactContainer>
       <Title>Añadir contacto</Title>
-      <Subtitle>Número de cuenta</Subtitle>
-      <Input type="text" placeholder="Número de cuenta" />
-      <Subtitle>Nombre y apellido</Subtitle>
-      <Input type="text" placeholder="Nombre y apellido" />
-      <Button>Guardar</Button>
+      <Form onSubmit={handleSubmit}>
+        <Subtitle>Alias</Subtitle>
+        <Input
+          type="text"
+          placeholder="Alias"
+          value={alias}
+          onChange={(e) => setAlias(e.target.value)}
+        />
+        <Subtitle>Número de cuenta</Subtitle>
+        <Input
+          type="text"
+          placeholder="Número de cuenta"
+          value={accountNumber}
+          onChange={(e) => setAccountNumber(e.target.value)}
+        />
+        <Subtitle>Descripción</Subtitle>
+        <Input
+          type="text"
+          placeholder="Descripción"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <Button type="submit">Guardar</Button>
+      </Form>
     </ContactContainer>
   );
 };
