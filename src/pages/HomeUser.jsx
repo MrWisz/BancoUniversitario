@@ -8,7 +8,8 @@ import PasswordChange from '../components/PasswordChange';
 import Contacts from '../components/Contacts';
 import AddContactForm from '../components/AddContactForm';
 import ModifyContact from '../components/ModifyContact';
-import TransferForm from '../components/TransferForm'; // Importa el componente TransferForm
+import TransferForm from '../components/TransferForm';
+import SuccessfulTransfer from '../components/SuccessfulTransfer'; // Importa el componente SuccessfulTransfer
 
 const HomeUserContainer = styled.div`
   width: 100%;
@@ -35,8 +36,10 @@ const HomeUser = () => {
   const [showContacts, setShowContacts] = useState(false);
   const [showAddContactForm, setShowAddContactForm] = useState(false);
   const [showModifyContact, setShowModifyContact] = useState(false);
-  const [showTransferForm, setShowTransferForm] = useState(false); // Nuevo estado para TransferForm
+  const [showTransferForm, setShowTransferForm] = useState(false);
+  const [showSuccessfulTransfer, setShowSuccessfulTransfer] = useState(false); // Nuevo estado para SuccessfulTransfer
   const [selectedContactId, setSelectedContactId] = useState(null);
+  const [lastAccountNumber, setLastAccountNumber] = useState(""); // Estado para almacenar el número de cuenta de la última transferencia
 
   const handlePasswordChangeClick = () => {
     setShowPasswordChange(true);
@@ -44,6 +47,7 @@ const HomeUser = () => {
     setShowAddContactForm(false);
     setShowModifyContact(false);
     setShowTransferForm(false);
+    setShowSuccessfulTransfer(false);
   };
 
   const handleSaldoClick = () => {
@@ -52,6 +56,7 @@ const HomeUser = () => {
     setShowAddContactForm(false);
     setShowModifyContact(false);
     setShowTransferForm(false);
+    setShowSuccessfulTransfer(false);
   };
 
   const handleContactsClick = () => {
@@ -60,6 +65,7 @@ const HomeUser = () => {
     setShowAddContactForm(false);
     setShowModifyContact(false);
     setShowTransferForm(false);
+    setShowSuccessfulTransfer(false);
   };
 
   const handleAddContactClick = () => {
@@ -68,6 +74,7 @@ const HomeUser = () => {
     setShowPasswordChange(false);
     setShowModifyContact(false);
     setShowTransferForm(false);
+    setShowSuccessfulTransfer(false);
   };
 
   const handleEditContactClick = (contactId) => {
@@ -77,14 +84,38 @@ const HomeUser = () => {
     setShowPasswordChange(false);
     setShowAddContactForm(false);
     setShowTransferForm(false);
+    setShowSuccessfulTransfer(false);
   };
 
   const handleTransferGuestClick = () => {
+    setLastAccountNumber(""); // Reinicia el número de cuenta
     setShowTransferForm(true);
     setShowContacts(false);
     setShowPasswordChange(false);
     setShowAddContactForm(false);
     setShowModifyContact(false);
+    setShowSuccessfulTransfer(false);
+  };
+
+  const handleTransferSuccess = (accountNumber) => {
+    setLastAccountNumber(accountNumber); // Almacena el número de cuenta de la última transferencia
+    setShowTransferForm(false);
+    setShowSuccessfulTransfer(true);
+  };
+
+  const handleContinueClick = () => {
+    setShowSuccessfulTransfer(false);
+    setShowPasswordChange(false);
+    setShowContacts(false);
+    setShowAddContactForm(false);
+    setShowModifyContact(false);
+    setShowTransferForm(false);
+  };
+
+  const handleTransferFromContact = (accountNumber) => {
+    setLastAccountNumber(accountNumber);
+    setShowContacts(false);
+    setShowTransferForm(true);
   };
 
   return (
@@ -93,21 +124,23 @@ const HomeUser = () => {
         onPasswordChangeClick={handlePasswordChangeClick} 
         onSaldoClick={handleSaldoClick} 
         onContactsClick={handleContactsClick} 
-        onTransferGuestClick={handleTransferGuestClick} // Pasar la función de manejo de clics
+        onTransferGuestClick={handleTransferGuestClick} 
       />
-      {!showPasswordChange && !showContacts && !showAddContactForm && !showModifyContact && !showTransferForm ? (
+      {!showPasswordChange && !showContacts && !showAddContactForm && !showModifyContact && !showTransferForm && !showSuccessfulTransfer ? (
         <>
           <Account />
           <Movements />
         </>
       ) : showContacts ? (
-        <Contacts onEditContact={handleEditContactClick} />
+        <Contacts onEditContact={handleEditContactClick} onTransfer={handleTransferFromContact} />
       ) : showAddContactForm ? (
         <AddContactForm />
       ) : showModifyContact ? (
         <ModifyContact contactId={selectedContactId} />
       ) : showTransferForm ? (
-        <TransferForm />
+        <TransferForm onSuccess={handleTransferSuccess} initialAccountNumber={lastAccountNumber} />
+      ) : showSuccessfulTransfer ? (
+        <SuccessfulTransfer accountNumber={lastAccountNumber} onContinue={handleContinueClick} />
       ) : (
         <PasswordChange />
       )}

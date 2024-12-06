@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { createContactAPI } from "../services/contacts/Contacts.Service";
+import { getMovementsAPI } from "../services/movement/Movement.Service";
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -89,6 +90,22 @@ const AddContactForm = ({ onSuccess }) => {
   const [accountNumber, setAccountNumber] = useState("");
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    const fetchLastMovement = async () => {
+      try {
+        const response = await getMovementsAPI({ limit: 1, sort: "desc" });
+        const lastMovement = response.data.data[0];
+        if (lastMovement) {
+          setAccountNumber(lastMovement.account_number);
+        }
+      } catch (error) {
+        console.error("Error fetching last movement:", error);
+      }
+    };
+
+    fetchLastMovement();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
@@ -127,6 +144,7 @@ const AddContactForm = ({ onSuccess }) => {
           placeholder="Número de cuenta"
           value={accountNumber}
           onChange={(e) => setAccountNumber(e.target.value)}
+          readOnly
         />
         <Subtitle>Descripción</Subtitle>
         <Input

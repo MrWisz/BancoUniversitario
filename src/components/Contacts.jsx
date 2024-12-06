@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getContactsListAPI, deleteContactAPI } from '../services/contacts/Contacts.Service';
-import AddContactForm from './AddContactForm';
+import { getContactsListAPI, deleteContactAPI, getContactByAliasAPI } from '../services/contacts/Contacts.Service';
 import DeleteConfirmationPopup from './DeleteConfirmationPopup';
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 90%;
   margin: 20px auto;
   font-family: 'Montserrat Alternates', sans-serif;
   position: relative;
+  margin-bottom: 230px;
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+  &::placeholder {
+    color: #aaa;
+  }
 `;
 
 const TableWrapper = styled.div`
@@ -50,6 +67,7 @@ const TableRow = styled.tr`
 
   &:hover {
     background-color: #e0f7fa;
+    cursor: pointer;
   }
 `;
 
@@ -80,29 +98,12 @@ const Title = styled.h2`
   font-size: 24px;
 `;
 
-const AddButton = styled.button`
-  background-color: #085f63;
-  color: white;
-  font-family: "Montserrat Alternates", sans-serif;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 20px;
-
-  &:hover {
-    background-color: #49beb7;
-  }
-`;
-
-const Contacts = ({ onEditContact }) => {
+const Contacts = ({ onEditContact, onTransfer }) => {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState('');
-  const [showAddContactForm, setShowAddContactForm] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -117,6 +118,25 @@ const Contacts = ({ onEditContact }) => {
 
     fetchContacts();
   }, []);
+
+  useEffect(() => {
+    const fetchContactsByAlias = async () => {
+      if (searchTerm.trim() === '') {
+        const response = await getContactsListAPI();
+        setContacts(response.data?.data || []);
+      } else {
+        try {
+          const response = await getContactByAliasAPI(searchTerm);
+          setContacts(response.data?.data || []);
+        } catch (error) {
+          console.error('Error fetching contacts by alias:', error);
+          setError('Error al buscar contactos');
+        }
+      }
+    };
+
+    fetchContactsByAlias();
+  }, [searchTerm]);
 
   const handleDeleteClick = (contactId) => {
     setContactToDelete(contactId);
@@ -140,65 +160,71 @@ const Contacts = ({ onEditContact }) => {
     setContactToDelete(null);
   };
 
-  const handleAddContactSuccess = () => {
-    setShowAddContactForm(false);
-    fetchContacts();
+  const handleRowClick = (accountNumber) => {
+    if (typeof onTransfer === 'function') {
+      onTransfer(accountNumber);
+    }
   };
 
   return (
     <>
-      <AddButton onClick={() => setShowAddContactForm(!showAddContactForm)}>
-        {showAddContactForm ? "Cerrar Formulario" : "Agregar un Contacto"}
-      </AddButton>
-      {showAddContactForm ? (
-        <AddContactForm onSuccess={handleAddContactSuccess} />
-      ) : (
-        <Container>
-          <TableWrapper>
-            <Title>Contactos</Title>
-            {error && <p>{error}</p>}
-            <Table>
-              <TableHeader>
-                <tr>
-                  <th>Alias</th>
-                  <th>Descripción</th>
-                  <th>Número de Cuenta</th>
-                  <th>Acciones</th>
-                </tr>
-              </TableHeader>
-              <tbody>
-                {contacts.length > 0 ? (
-                  contacts.map((contact, index) => (
-                    <TableRow key={index}>
-                      <TableData>{contact.alias}</TableData>
-                      <TableData>{contact.description}</TableData>
-                      <TableData>{contact.account_number}</TableData>
-                      <TableData>
-                        <IconWrapper>
-                          <Icon
-                            src="/editar.png"
-                            alt="Editar"
-                            onClick={() => onEditContact(contact.id)}
-                          />
-                          <Icon
-                            src="/basura.png"
-                            alt="Eliminar"
-                            onClick={() => handleDeleteClick(contact.id)}
-                          />
-                        </IconWrapper>
-                      </TableData>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableData colSpan="4">No hay contactos disponibles</TableData>
+      <Container>
+        <Title>Contactos</Title>
+        <SearchInput
+          type="text"
+          placeholder="Buscar por alias"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <TableWrapper>
+          {error && <p>{error}</p>}
+          <Table>
+            <TableHeader>
+              <tr>
+                <th>Alias</th>
+                <th>Descripción</th>
+                <th>Número de Cuenta</th>
+                <th>Acciones</th>
+              </tr>
+            </TableHeader>
+            <tbody>
+              {contacts.length > 0 ? (
+                contacts.map((contact, index) => (
+                  <TableRow key={index} onClick={() => handleRowClick(contact.account_number)}>
+                    <TableData>{contact.alias}</TableData>
+                    <TableData>{contact.description}</TableData>
+                    <TableData>{contact.account_number}</TableData>
+                    <TableData>
+                      <IconWrapper>
+                        <Icon
+                          src="/editar.png"
+                          alt="Editar"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onEditContact(contact.id);
+                          }}
+                        />
+                        <Icon
+                          src="/basura.png"
+                          alt="Eliminar"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteClick(contact.id);
+                          }}
+                        />
+                      </IconWrapper>
+                    </TableData>
                   </TableRow>
-                )}
-              </tbody>
-            </Table>
-          </TableWrapper>
-        </Container>
-      )}
+                ))
+              ) : (
+                <TableRow>
+                  <TableData colSpan="4">No hay contactos disponibles</TableData>
+                </TableRow>
+              )}
+            </tbody>
+          </Table>
+        </TableWrapper>
+      </Container>
       {showDeletePopup && (
         <DeleteConfirmationPopup
           onConfirm={handleConfirmDelete}

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
+import { createMovementAPI } from "../services/movement/Movement.Service";
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -75,17 +76,81 @@ const Subtitle = styled.h3`
   align-self: flex-start; /* Alineación a la izquierda */
 `;
 
-const TransferForm = () => {
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+`;
+
+const TransferForm = ({ onSuccess, initialAccountNumber }) => {
+  const [amount, setAmount] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (initialAccountNumber) {
+      setAccountNumber(initialAccountNumber);
+    } else {
+      setAccountNumber("");
+    }
+  }, [initialAccountNumber]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!amount || !accountNumber || !description) {
+      setError("Todos los campos son obligatorios.");
+      return;
+    }
+
+    const data = {
+      amount: parseFloat(amount), // Asegurarse de que amount sea un número
+      account_number: accountNumber, // Asegurarse de que account_number sea una cadena de texto
+      description,
+    };
+
+    try {
+      const response = await createMovementAPI(data);
+      console.log("Intento de transferencia:", response);
+      onSuccess(); // Llamar a la función de manejo de éxito
+    } catch (error) {
+      console.error("Error during transfer:", error);
+      setError(error.response?.data?.message || "Error durante la transferencia.");
+    }
+  };
+
   return (
     <TransferContainer>
       <Title>Transferencia</Title>
-      <Subtitle>Número de Cuenta</Subtitle>
-      <Input type="text" placeholder="Número de Cuenta" />
-      <Subtitle>Monto</Subtitle>
-      <Input type="number" placeholder="Monto" />
-      <Subtitle>Descripción</Subtitle>
-      <Input type="text" placeholder="Descripción (e.g., Pago cafetería)" />
-      <Button>Continuar</Button>
+      <form onSubmit={handleSubmit}>
+        <Subtitle>Monto</Subtitle>
+        <Input
+          type="number"
+          placeholder="Monto"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+        <Subtitle>Número de Cuenta</Subtitle>
+        <Input
+          type="text"
+          placeholder="Número de Cuenta"
+          value={accountNumber}
+          onChange={(e) => setAccountNumber(e.target.value)}
+          readOnly={!!initialAccountNumber}
+        />
+        <Subtitle>Descripción</Subtitle>
+        <Input
+          type="text"
+          placeholder="Descripción (e.g., Pago cafetería)"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <Button type="submit">Continuar</Button>
+      </form>
     </TransferContainer>
   );
 };
