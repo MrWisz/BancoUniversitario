@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import HeaderComponent from "../components/HeaderComponent";
 import Footer from "../components/Footer";
 import BackToTop from "../components/BackToTop";
+import Contacts from '../components/Contacts';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
