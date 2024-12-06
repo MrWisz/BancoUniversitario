@@ -14,12 +14,28 @@ const Container = styled.div`
   color: #085f63;
   padding: 0px;
   margin-top: 0px;
+
+  @media (max-width: 600px) {
+    padding: 0 10px;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 1.8rem;
   margin-bottom: 20px;
   text-align: center;
+
+  @media (max-width: 600px) {
+    font-size: 1.6rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Section = styled.div`
@@ -34,6 +50,18 @@ const Section = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr; /* Cambia a una sola columna en pantallas pequeñas */
   }
+
+  @media (max-width: 600px) {
+    padding: 15px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 5px;
+  }
 `;
 
 const SelectWrapper = styled.div`
@@ -47,6 +75,18 @@ const SelectWrapper = styled.div`
     font-size: 1.2rem;
     margin-bottom: 5px;
     color: #085f63;
+
+    @media (max-width: 600px) {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 320px) {
+      font-size: 0.8rem;
+    }
   }
 
   label1 {
@@ -63,6 +103,21 @@ const SelectWrapper = styled.div`
       outline: none;
       border-color: #085f63;
       box-shadow: 0px 0px 5px rgba(8, 95, 99, 0.5);
+    }
+
+    @media (max-width: 600px) {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 480px) {
+      padding: 8px;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 320px) {
+      padding: 6px;
+      font-size: 0.7rem;
     }
   }
 `;
@@ -86,6 +141,18 @@ const Card = styled.div`
   background-color: #ffffff;
   width: 100%;
   max-width: 300px;
+
+  @media (max-width: 600px) {
+    padding: 12px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 8px;
+  }
 `;
 
 const AccountInfo = styled(Card)`
@@ -115,6 +182,18 @@ const AccountInfo = styled(Card)`
       white-space: wrap; /* Evita que el texto se desborde */
       overflow: hidden; /* Oculta cualquier desbordamiento */
       max-width: 100%; /* Evita que exceda el ancho del contenedor */
+
+      @media (max-width: 600px) {
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 0.7rem;
+      }
+
+      @media (max-width: 320px) {
+        font-size: 0.6rem;
+      }
     }
   }
 
@@ -143,6 +222,18 @@ const AccountInfo = styled(Card)`
       font-weight: bold;
       color: #49beb7;
       text-align: right; /* Ajusta la alineación para claridad */
+
+      @media (max-width: 600px) {
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 320px) {
+        font-size: 0.7rem;
+      }
     }
   }
 `;
@@ -156,6 +247,18 @@ const AccountNumber = styled.h4`
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%; /* Limita el ancho del texto */
+
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const CopyButton = styled.button`
@@ -176,6 +279,21 @@ const CopyButton = styled.button`
 
   &:active {
     background-color: #064f54;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+    padding: 4px 4px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 3px 3px;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.7rem;
+    padding: 2px 2px;
   }
 `;
 

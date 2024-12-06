@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getContactsListAPI, deleteContactAPI } from '../services/contacts/Contacts.Service';
-import AddContactForm from './AddContactForm';
 import DeleteConfirmationPopup from './DeleteConfirmationPopup';
 
 const Container = styled.div`
@@ -80,27 +79,9 @@ const Title = styled.h2`
   font-size: 24px;
 `;
 
-const AddButton = styled.button`
-  background-color: #085f63;
-  color: white;
-  font-family: "Montserrat Alternates", sans-serif;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 20px;
-
-  &:hover {
-    background-color: #49beb7;
-  }
-`;
-
 const Contacts = ({ onEditContact }) => {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState('');
-  const [showAddContactForm, setShowAddContactForm] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
 
@@ -140,65 +121,53 @@ const Contacts = ({ onEditContact }) => {
     setContactToDelete(null);
   };
 
-  const handleAddContactSuccess = () => {
-    setShowAddContactForm(false);
-    fetchContacts();
-  };
-
   return (
     <>
-      <AddButton onClick={() => setShowAddContactForm(!showAddContactForm)}>
-        {showAddContactForm ? "Cerrar Formulario" : "Agregar un Contacto"}
-      </AddButton>
-      {showAddContactForm ? (
-        <AddContactForm onSuccess={handleAddContactSuccess} />
-      ) : (
-        <Container>
-          <TableWrapper>
-            <Title>Contactos</Title>
-            {error && <p>{error}</p>}
-            <Table>
-              <TableHeader>
-                <tr>
-                  <th>Alias</th>
-                  <th>Descripción</th>
-                  <th>Número de Cuenta</th>
-                  <th>Acciones</th>
-                </tr>
-              </TableHeader>
-              <tbody>
-                {contacts.length > 0 ? (
-                  contacts.map((contact, index) => (
-                    <TableRow key={index}>
-                      <TableData>{contact.alias}</TableData>
-                      <TableData>{contact.description}</TableData>
-                      <TableData>{contact.account_number}</TableData>
-                      <TableData>
-                        <IconWrapper>
-                          <Icon
-                            src="/editar.png"
-                            alt="Editar"
-                            onClick={() => onEditContact(contact.id)}
-                          />
-                          <Icon
-                            src="/basura.png"
-                            alt="Eliminar"
-                            onClick={() => handleDeleteClick(contact.id)}
-                          />
-                        </IconWrapper>
-                      </TableData>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableData colSpan="4">No hay contactos disponibles</TableData>
+      <Container>
+        <TableWrapper>
+          <Title>Contactos</Title>
+          {error && <p>{error}</p>}
+          <Table>
+            <TableHeader>
+              <tr>
+                <th>Alias</th>
+                <th>Descripción</th>
+                <th>Número de Cuenta</th>
+                <th>Acciones</th>
+              </tr>
+            </TableHeader>
+            <tbody>
+              {contacts.length > 0 ? (
+                contacts.map((contact, index) => (
+                  <TableRow key={index}>
+                    <TableData>{contact.alias}</TableData>
+                    <TableData>{contact.description}</TableData>
+                    <TableData>{contact.account_number}</TableData>
+                    <TableData>
+                      <IconWrapper>
+                        <Icon
+                          src="/editar.png"
+                          alt="Editar"
+                          onClick={() => onEditContact(contact.id)}
+                        />
+                        <Icon
+                          src="/basura.png"
+                          alt="Eliminar"
+                          onClick={() => handleDeleteClick(contact.id)}
+                        />
+                      </IconWrapper>
+                    </TableData>
                   </TableRow>
-                )}
-              </tbody>
-            </Table>
-          </TableWrapper>
-        </Container>
-      )}
+                ))
+              ) : (
+                <TableRow>
+                  <TableData colSpan="4">No hay contactos disponibles</TableData>
+                </TableRow>
+              )}
+            </tbody>
+          </Table>
+        </TableWrapper>
+      </Container>
       {showDeletePopup && (
         <DeleteConfirmationPopup
           onConfirm={handleConfirmDelete}

@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import styled from "styled-components";
+import { getMovementsAPI } from "../services/movement/Movement.Service";
+import AddContactForm from "./AddContactForm";
 
 
 const Container = styled.div`
   font-family: "Montserrat Alternates";
   background-color: #ffffff;
-  padding-top: 950px;
-  padding-bottom: 200px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   text-align: center;
   height: 100vh;
   width: 90%;
   position: relative;
-  left:7%;
-  
+  left: 7%;
 `;
 
 const Title = styled.h1`
@@ -42,7 +43,7 @@ const DetailItem = styled.div`
   font-family: "Montserrat Alternates";
   font-size: 20px;
   margin-bottom: 20px;
-  padding-bottom:1px;
+  padding-bottom: 1px;
 `;
 
 const Label = styled.span`
@@ -97,34 +98,71 @@ const Button = styled.button`
   }
 `;
 
-function SuccessfulTransfer() {
+function SuccessfulTransfer({ accountNumber }) {
+  const [lastMovement, setLastMovement] = useState(null);
+  const [showAddContactForm, setShowAddContactForm] = useState(false);
+
+
+  useEffect(() => {
+    const fetchLastMovement = async () => {
+      try {
+        const response = await getMovementsAPI({ limit: 1, sort: "desc" });
+        const movement = response.data.data[0];
+        setLastMovement(movement);
+      } catch (error) {
+        console.error("Error fetching last movement:", error);
+      }
+    };
+
+    fetchLastMovement();
+  }, []);
+
+  const handleAddContactClick = () => {
+    setShowAddContactForm(true);
+  };
+
+  const handleContinueClick = () => {
+    navigate("/home-user");
+  };
+
+  const handleAddContactSuccess = () => {
+    setShowAddContactForm(false);
+    navigate("/home-user");
+  };
+
   return (
     <Container>
-      <Title>Transferencias</Title>
-      <Card>
-        <Details>
-          <DetailItem>
-            <Label>Número de Cuenta</Label>
-            <Value>54321098765432109876</Value>
-          </DetailItem>
-          <DetailItem>
-            <Label>Total</Label>
-            <Value>250.00 Bs</Value>
-          </DetailItem>
-          <DetailItem>
-            <Label>Descripción</Label>
-            <Value>Pago Tequeños y malta</Value>
-          </DetailItem>
-        </Details>
-        <Success>
-          <AiFillCheckCircle style={{ fontSize: "80px", color: "#085F63", paddingTop: "2px" }} />
-          <SuccessText>Transferencia exitosa</SuccessText>
-        </Success>
-        <Buttons>
-          <Button>Agregar a contactos</Button>
-          <Button>Continuar</Button>
-        </Buttons>
-      </Card>
+      {showAddContactForm ? (
+        <AddContactForm onSuccess={handleAddContactSuccess} />
+      ) : (
+        <>
+          <Title>Transferencias</Title>
+          <Card>
+            <Details>
+              <DetailItem>
+                <Label>Número de Cuenta</Label>
+                <Value>{accountNumber}</Value>
+              </DetailItem>
+              <DetailItem>
+                <Label>Total</Label>
+                <Value>{lastMovement ? `${lastMovement.amount} Bs` : "Cargando..."}</Value>
+              </DetailItem>
+              <DetailItem>
+                <Label>Descripción</Label>
+                <Value>{lastMovement ? lastMovement.description : "Cargando..."}</Value>
+              </DetailItem>
+            </Details>
+            <Success>
+              <AiFillCheckCircle style={{ fontSize: "80px", color: "#085F63", paddingTop: "2px" }} />
+              <SuccessText>Transferencia exitosa</SuccessText>
+            </Success>
+            <Buttons>
+              <Button onClick={handleAddContactClick}>Agregar a contactos</Button>
+              <Button onClick={handleContinueClick}>Continuar</Button>
+            </Buttons>
+          </Card>
+        </>
+      )}
     </Container>
   );
 }
