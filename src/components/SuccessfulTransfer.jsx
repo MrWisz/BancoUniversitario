@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { getMovementsAPI } from "../services/movement/Movement.Service";
 import AddContactForm from "./AddContactForm";
 
-
 const Container = styled.div`
   font-family: "Montserrat Alternates";
   background-color: #ffffff;
@@ -98,10 +97,9 @@ const Button = styled.button`
   }
 `;
 
-function SuccessfulTransfer({ accountNumber }) {
+function SuccessfulTransfer({ accountNumber, onContinue }) {
   const [lastMovement, setLastMovement] = useState(null);
   const [showAddContactForm, setShowAddContactForm] = useState(false);
-
 
   useEffect(() => {
     const fetchLastMovement = async () => {
@@ -121,13 +119,9 @@ function SuccessfulTransfer({ accountNumber }) {
     setShowAddContactForm(true);
   };
 
-  const handleContinueClick = () => {
-    navigate("/home-user");
-  };
-
   const handleAddContactSuccess = () => {
     setShowAddContactForm(false);
-    navigate("/home-user");
+    onContinue();
   };
 
   return (
@@ -158,7 +152,7 @@ function SuccessfulTransfer({ accountNumber }) {
             </Success>
             <Buttons>
               <Button onClick={handleAddContactClick}>Agregar a contactos</Button>
-              <Button onClick={handleContinueClick}>Continuar</Button>
+              <Button onClick={onContinue}>Continuar</Button>
             </Buttons>
           </Card>
         </>

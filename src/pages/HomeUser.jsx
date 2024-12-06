@@ -102,6 +102,15 @@ const HomeUser = () => {
     setShowSuccessfulTransfer(true);
   };
 
+  const handleContinueClick = () => {
+    setShowSuccessfulTransfer(false);
+    setShowPasswordChange(false);
+    setShowContacts(false);
+    setShowAddContactForm(false);
+    setShowModifyContact(false);
+    setShowTransferForm(false);
+  };
+
   return (
     <HomeUserContainer>
       <HeaderBanca 
@@ -124,7 +133,7 @@ const HomeUser = () => {
       ) : showTransferForm ? (
         <TransferForm onSuccess={handleTransferSuccess} />
       ) : showSuccessfulTransfer ? (
-        <SuccessfulTransfer accountNumber={lastAccountNumber} />
+        <SuccessfulTransfer accountNumber={lastAccountNumber} onContinue={handleContinueClick} />
       ) : (
         <PasswordChange />
       )}
