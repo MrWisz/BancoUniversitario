@@ -74,6 +74,8 @@ function App() {
     }
   }, [pathname]);
 
+  console.log(process.env.REACT_APP_API_URL_BACKEND);
+
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
