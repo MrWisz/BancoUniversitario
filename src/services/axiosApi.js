@@ -3,7 +3,7 @@ import { getJWT } from '../utils/localStorage';
 
 //export const API_URL_BACKEND = process.env.REACT_APP_API_URL_BACKEND;
 export const API_URL_BACKEND = "https://backend-bank-app-production.up.railway.app:3000";
-const AXIOS_TIMEOUT_MS = process.env.REACT_APP_AXIOS_TIMEOUT_MS || 10000;
+const AXIOS_TIMEOUT_MS = process.env.REACT_APP_AXIOS_TIMEOUT_MS || 30000;
 
 const defaultHeaders = {
   Accept: 'application/json',
