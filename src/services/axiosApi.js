@@ -39,6 +39,7 @@ export const apiHttp = async (method, endpoint, data = null, params = null, opti
     return {
       data: response.data,
       headers: response.headers,
+      status: response.status,
     };
   } catch (error) {
     if (error.response) {
