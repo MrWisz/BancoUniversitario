@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getJWT } from '../utils/localStorage';
 
 //export const API_URL_BACKEND = process.env.REACT_APP_API_URL_BACKEND;
-export const API_URL_BACKEND = "https://bank-backend-production.up.railway.app";
+export const API_URL_BACKEND = "http://localhost:3000";
 const AXIOS_TIMEOUT_MS = process.env.REACT_APP_AXIOS_TIMEOUT_MS || 10000;
 
 const defaultHeaders = {
@@ -39,6 +39,7 @@ export const apiHttp = async (method, endpoint, data = null, params = null, opti
     return {
       data: response.data,
       headers: response.headers,
+      status: response.status,
     };
   } catch (error) {
     if (error.response) {
